@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Test - ? and '</title>
+    <style>
+        @font-face {
+            font-family: 'SugarMagic';
+            src: url('/fonts/sugarmagic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f1e8;
+            padding: 2rem;
+            color: #000;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .controls label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .controls select, .controls input {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid #000;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .test-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .test-card:hover {
+            border-color: #000;
+        }
+
+        .font-name {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .test-text {
+            font-size: 2.5rem;
+            line-height: 1.4;
+            color: #000;
+        }
+
+        .test-text .fallback {
+            color: #e63946;
+        }
+
+        .current {
+            background: #e8f4ea;
+            border-color: #2d6a4f;
+        }
+
+        .weight-display {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-size: 2rem; margin-bottom: 1rem;">Font Test: ? and ' Fallback</h1>
+    <p style="margin-bottom: 2rem; color: #666;">
+        Test different fonts for the question mark and apostrophe. SugarMagic is used for other letters.
+        <span style="color: #e63946;">Red text</span> shows the fallback characters.
+    </p>
+
+    <div class="controls">
+        <label for="weight">Font Weight:</label>
+        <input type="range" id="weight" min="100" max="900" step="100" value="400">
+        <div class="weight-display">Weight: <strong id="weight-value">400</strong></div>
+    </div>
+
+    <div class="test-grid" id="test-grid"></div>
+
+    <script>
+        const fonts = [
+            { name: 'Raleway', current: true },
+            { name: 'Inter' },
+            { name: 'Georgia' },
+            { name: 'Times New Roman' },
+            { name: 'Garamond' },
+            { name: 'Baskerville' },
+            { name: 'Didot' },
+            { name: 'Bodoni MT' },
+            { name: 'Futura' },
+            { name: 'Helvetica Neue' },
+            { name: 'Arial' },
+            { name: 'Avenir' },
+            { name: 'Optima' },
+            { name: 'Gill Sans' },
+            { name: 'Verdana' }
+        ];
+
+        const testTexts = [
+            "C'est quoi?",
+            "Qui sommes nous?",
+            "Notre Café"
+        ];
+
+        const weightSlider = document.getElementById('weight');
+        const weightValue = document.getElementById('weight-value');
+        const testGrid = document.getElementById('test-grid');
+
+        function renderTests() {
+            const weight = weightSlider.value;
+            weightValue.textContent = weight;
+
+            testGrid.innerHTML = fonts.map(font => {
+                const testTextHTML = testTexts.map(text => {
+                    // Wrap ? and ' in span for coloring
+                    const highlighted = text
+                        .replace(/\?/g, '<span class="fallback">?</span>')
+                        .replace(/'/g, '<span class="fallback">\'</span>');
+                    return `<div class="test-text" style="font-family: 'SugarMagic', '${font.name}', sans-serif; font-weight: ${weight};">${highlighted}</div>`;
+                }).join('');
+
+                return `
+                    <div class="test-card ${font.current ? 'current' : ''}">
+                        <div class="font-name">${font.name} ${font.current ? '(Current)' : ''}</div>
+                        ${testTextHTML}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        weightSlider.addEventListener('input', renderTests);
+        renderTests();
+    </script>
+</body>
+</html>

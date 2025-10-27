@@ -1,0 +1,178 @@
+# ALMAS WEBSITE CONTENT
+# Edit this file to change ALL text and images on your website
+# Images should be placed in the /images folder
+
+# ============================================
+# SITE-WIDE SETTINGS
+# ============================================
+site:
+  name: 'ALMAS'
+  tagline: 'La cuisine de nos racines'
+  logo: '/images/logo.png'
+  favicon: 'favicon/favicon-96x96.png'
+
+# ============================================
+# NAVIGATION
+# ============================================
+navigation:
+  - text: 'Menu'
+    link: 'menu.html'
+  - text: 'À emporter'
+    link: '#takeaway'
+  - text: 'Contact'
+    link: '#contact'
+
+# ============================================
+# HOME PAGE - HERO SECTION (KEN BURNS SLIDESHOW)
+# ============================================
+hero:
+  heading: 'ALMAS'
+  subheading: 'La cuisine de nos racines'
+  show_cta_button: false # Set to true if you want a button
+
+# ============================================
+# ALMAS C'EST QUOI
+# ============================================
+almas_cest_quoi:
+  heading: "C'est quoi?"
+  text: |
+    Pain frais maison façonné et farci à la main. Différent de tous les sandwiches connus.
+
+    Mot signifiant « diamant » en arabe, persan et russe évoquant quelque chose de précieux.
+
+    Lieu parisien où la cuisine des racines apporte de l'âme à la pause déjeuner.
+  image: '/images/farcis.jpg'
+
+# ============================================
+# QUI SOMMES NOUS
+# ============================================
+qui_sommes_nous:
+  heading: 'Qui sommes nous?'
+  text: |
+    Almas est avant tout l’histoire de notre rencontre et la cuisine de nos racines. Des recettes héritées de nos mères, grand-mères et familles. Amitiée construite au sein du restaurant Nosso de Alessandra Montagne, nous avons à cœur de travailler dans le respect des producteurs, la protection de la biodiversité, et la valorisation du local au maximum avec une vraie limitation des déchets et un click&collect des plus écoresponsables. Une garantie de produits frais et de qualité, préparés avec le souci du bon et du partage des multiples inspirations qui nous animent.
+  images:
+    - '/images/qui-sommes-nous-1.png'
+    - '/images/qui-sommes-nous-2.png'
+    - '/images/qui-sommes-nous-3.png'
+
+# ============================================
+# NOTRE CAFE
+# ============================================
+notre_cafe:
+  heading: 'Notre Café'
+  text: |
+    Retrouvez-nous au cœur du 11e arrondissement pour une pause gourmande aux saveurs de nos origines. Nous vous accueillons toute la semaine dans un lieu convivial et lumineux.
+  image: '/images/notre-cafe.jpg'
+  items:
+    - label: 'Adresse'
+      lines:
+        - '12 Rue des Artisans'
+        - '75011 Paris'
+    - label: 'Horaires'
+      lines:
+        - 'Lundi — Vendredi : 8h00 – 18h00'
+        - 'Samedi : 9h00 – 14h00'
+        - 'Dimanche : Fermé'
+    - label: 'Contact'
+      lines:
+        - 'Tél : +33 1 23 45 67 89'
+        - 'Email : bonjour@almas.fr'
+  map:
+    title: 'Almas - 12 Rue des Artisans, Paris'
+    embed_url: 'https://maps.google.com/maps?q=12%20Rue%20des%20Artisans%2C%2075011%20Paris&t=&z=15&ie=UTF8&iwloc=&output=embed&style=feature:poi|visibility:off&style=feature:transit|visibility:off&style=feature:road|element:labels.icon|visibility:off&style=feature:administrative|element:labels|visibility:simplified&style=element:geometry|saturation:-100|lightness:20&style=feature:water|element:geometry|saturation:-50|lightness:30'
+    link_url: 'https://www.google.com/maps/place/12+Rue+des+Artisans,+75011+Paris'
+
+# ============================================
+# SOCIAL MEDIA
+# ============================================
+social:
+  instagram: 'https://instagram.com/brewandbite'
+  facebook: 'https://facebook.com/brewandbite'
+  twitter: 'https://twitter.com/brewandbite'
+
+# ============================================
+# MENU PAGE
+# ============================================
+menu:
+  hero_image: '/images/menu-hero.jpg'
+  heading: 'Notre Menu'
+  subheading: 'Préparé avec amour, servi avec soin'
+
+  # COFFEE SECTION
+  coffee:
+    section_title: 'Café'
+    section_image: '/images/coffee-section.jpg'
+    items:
+      - name: 'Espresso'
+        description: 'Riche et corsé'
+        price: '3,50€'
+      - name: 'Americano'
+        description: 'Espresso allongé'
+        price: '4,00€'
+      - name: 'Cappuccino'
+        description: 'Espresso avec lait mousseux'
+        price: '4,50€'
+      - name: 'Latte'
+        description: 'Espresso avec lait chaud'
+        price: '4,75€'
+      - name: 'Flat White'
+        description: 'Double espresso avec microfoam'
+        price: '5,00€'
+      - name: 'Moka'
+        description: 'Latte au chocolat'
+        price: '5,25€'
+      - name: 'Cold Brew'
+        description: 'Café infusé à froid'
+        price: '4,50€'
+
+  # PASTRIES SECTION
+  pastries:
+    section_title: 'Pâtisseries'
+    section_image: '/images/pastries-section.jpg'
+    items:
+      - name: 'Croissant'
+        description: 'Beurré, feuilleté, parfait'
+        price: '3,50€'
+      - name: 'Pain au Chocolat'
+        description: 'Croissant au chocolat noir'
+        price: '4,00€'
+      - name: 'Muffin aux Myrtilles'
+        description: 'Fait avec des baies fraîches'
+        price: '3,75€'
+      - name: 'Roulé à la Cannelle'
+        description: 'Chaud avec glaçage au fromage'
+        price: '4,50€'
+      - name: 'Scone'
+        description: 'Saveurs du jour'
+        price: '3,50€'
+      - name: 'Cake à la Banane'
+        description: 'Moelleux et savoureux'
+        price: '3,25€'
+
+  # LUNCH SECTION
+  lunch:
+    section_title: 'Déjeuner'
+    section_image: '/images/lunch-section.jpg'
+    items:
+      - name: "Toast à l'Avocat"
+        description: 'Pain au levain, avocat, tomates cerises, feta'
+        price: '9,50€'
+      - name: 'Sandwich Petit Déjeuner'
+        description: 'Œuf, fromage, choix de viande sur brioche'
+        price: '8,50€'
+      - name: 'Panini Caprese'
+        description: 'Mozzarella, tomate, basilic, balsamique'
+        price: '10,00€'
+      - name: 'Club Dinde'
+        description: 'Dinde, bacon, laitue, tomate sur pain au levain'
+        price: '11,00€'
+      - name: 'Soupe du Jour'
+        description: 'Demandez notre sélection du jour'
+        price: '6,50€'
+
+# ============================================
+# FOOTER
+# ============================================
+footer:
+  copyright: '© 2025 ALMAS. Tous droits réservés.'
+  tagline: 'Fait avec ❤️ et bon café'

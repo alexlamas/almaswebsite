@@ -1,0 +1,1022 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-light);
+}
+
+@font-face {
+  font-family: 'SugarMagic';
+  src: url('/fonts/sugarmagic.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fallback font for punctuation that SugarMagic doesn't support */
+.fallback-char {
+  font-family: 'Playfair Display', 'Raleway', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+  --primary-color: #000000;
+  --bg-light: #f5f1e8;
+  --text-dark: var(--primary-color);
+  --text-light: var(--bg-light);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: var(--bg-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================================
+   NAVIGATION (ALMAS Style - Below Hero)
+   ============================================ */
+.navbar-below-hero {
+  background: var(--bg-light);
+  padding: 2.5rem 0;
+  border-bottom: 2px solid transparent;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+.navbar-below-hero.scrolled {
+  background: var(--bg-light);
+  padding: 1.5rem 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-below-hero .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.navbar-logo {
+  position: absolute;
+  left: 0;
+  height: 30px;
+  width: auto;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.navbar-below-hero.scrolled .navbar-logo {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu li:not(:last-child)::after {
+  content: '✽';
+  position: absolute;
+  right: -1.7rem;
+  color: var(--text-dark);
+  opacity: 0.5;
+  transition: transform 0.5s ease;
+  display: inline-block;
+}
+
+.nav-menu li:not(:last-child):hover::after {
+  transform: rotate(360deg);
+  opacity: 1;
+}
+
+.nav-menu a {
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--text-dark);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: var(--text-dark);
+  opacity: 1;
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* ============================================
+   HERO SECTION WITH VIDEO BACKGROUND (ALMAS Style)
+   ============================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-light);
+  overflow: visible;
+  background: var(--bg-light);
+}
+
+.hero-slideshow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out, filter 0.3s ease-out;
+  will-change: transform, opacity;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+/* Pan all odd slides continuously - even when not visible */
+.hero-slide:nth-child(odd) {
+  animation: panRight 20s linear infinite;
+}
+
+/* Pan all even slides continuously - even when not visible */
+.hero-slide:nth-child(even) {
+  animation: panLeft 20s linear infinite;
+}
+
+@keyframes panRight {
+  0% {
+    transform: scale(1.2) translateX(-5%);
+  }
+  100% {
+    transform: scale(1.2) translateX(5%);
+  }
+}
+
+@keyframes panLeft {
+  0% {
+    transform: scale(1.2) translateX(5%);
+  }
+  100% {
+    transform: scale(1.2) translateX(-5%);
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 40%;
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+.hero-logo {
+  max-width: none;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 0.5rem;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
+}
+
+/* Logo animation - stroke trace then fill */
+.hero-logo path {
+  fill: transparent !important;
+  stroke: var(--text-light) !important;
+  stroke-width: 2.5 !important;
+}
+
+.hero-logo.filled path {
+  fill: var(--text-light) !important;
+  stroke: var(--text-light) !important;
+  stroke-width: 2.5 !important;
+  animation: fadeInFill 2s ease-in forwards;
+}
+
+@keyframes fadeInFill {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+    stroke-width: 0;
+  }
+}
+
+.hero h1 {
+  font-size: 6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  color: var(--text-light);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}
+
+.hero p.show {
+  opacity: 1;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.scroll-indicator.show {
+  opacity: 0.6;
+}
+
+.scroll-indicator span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.scroll-arrows {
+  position: relative;
+  height: 20px;
+  width: 20px;
+}
+
+.scroll-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: scrollFlow 3s ease-out infinite;
+  opacity: 0;
+}
+
+.scroll-arrow:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.scroll-indicator:hover .scroll-arrow {
+  animation-play-state: paused;
+}
+
+@keyframes scrollFlow {
+  0% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(5px);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--bg-light);
+  color: var(--text-dark);
+}
+
+.btn-primary:hover {
+  background: var(--primary-color);
+  color: var(--bg-light);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   SECTION STYLES (Almas c'est quoi, Qui sommes nous, Notre cafe)
+   ============================================ */
+.almas-cest-quoi,
+.qui-sommes-nous,
+.notre-cafe {
+  padding: 5rem 14rem;
+  background: var(--bg-light);
+  scroll-margin-top: 4rem;
+}
+
+.almas-cest-quoi h2,
+.qui-sommes-nous h2,
+.notre-cafe h2 {
+  font-family: 'SugarMagic', 'Raleway', sans-serif;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.almas-cest-quoi h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.qui-sommes-nous h2::after,
+.notre-cafe h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.almas-cest-quoi-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.notre-cafe h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.notre-cafe-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+}
+
+.notre-cafe-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.qui-sommes-nous-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.almas-cest-quoi-text p,
+.qui-sommes-nous-text p,
+.notre-cafe-text p {
+  font-size: 1.05rem;
+  line-height: 2;
+  margin-bottom: 2rem;
+  white-space: pre-line;
+  opacity: 0.9;
+  text-align: left;
+}
+
+.almas-cest-quoi-text p:last-child,
+.qui-sommes-nous-text p:last-child,
+.notre-cafe-text p:last-child {
+  margin-bottom: 0;
+}
+
+.almas-cest-quoi-text {
+  padding-right: 2rem;
+  max-width: 400px;
+}
+
+.notre-cafe-text {
+  width: 100%;
+}
+
+.qui-sommes-nous-text {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.visit-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.visit-card {
+  background: transparent;
+}
+
+.visit-card h3 {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--primary-color);
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.visit-card p {
+  margin: 0.35rem 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.visit-map {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border: 2px solid var(--primary-color);
+  isolation: isolate;
+}
+
+.visit-map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+  filter: grayscale(20%) saturate(110%) contrast(95%) brightness(0.92);
+  z-index: 0;
+}
+
+.visit-map::after {
+  display: none;
+}
+
+.visit-map-link {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 1.5rem 1.75rem;
+  text-decoration: none;
+  color: var(--text-light);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.45) 100%);
+  gap: 0.4rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.visit-map-title {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.45rem 1.2rem;
+  border-radius: 999px;
+  font-family: 'SugarMagic', 'Raleway', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.visit-map-cta {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.visit-map-link:hover {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.65) 100%);
+  transform: translateY(-2px);
+}
+
+.almas-cest-quoi-image {
+  width: 85%;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.24);
+  margin-top: 1rem;
+}
+
+.qui-sommes-nous-image {
+  width: 100%;
+}
+
+.almas-cest-quoi-image img {
+  width: 100%;
+  height: 150%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.1s ease-out;
+  position: relative;
+  top: -25%;
+  transform: translateY(var(--parallax-offset, 0%)) scale(1.1);
+  will-change: transform;
+}
+
+.qui-sommes-nous-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.qui-sommes-nous-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  transform: translateY(var(--parallax-offset, 2%));
+  will-change: transform;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .navbar .container,
+  .footer .container {
+    padding: 0 20px;
+  }
+
+  .nav-menu {
+    gap: 1.75rem;
+  }
+
+  .almas-cest-quoi,
+  .qui-sommes-nous,
+  .notre-cafe,
+  .visit {
+    padding: 3.5rem 3rem;
+  }
+
+  .almas-cest-quoi-content,
+  .qui-sommes-nous-content,
+  .notre-cafe-content,
+  .visit-content {
+    gap: 2rem;
+  }
+
+  .almas-cest-quoi-text,
+  .qui-sommes-nous-text,
+  .notre-cafe-text {
+    max-width: 100%;
+    padding-right: 0;
+  }
+}
+
+/* ============================================
+   MENU PAGE
+   ============================================ */
+.menu-hero {
+  height: 400px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('/images/menu-hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.menu-hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.menu-hero-content p {
+  font-size: 1.25rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu-content {
+  padding: 5rem 0;
+}
+
+.menu-section {
+  margin-bottom: 5rem;
+}
+
+.menu-section:last-child {
+  margin-bottom: 0;
+}
+
+.menu-section-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.menu-section-header h2 {
+  font-family: 'SugarMagic', 'Raleway', sans-serif;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  flex: 1;
+}
+
+.section-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.2), var(--shadow);
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.menu-item {
+  background: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+
+.menu-item:hover {
+  transform: translateY(-3px);
+}
+
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item h3 {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.price {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.menu-item p {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 4rem 0 2rem;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.social-links a {
+  color: var(--text-light);
+  font-size: 1.75rem;
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+}
+
+.social-links a:hover {
+  background: var(--text-light);
+  color: var(--primary-color);
+  border-color: var(--text-light);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.footer p:first-of-type {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background: var(--bg-light);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    padding: 2rem 0;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  /* Section padding for tablets */
+  .almas-cest-quoi,
+  .qui-sommes-nous,
+  .notre-cafe {
+    padding: 4rem 3rem;
+  }
+
+  /* Make hero logo bigger on tablets */
+  .hero-content {
+    width: 60%;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .almas-cest-quoi-content,
+  .qui-sommes-nous-content,
+  .notre-cafe-intro,
+  .notre-cafe-details {
+    grid-template-columns: 1fr;
+  }
+
+  .almas-cest-quoi-text {
+    padding-right: 0;
+    max-width: 100%;
+  }
+
+  .visit-map {
+    min-height: 320px;
+  }
+
+  .menu-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  .menu-items {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .qui-sommes-nous-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navbar-logo {
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Section padding for mobile */
+  .almas-cest-quoi,
+  .qui-sommes-nous,
+  .notre-cafe {
+    padding: 3rem 1.5rem;
+  }
+
+  /* Make hero logo bigger on mobile */
+  .hero-content {
+    width: 80%;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  .visit-map {
+    min-height: 260px;
+  }
+
+  .qui-sommes-nous-gallery {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .qui-sommes-nous-gallery img {
+    height: 180px;
+  }
+
+  .navbar-logo {
+    height: 25px;
+  }
+
+  .navbar-below-hero {
+    padding: 1.5rem 0;
+  }
+
+  .navbar-below-hero.scrolled {
+    padding: 1rem 0;
+  }
+}
