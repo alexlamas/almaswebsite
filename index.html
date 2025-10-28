@@ -24,6 +24,9 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <!-- Mapbox CSS and JS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preload" as="image" href="images/hero-1.jpg" />
     <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
@@ -121,15 +124,16 @@
       </a>
     </section>
 
-    <!-- Navigation (Below Hero) -->
-    <nav class="navbar navbar-below-hero">
-      <div class="container">
-        <img src="/images/logo-black.svg" alt="Almas" class="navbar-logo" id="navbar-logo" />
-        <ul class="nav-menu" id="nav-menu">
-          <!-- Navigation loaded dynamically from YAML -->
-        </ul>
-      </div>
-    </nav>
+    <!-- Floating Buttons -->
+    <div class="floating-buttons-container">
+      <a href="https://mylightspeed.app/SCDAKRPQ/C-ordering/menu" target="_blank" rel="noopener" class="floating-button" id="floating-button">
+        <i class="ph ph-shopping-cart"></i>
+        <span>À emporter</span>
+      </a>
+      <a href="https://www.instagram.com/almas.restaurantparis/" target="_blank" rel="noopener" class="floating-button floating-button-instagram" id="floating-instagram">
+        <i class="ph ph-instagram-logo"></i>
+      </a>
+    </div>
 
     <!-- Almas c'est quoi -->
     <section class="almas-cest-quoi reveal" id="almas-cest-quoi">
@@ -167,51 +171,40 @@
       </div>
     </section>
 
-    <!-- Notre cafe -->
-    <section class="notre-cafe reveal" id="notre-cafe">
+    <!-- Footer with Map and Info -->
+    <footer class="footer" id="footer">
       <div class="container">
-        <h2 id="notre-cafe-heading"></h2>
-        <div class="notre-cafe-intro">
-          <div class="notre-cafe-text">
-            <p id="notre-cafe-text"></p>
+        <div class="footer-content">
+          <div class="footer-info">
+            <div class="footer-section">
+              <h3>Notre Café</h3>
+              <p id="notre-cafe-text"></p>
+            </div>
+
+            <div class="footer-cards" id="visit-cards">
+              <!-- Address, hours loaded dynamically -->
+            </div>
+
+            <div class="footer-social">
+              <div class="social-links" id="social-links">
+                <!-- Social links loaded dynamically -->
+              </div>
+              <p id="footer-tagline"></p>
+            </div>
+          </div>
+
+          <div class="footer-map">
+            <div id="mapbox-map"></div>
           </div>
         </div>
 
-        <div class="notre-cafe-details">
-          <div class="visit-cards" id="visit-cards"></div>
-          <div class="visit-map">
-            <a
-              id="visit-map-link"
-              class="visit-map-link"
-              href="#"
-              target="_blank"
-              rel="noopener"
-              aria-label="Ouvrir la carte dans Google Maps"
-            >
-              <span class="visit-map-title">📍 Almas</span>
-              <span class="visit-map-cta">Voir dans Google Maps</span>
-            </a>
-            <iframe
-              id="visit-map-frame"
-              src=""
-              title="Almas sur la carte"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-          </div>
+        <div class="footer-bottom">
+          <p>
+            <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="mailto:bonjour@almas.fr">bonjour@almas.fr</a>
+          </p>
         </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="social-links" id="social-links">
-          <!-- Social links loaded dynamically -->
-        </div>
-        <p id="footer-tagline"></p>
-        <p id="footer-copyright"></p>
       </div>
     </footer>
 

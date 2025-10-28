@@ -70,13 +70,9 @@ notre_cafe:
         - '75011 Paris'
     - label: 'Horaires'
       lines:
-        - 'Lundi — Vendredi : 8h00 – 18h00'
-        - 'Samedi : 9h00 – 14h00'
+        - 'Lundi — Vendredi : 8h00 — 18h00'
+        - 'Samedi : 9h00 — 14h00'
         - 'Dimanche : Fermé'
-    - label: 'Contact'
-      lines:
-        - 'Tél : +33 1 23 45 67 89'
-        - 'Email : bonjour@almas.fr'
   map:
     title: 'Almas - 12 Rue des Artisans, Paris'
     embed_url: 'https://maps.google.com/maps?q=12%20Rue%20des%20Artisans%2C%2075011%20Paris&t=&z=15&ie=UTF8&iwloc=&output=embed&style=feature:poi|visibility:off&style=feature:transit|visibility:off&style=feature:road|element:labels.icon|visibility:off&style=feature:administrative|element:labels|visibility:simplified&style=element:geometry|saturation:-100|lightness:20&style=feature:water|element:geometry|saturation:-50|lightness:30'
@@ -86,9 +82,7 @@ notre_cafe:
 # SOCIAL MEDIA
 # ============================================
 social:
-  instagram: 'https://instagram.com/brewandbite'
-  facebook: 'https://facebook.com/brewandbite'
-  twitter: 'https://twitter.com/brewandbite'
+  instagram: 'https://www.instagram.com/almas.restaurantparis/'
 
 # ============================================
 # MENU PAGE
@@ -175,4 +169,4 @@ menu:
 # ============================================
 footer:
   copyright: '© 2025 ALMAS. Tous droits réservés.'
-  tagline: 'Fait avec ❤️ et bon café'
+  tagline: ''
