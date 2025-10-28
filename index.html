@@ -3,16 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="site-title">Cafe</title>
+    <title id="site-title">ALMAS</title>
     <meta name="description" content="ALMAS - La cuisine de nos racines. Pain frais maison façonné et farci à la main au cœur du 11e arrondissement." />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ALMAS - La cuisine de nos racines" />
     <meta property="og:description" content="Pain frais maison façonné et farci à la main au cœur du 11e arrondissement." />
     <meta property="og:image" content="/images/hero-1.jpg" />
-
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ALMAS - La cuisine de nos racines" />
     <meta name="twitter:description" content="Pain frais maison façonné et farci à la main au cœur du 11e arrondissement." />
@@ -24,17 +20,18 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
-    <!-- Mapbox CSS and JS -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preload" as="image" href="images/hero-1.jpg" />
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
   </head>
 
   <body>
-    <!-- Hero Section with Ken Burns Slideshow -->
     <section class="hero" id="home">
       <div class="hero-slideshow">
         <div class="hero-slide active" style="background-image: url('images/hero-1.jpg')"></div>
@@ -124,7 +121,6 @@
       </a>
     </section>
 
-    <!-- Floating Buttons -->
     <div class="floating-buttons-container">
       <a href="https://mylightspeed.app/SCDAKRPQ/C-ordering/menu" target="_blank" rel="noopener" class="floating-button" id="floating-button">
         <i class="ph ph-shopping-cart"></i>
@@ -135,7 +131,6 @@
       </a>
     </div>
 
-    <!-- Almas c'est quoi -->
     <section class="almas-cest-quoi reveal" id="almas-cest-quoi">
       <div class="container">
         <div class="almas-cest-quoi-content">
@@ -156,7 +151,6 @@
       </div>
     </section>
 
-    <!-- Qui sommes nous -->
     <section class="qui-sommes-nous reveal" id="qui-sommes-nous">
       <div class="container">
         <div class="qui-sommes-nous-content">
@@ -171,40 +165,36 @@
       </div>
     </section>
 
-    <!-- Footer with Map and Info -->
-    <footer class="footer" id="footer">
+    <section class="notre-cafe reveal" id="notre-cafe">
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-info">
-            <div class="footer-section">
-              <h3>Notre Café</h3>
-              <p id="notre-cafe-text"></p>
+        <div class="notre-cafe-content">
+          <div class="notre-cafe-description">
+            <h2>Notre Café</h2>
+            <p id="notre-cafe-text"></p>
+          </div>
+          <div class="notre-cafe-details">
+            <div class="notre-cafe-map">
+              <div id="mapbox-map"></div>
             </div>
-
-            <div class="footer-cards" id="visit-cards">
-              <!-- Address, hours loaded dynamically -->
-            </div>
-
-            <div class="footer-social">
-              <div class="social-links" id="social-links">
-                <!-- Social links loaded dynamically -->
+            <div class="notre-cafe-info">
+              <div class="visit-cards" id="visit-cards"></div>
+              <div class="cafe-social">
+                <div class="social-links" id="social-links"></div>
+                <p id="cafe-tagline"></p>
               </div>
-              <p id="footer-tagline"></p>
             </div>
           </div>
-
-          <div class="footer-map">
-            <div id="mapbox-map"></div>
-          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="footer-bottom">
-          <p>
-            <a href="tel:+33123456789">+33 1 23 45 67 89</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="mailto:bonjour@almas.fr">bonjour@almas.fr</a>
-          </p>
-        </div>
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+          <span class="separator">|</span>
+          <a href="mailto:bonjour@almas.fr">bonjour@almas.fr</a>
+        </p>
       </div>
     </footer>
 

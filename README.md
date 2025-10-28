@@ -33,18 +33,20 @@ This website was intentionally built with **simplicity and maintainability** in 
 ## 📁 File Structure
 
 ```
-cafe-website/
+almaswebsite/
 ├── index.html          # Main homepage
-├── menu.html           # Menu page
-├── style.css           # All styles in one file (flat design, no shadows)
-├── app.js              # All JavaScript functionality
+├── menu.html           # Menu page (if exists)
+├── style.css           # All styles - clean, no comments
+├── app.js              # JavaScript - clean, no comments
 ├── content.yaml        # ⭐ SINGLE SOURCE OF TRUTH FOR ALL CONTENT
 ├── images/             # All media assets
-│   ├── logo.png        # ALMAS logo
-│   ├── hero-1.jpg      # Slideshow image 1
-│   ├── hero-2.jpg      # Slideshow image 2
-│   └── hero-3.jpg      # Additional imagery
-├── start-server.sh     # Local development server script
+│   ├── hero-1.jpg      # Slideshow images
+│   ├── hero-2.jpg
+│   ├── hero-3.jpg
+│   ├── pin.svg         # Custom map marker
+│   └── ...             # Other images
+├── favicon/            # Favicon files
+├── fonts/              # Custom fonts (SugarMagic)
 └── README.md           # This file
 ```
 
@@ -81,8 +83,9 @@ cafe-website/
 ```css
 --primary-color: #000000;    /* Black - text & accents */
 --bg-light: #f5f1e8;         /* Cream - backgrounds */
---text-dark: var(--primary-color);
---text-light: var(--bg-light);
+--text-dark: #000000;        /* Black text */
+--text-light: #f5f1e8;       /* Cream text */
+--green: #5F9471;            /* Sage green - accents & buttons */
 ```
 
 ## ✏️ Content Management

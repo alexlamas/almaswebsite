@@ -1,6 +1,6 @@
 {
-  "name": "Almas",
-  "short_name": "Almas",
+  "name": "MyWebSite",
+  "short_name": "MySite",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",

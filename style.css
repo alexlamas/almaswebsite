@@ -1,6 +1,3 @@
-/* ============================================
-   RESET & BASE STYLES
-   ============================================ */
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +6,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg-light);
+  background: #f5f1e8;
 }
 
 @font-face {
@@ -20,7 +17,6 @@ html {
   font-display: swap;
 }
 
-/* Fallback font for punctuation that SugarMagic doesn't support */
 .fallback-char {
   font-family: 'Playfair Display', 'Raleway', sans-serif;
   font-weight: 600;
@@ -30,14 +26,14 @@ html {
 :root {
   --primary-color: #000000;
   --bg-light: #f5f1e8;
-  --text-dark: var(--primary-color);
-  --text-light: var(--bg-light);
+  --text-dark: #000000;
+  --text-light: #f5f1e8;
+  --green: #5F9471;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 body {
-  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
   color: var(--text-dark);
   background: var(--bg-light);
@@ -60,9 +56,6 @@ a {
   color: inherit;
 }
 
-/* ============================================
-   FLOATING BUTTONS
-   ============================================ */
 .floating-buttons-container {
   position: fixed;
   top: 2rem;
@@ -74,8 +67,8 @@ a {
 }
 
 .floating-button {
-  background: #5F9471;
-  color: #ffffff;
+  background: var(--green);
+  color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
   text-decoration: none;
@@ -97,18 +90,21 @@ a {
   width: 50px;
   height: 50px;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.05);
-
-  gap: 0; /* No gap needed for icon-only button */
-  color: #000000;
+  background: rgba(245, 241, 232, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  gap: 0;
+  color: var(--text-dark);
 }
 
 .floating-button-instagram:hover {
-  background: #000000;
-  color: #f5f1e8;
-
+  background: rgba(232, 227, 218, 0.85) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
 .floating-button-instagram i {
@@ -129,13 +125,9 @@ a {
 
 .floating-button i {
   font-size: 1.1rem;
-  order: -1; /* Ensure icon is on the left */
+  order: -1;
 }
 
-
-/* ============================================
-   HERO SECTION WITH VIDEO BACKGROUND (ALMAS Style)
-   ============================================ */
 .hero {
   position: relative;
   height: 100vh;
@@ -179,12 +171,10 @@ a {
   opacity: 1;
 }
 
-/* Pan all odd slides continuously - even when not visible */
 .hero-slide:nth-child(odd) {
   animation: panRight 20s linear infinite;
 }
 
-/* Pan all even slides continuously - even when not visible */
 .hero-slide:nth-child(even) {
   animation: panLeft 20s linear infinite;
 }
@@ -237,7 +227,6 @@ a {
   filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
 }
 
-/* Logo animation - stroke trace then fill */
 .hero-logo path {
   fill: transparent !important;
   stroke: var(--text-light) !important;
@@ -286,7 +275,6 @@ a {
   opacity: 1;
 }
 
-/* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 4rem;
@@ -303,12 +291,12 @@ a {
 }
 
 .scroll-indicator.show {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .scroll-indicator span {
   font-size: 0.85rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.1em;
   opacity: 0.5;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
@@ -357,9 +345,6 @@ a {
   }
 }
 
-/* ============================================
-   BUTTONS
-   ============================================ */
 .btn {
   display: inline-block;
   padding: 1rem 2.5rem;
@@ -382,9 +367,6 @@ a {
   transform: translateY(-2px);
 }
 
-/* ============================================
-   SCROLL REVEAL ANIMATIONS
-   ============================================ */
 .reveal {
   opacity: 0;
   transform: translateY(50px);
@@ -396,9 +378,6 @@ a {
   transform: translateY(0);
 }
 
-/* ============================================
-   SECTION STYLES (Almas c'est quoi, Qui sommes nous, Notre cafe)
-   ============================================ */
 .almas-cest-quoi,
 .qui-sommes-nous,
 .notre-cafe {
@@ -428,8 +407,7 @@ a {
   background: var(--primary-color);
 }
 
-.qui-sommes-nous h2::after,
-.notre-cafe h2::after {
+.qui-sommes-nous h2::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -447,27 +425,6 @@ a {
   align-items: center;
 }
 
-.notre-cafe h2 {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.notre-cafe-intro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 4rem;
-}
-
-.notre-cafe-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: stretch;
-}
-
 .qui-sommes-nous-content {
   display: flex;
   flex-direction: column;
@@ -479,7 +436,7 @@ a {
 
 .almas-cest-quoi-text p,
 .qui-sommes-nous-text p,
-.notre-cafe-text p {
+.notre-cafe-description p {
   font-size: 1.05rem;
   line-height: 2;
   margin-bottom: 2rem;
@@ -489,148 +446,14 @@ a {
   padding-right: 1rem;
 }
 
-
 .almas-cest-quoi-text {
   padding-right: 1rem;
   max-width: 400px;
 }
 
-.btn-menu {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 0.75rem 2rem;
-  background: var(--primary-color);
-  color: var(--text-light);
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  border: 2px solid var(--primary-color);
-}
-
-.btn-menu:hover {
-  background: transparent;
-  color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.notre-cafe-text {
-  width: 100%;
-}
-
 .qui-sommes-nous-text {
   width: 100%;
-  margin-bottom: 3rem;
-}
-
-.visit-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.visit-card {
-  background: transparent;
-}
-
-.visit-card h3 {
-  font-size: 0.7rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--primary-color);
-  font-weight: 600;
-  opacity: 0.5;
-}
-
-.visit-card p {
-  margin: 0.35rem 0;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--primary-color);
-  font-weight: 400;
-}
-
-.visit-map {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  width: 100%;
-  border: 2px solid var(--primary-color);
-}
-
-/* Style Mapbox popup */
-.mapboxgl-popup-content {
-  border-radius: 8px;
-  padding: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.mapboxgl-popup-close-button {
-  font-size: 20px;
-  padding: 4px 8px;
-}
-
-.mapboxgl-popup-close-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* Hide Mapbox logo */
-.mapboxgl-ctrl-logo {
-  display: none !important;
-}
-
-.visit-map::after {
-  display: none;
-}
-
-.visit-map-link {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 1.5rem 1.75rem;
-  text-decoration: none;
-  color: var(--text-light);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.45) 100%);
-  gap: 0.4rem;
-  transition: background 0.3s ease, transform 0.3s ease;
-  z-index: 2;
-}
-
-.visit-map-title {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 0.45rem 1.2rem;
-  border-radius: 999px;
-  font-family: 'SugarMagic', 'Raleway', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.visit-map-cta {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--primary-color);
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.visit-map-link:hover {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.65) 100%);
-  transform: translateY(-2px);
+  margin-bottom: 1.5rem;
 }
 
 .almas-cest-quoi-image {
@@ -642,10 +465,6 @@ a {
   margin-top: 1rem;
 }
 
-.qui-sommes-nous-image {
-  width: 100%;
-}
-
 .almas-cest-quoi-image img {
   width: 100%;
   height: 150%;
@@ -654,8 +473,12 @@ a {
   transition: transform 0.1s ease-out;
   position: relative;
   top: -25%;
-  transform: translateY(var(--parallax-offset, 0%)) scale(1.1);
+  transform: translateY(var(--parallax-offset, 0%)) scale(1.3);
   will-change: transform;
+}
+
+.qui-sommes-nous-image {
+  width: 100%;
 }
 
 .qui-sommes-nous-gallery {
@@ -674,49 +497,205 @@ a {
   will-change: transform;
 }
 
-@media (max-width: 1024px) {
-  .container {
-    padding: 0 28px;
-  }
-
-  .navbar .container,
-  .footer .container {
-    padding: 0 20px;
-  }
-
-  .nav-menu {
-    gap: 1.75rem;
-  }
-
-  .almas-cest-quoi,
-  .qui-sommes-nous,
-  .notre-cafe,
-  .visit {
-    padding: 3.5rem 3rem;
-  }
-
-  .almas-cest-quoi-content,
-  .qui-sommes-nous-content,
-  .notre-cafe-content,
-  .visit-content {
-    gap: 2rem;
-  }
-
-  .almas-cest-quoi-text,
-  .qui-sommes-nous-text,
-  .notre-cafe-text {
-    max-width: 100%;
-    padding-right: 0;
-  }
+.notre-cafe-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-/* ============================================
-   MENU PAGE
-   ============================================ */
+.notre-cafe-description {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.notre-cafe-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: stretch;
+}
+
+.notre-cafe-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.notre-cafe-description h2 {
+  font-family: 'SugarMagic', 'Raleway', sans-serif;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+  position: relative;
+  padding-bottom: 1.5rem;
+  text-align: center;
+}
+
+.notre-cafe-description h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--text-dark);
+  opacity: 0.2;
+}
+
+.notre-cafe-description p {
+  line-height: 1.6;
+  opacity: 0.95;
+  text-align: center;
+}
+
+.visit-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.visit-card {
+  background: transparent;
+  padding: 0.75rem 0;
+}
+
+.visit-card h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.4rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.visit-card p {
+  margin: 0.15rem 0;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.35;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.visit-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.visit-card-link:hover {
+  opacity: 0.7;
+}
+
+.notre-cafe-map {
+  position: relative;
+  height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #f5f1e8;
+}
+
+.notre-cafe-map #mapbox-map {
+  position: relative !important;
+  width: 100%;
+  height: 100%;
+}
+
+.cafe-social {
+  margin-top: auto;
+}
+
+.social-links {
+  display: flex;
+  justify-content: start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.social-links a {
+  color: var(--text-dark);
+  font-size: 1.75rem;
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px solid transparent;
+}
+
+.social-links a:hover {
+  background: var(--text-dark);
+  color: var(--bg-light);
+  border-color: var(--text-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#cafe-tagline {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.mapboxgl-popup-content {
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 20px;
+  padding: 4px 8px;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.footer {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  opacity: 0.6;
+}
+
+.footer a {
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer a:hover {
+  opacity: 0.7;
+}
+
+.footer .separator {
+  margin: 0 1rem;
+}
+
 .menu-hero {
   height: 400px;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('/images/menu-hero.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/menu-hero.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -810,177 +789,40 @@ a {
   font-size: 0.95rem;
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
-.footer {
-  background: var(--bg-light);
-  color: var(--text-dark);
-  padding: 4rem 0 2rem;
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .almas-cest-quoi,
+  .qui-sommes-nous,
+  .notre-cafe {
+    padding: 3.5rem 3rem;
+  }
+
+  .almas-cest-quoi-content,
+  .qui-sommes-nous-content,
+  .notre-cafe-content {
+    gap: 2rem;
+  }
+
+  .almas-cest-quoi-text,
+  .qui-sommes-nous-text {
+    max-width: 100%;
+    padding-right: 0;
+  }
 }
 
-.footer-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 3rem;
-  align-items: center;
-}
-
-.footer-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.footer-section h3 {
-  font-family: 'SugarMagic', 'Raleway', sans-serif;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: var(--text-dark);
-  position: relative;
-  padding-bottom: 1.5rem;
-}
-
-.footer-section h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 2px;
-  background: var(--text-dark);
-  opacity: 0.2;
-}
-
-.footer-section p {
-  line-height: 1.6;
-  opacity: 0.95;
-  padding-right: 1rem;
-}
-
-.footer-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.footer-cards .visit-card {
-  padding: 1.2rem 0;
-}
-
-.footer-cards .visit-card h3 {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.75rem;
-  color: var(--text-dark);
-  font-weight: 600;
-  opacity: 0.7;
-}
-
-.footer-cards .visit-card p {
-  margin: 0.35rem 0;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-  line-height: 1.5;
-  opacity: 0.85;
-  font-weight: 400;
-}
-
-.footer-map {
-  position: relative;
-  height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: #f5f1e8;
-}
-
-.footer-map #mapbox-map {
-  position: relative !important;
-  width: 100%;
-  height: 100%;
-}
-
-.footer-social {
-  margin-top: auto;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.footer-bottom p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--text-dark);
-  opacity: 0.6;
-}
-
-.footer-bottom a {
-  color: var(--text-dark);
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-.footer-bottom a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
-}
-
-.social-links {
-  display: flex;
-  justify-content: start;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.social-links a {
-  color: var(--text-dark);
-  font-size: 1.75rem;
-  transition: all 0.3s ease;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.05);
-  border: 2px solid transparent;
-}
-
-.social-links a:hover {
-  background: var(--text-dark);
-  color: var(--bg-light);
-  border-color: var(--text-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.footer p {
-  margin: 0.75rem 0;
-  font-size: 0.95rem;
-  opacity: 0.95;
-}
-
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
 @media (max-width: 768px) {
-  /* Floating buttons on mobile */
   .floating-buttons-container {
     right: 1rem;
     top: 1rem;
     gap: 0.75rem;
-    flex-direction: column-reverse; /* Stack vertically with Instagram on top */
+    flex-direction: column-reverse;
   }
 
   .floating-button span {
-    display: none; /* Hide text on mobile, show only icons */
+    display: none;
   }
 
   .floating-button {
@@ -995,48 +837,66 @@ a {
     font-size: 1.3rem;
   }
 
-  /* Footer responsive styles */
-  .footer-content {
-    grid-template-columns: 1fr;
+  .notre-cafe-details {
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
   }
 
-  .footer-map {
+  .notre-cafe-map {
+    order: 1;
     height: 300px;
-    order: -1; /* Show map first on mobile */
+    width: 100%;
   }
 
-  .footer-cards {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
+  .notre-cafe-info {
+    order: 2;
+    gap: 2rem;
   }
 
-  .footer-cards .visit-card {
-    flex: 1;
-    min-width: 140px;
+  .visit-cards {
+    align-items: center;
+    text-align: center;
+  }
+
+  .cafe-social {
+    text-align: center;
   }
 
   .social-links {
     justify-content: center;
   }
 
-  .footer-section {
-    text-align: center;
-  }
 
-  .footer-info {
-    text-align: center;
-  }
-
-  /* Section padding for tablets */
   .almas-cest-quoi,
   .qui-sommes-nous,
   .notre-cafe {
-    padding: 4rem 3rem;
+    padding: 3rem 2rem;
   }
 
-  /* Make hero logo bigger on tablets */
+  .almas-cest-quoi h2,
+  .qui-sommes-nous h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .almas-cest-quoi-text p,
+  .qui-sommes-nous-text p {
+    margin-bottom: 1.25rem;
+  }
+
+  .almas-cest-quoi-text p:last-child,
+  .qui-sommes-nous-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .almas-cest-quoi-image {
+    margin-top: 1.25rem;
+  }
+
+  .qui-sommes-nous-gallery {
+    margin-top: 1.25rem;
+  }
+
   .hero-content {
     width: 60%;
   }
@@ -1050,19 +910,46 @@ a {
   }
 
   .almas-cest-quoi-content,
-  .qui-sommes-nous-content,
-  .notre-cafe-intro,
-  .notre-cafe-details {
+  .qui-sommes-nous-content {
     grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .almas-cest-quoi-text {
+  .almas-cest-quoi-text,
+  .qui-sommes-nous-text {
     padding-right: 0;
     max-width: 100%;
+    text-align: center;
   }
 
-  .visit-map {
-    min-height: 300px;
+  .almas-cest-quoi-text p,
+  .qui-sommes-nous-text p {
+    text-align: center;
+  }
+
+  .almas-cest-quoi h2,
+  .qui-sommes-nous h2 {
+    text-align: center;
+  }
+
+  .almas-cest-quoi h2::after,
+  .qui-sommes-nous h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .almas-cest-quoi-image {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  .qui-sommes-nous-gallery {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .qui-sommes-nous-text {
+    margin-bottom: 0;
   }
 
   .menu-section-header {
@@ -1084,19 +971,22 @@ a {
   }
 
   .qui-sommes-nous-gallery {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .qui-sommes-nous-gallery img {
+    height: 150px;
   }
 }
 
 @media (max-width: 480px) {
-  /* Section padding for mobile */
   .almas-cest-quoi,
   .qui-sommes-nous,
   .notre-cafe {
-    padding: 2.5rem 1.25rem;
+    padding: 2rem 1.25rem;
   }
 
-  /* Make hero logo bigger on mobile */
   .hero-content {
     width: 85%;
     padding: 0 15px;
@@ -1115,22 +1005,46 @@ a {
     margin-top: 0.75rem;
   }
 
-  /* Section headings */
   .almas-cest-quoi h2,
   .qui-sommes-nous h2,
-  .notre-cafe h2,
-  .footer-section h3 {
+  .notre-cafe-description h2 {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
   }
 
-  /* Text content */
   .almas-cest-quoi-text p,
-  .qui-sommes-nous-text p,
-  .notre-cafe-text p {
+  .qui-sommes-nous-text p {
     font-size: 0.95rem;
-    line-height: 1.75;
-    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .almas-cest-quoi-text p:last-child,
+  .qui-sommes-nous-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .almas-cest-quoi,
+  .qui-sommes-nous,
+  .notre-cafe {
+    text-align: center;
+  }
+
+  .almas-cest-quoi-content,
+  .qui-sommes-nous-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .almas-cest-quoi-image {
+    margin: 1rem auto 0;
+  }
+
+  .qui-sommes-nous-gallery {
+    margin-top: 1rem;
   }
 
   .btn {
@@ -1138,20 +1052,17 @@ a {
     font-size: 0.9rem;
   }
 
-  .visit-map {
-    min-height: 260px;
-  }
-
   .qui-sommes-nous-gallery {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
   }
 
   .qui-sommes-nous-gallery img {
-    height: 180px;
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
   }
 
-  /* Floating buttons on very small screens */
   .floating-buttons-container {
     right: 0.75rem;
     top: 0.75rem;
@@ -1164,12 +1075,40 @@ a {
     padding: 0.7rem;
   }
 
-  /* Footer adjustments */
-  .footer-map {
+  .notre-cafe-map {
     height: 250px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
-  .footer-bottom p {
+  .visit-card {
+    margin-bottom: 1rem;
+  }
+
+  .visit-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .visit-card h3 {
+    font-size: 0.7rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .visit-card p {
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+  }
+
+  .cafe-social {
+    margin-top: 1rem;
+  }
+
+  .footer {
+    margin-top: 1.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .footer p {
     font-size: 0.8rem;
   }
 }
