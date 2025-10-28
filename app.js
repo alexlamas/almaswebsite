@@ -1,4 +1,12 @@
 let content = {};
+let domElements = {};
+let animationState = {
+  currentSlide: 0,
+  slides: [],
+  heroHeight: 0,
+  ticking: false,
+  revealElements: [],
+};
 
 async function loadContent() {
   try {
@@ -16,11 +24,11 @@ function populateContent() {
     document.getElementById("site-title").textContent = content.site.name;
   }
 
-  if (
-    window.location.pathname.includes("index.html") ||
-    window.location.pathname === "/" ||
-    window.location.pathname.endsWith("/")
-  ) {
+  const isHomePage =
+    ["/", "/index.html"].includes(window.location.pathname) ||
+    window.location.pathname.endsWith("/");
+
+  if (isHomePage) {
     populateHomePage();
     populateAlmasCestQuoi();
     populateQuiSommesNous();
@@ -32,76 +40,53 @@ function populateContent() {
   }
 
   populateFooter();
-  initMapbox();
+
+  if (typeof mapboxgl !== "undefined") {
+    initMapbox();
+  } else {
+    window.addEventListener("load", initMapbox);
+  }
 }
 
 function initMapbox() {
-  setTimeout(function () {
-    if (
-      typeof mapboxgl !== "undefined" &&
-      document.getElementById("mapbox-map")
-    ) {
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoiZWxlY3RyaWthbGV4IiwiYSI6ImNtaDlxbzFzazFic2kya3BjOGF0bm92Z24ifQ.-8evErzgCBHn8QWWuHmkSA";
+  if (!mapboxgl || !document.getElementById("mapbox-map")) return;
 
-      const cafeCoordinates = [2.3509551, 48.8771733];
+  mapboxgl.accessToken =
+    "pk.eyJ1IjoiZWxlY3RyaWthbGV4IiwiYSI6ImNtaDlxbzFzazFic2kya3BjOGF0bm92Z24ifQ.-8evErzgCBHn8QWWuHmkSA";
 
-      const map = new mapboxgl.Map({
-        container: "mapbox-map",
-        style: "mapbox://styles/electrikalex/cmhaeskgh001v01qyapsg1xpe",
-        center: cafeCoordinates,
-        zoom: 14,
-        scrollZoom: false,
-        attributionControl: false,
-      });
+  const cafeCoordinates = [2.3509551, 48.8771733];
+  const map = new mapboxgl.Map({
+    container: "mapbox-map",
+    style: "mapbox://styles/electrikalex/cmhaeskgh001v01qyapsg1xpe",
+    center: cafeCoordinates,
+    zoom: 14,
+    scrollZoom: false,
+    attributionControl: false,
+  });
 
-      map.addControl(new mapboxgl.NavigationControl());
+  map.addControl(new mapboxgl.NavigationControl());
 
-      const el = document.createElement("div");
-      el.className = "custom-marker";
-      el.style.width = "42px";
-      el.style.height = "58px";
-      el.style.cursor = "pointer";
-      el.style.position = "relative";
+  const el = document.createElement("div");
+  el.className = "custom-marker";
+  el.style.cssText = "width:42px;height:58px;cursor:pointer;position:relative;";
+  el.innerHTML = `
+    <img src="/images/pin.svg" style="width:42px;height:58px;display:block;" alt="Location pin">
+    <img src="/favicon/favicon.svg" style="position:absolute;top:2px;left:50%;transform:translateX(-50%);width:38px;height:38px;filter:brightness(0) invert(1);" alt="ALMAS">
+  `;
 
-      el.innerHTML = `
-        <img src="/images/pin.svg"
-             style="width: 42px;
-                    height: 58px;
-                    display: block;"
-             alt="Location pin">
-        <img src="/favicon/favicon.svg"
-             style="position: absolute;
-                    top: 2px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 38px;
-                    height: 38px;
-                    filter: brightness(0) invert(1);"
-             alt="ALMAS">
-      `;
+  el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    window.open("https://maps.app.goo.gl/Gft9sFEBrsT9h2KG7", "_blank");
+  });
 
-      el.style.filter = "drop-shadow(0 3px 8px rgba(0,0,0,0.3))";
+  new mapboxgl.Marker(el, { anchor: "bottom" })
+    .setLngLat(cafeCoordinates)
+    .addTo(map);
 
-      // Make the pin clickable to open Google Maps
-      el.addEventListener('click', function(e) {
-        e.stopPropagation();
-        window.open('https://maps.app.goo.gl/Gft9sFEBrsT9h2KG7', '_blank');
-      });
-
-      new mapboxgl.Marker(el, { anchor: "bottom" })
-        .setLngLat(cafeCoordinates)
-        .addTo(map);
-
-      map.on("click", function () {
-        map.scrollZoom.enable();
-      });
-
-      map.getCanvas().addEventListener("mouseleave", function () {
-        map.scrollZoom.disable();
-      });
-    }
-  }, 500);
+  map.on("click", () => map.scrollZoom.enable());
+  map
+    .getCanvas()
+    .addEventListener("mouseleave", () => map.scrollZoom.disable());
 }
 
 function populateHomePage() {
@@ -118,144 +103,112 @@ function populateHomePage() {
 }
 
 function populateAlmasCestQuoi() {
-  if (content.almas_cest_quoi) {
-    setText("almas-cest-quoi-heading", content.almas_cest_quoi.heading);
-    setText("almas-cest-quoi-text", content.almas_cest_quoi.text);
-    setImage(
-      "almas-cest-quoi-img",
-      content.almas_cest_quoi.image,
-      "Almas c'est quoi"
-    );
-  }
+  if (!content.almas_cest_quoi) return;
+
+  setText("almas-cest-quoi-heading", content.almas_cest_quoi.heading);
+  setText("almas-cest-quoi-text", content.almas_cest_quoi.text);
+  setImage(
+    "almas-cest-quoi-img",
+    content.almas_cest_quoi.image,
+    "Almas c'est quoi"
+  );
 }
 
 function populateQuiSommesNous() {
-  if (content.qui_sommes_nous) {
-    setText("qui-sommes-nous-heading", content.qui_sommes_nous.heading);
-    setText("qui-sommes-nous-text", content.qui_sommes_nous.text);
+  if (!content.qui_sommes_nous) return;
 
-    const gallery = document.getElementById("qui-sommes-nous-gallery");
-    if (gallery) {
-      gallery.innerHTML = "";
-      const images = Array.isArray(content.qui_sommes_nous.images)
-        ? content.qui_sommes_nous.images
-        : content.qui_sommes_nous.image
-        ? [content.qui_sommes_nous.image]
-        : [];
+  setText("qui-sommes-nous-heading", content.qui_sommes_nous.heading);
+  setText("qui-sommes-nous-text", content.qui_sommes_nous.text);
 
-      images.forEach((src, index) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = `Qui sommes nous ${index + 1}`;
-        img.loading = "lazy";
-        img.decoding = "async";
-        gallery.appendChild(img);
-      });
-    }
+  const gallery = document.getElementById("qui-sommes-nous-gallery");
+  if (gallery) {
+    const images = normalizeArray(
+      content.qui_sommes_nous.images || content.qui_sommes_nous.image
+    );
+    gallery.innerHTML = images
+      .map(
+        (src, index) =>
+          `<img src="${src}" alt="Qui sommes nous ${
+            index + 1
+          }" loading="lazy" decoding="async">`
+      )
+      .join("");
   }
 }
 
 function populateNotreCafe() {
-  if (content.notre_cafe) {
-    setText("notre-cafe-text", content.notre_cafe.text);
+  if (!content.notre_cafe) return;
 
-    const cardsContainer = document.getElementById("visit-cards");
-    if (cardsContainer && content.notre_cafe.items) {
-      const items = Array.isArray(content.notre_cafe.items)
-        ? content.notre_cafe.items
-        : [];
-      cardsContainer.innerHTML = items
-        .map((item) => {
-          const lines = Array.isArray(item.lines)
-            ? item.lines.map((line) => `<p>${line}</p>`).join("")
-            : "";
+  setText("notre-cafe-text", content.notre_cafe.text);
 
-          // Wrap entire address card in a link
-          if (item.label && item.label.toLowerCase().includes('adresse')) {
-            return `
-              <a href="https://maps.app.goo.gl/Gft9sFEBrsT9h2KG7" target="_blank" rel="noopener" class="visit-card visit-card-link">
-                  <h3>${item.label || ""}</h3>
-                  ${lines}
-              </a>
-            `;
-          }
+  const cardsContainer = document.getElementById("visit-cards");
+  if (cardsContainer && content.notre_cafe.items) {
+    const items = normalizeArray(content.notre_cafe.items);
+    cardsContainer.innerHTML = items
+      .map((item) => {
+        const lines = normalizeArray(item.lines)
+          .map((line) => `<p>${line}</p>`)
+          .join("");
+        const isAddress = item.label?.toLowerCase().includes("adresse");
 
+        if (isAddress) {
           return `
-            <div class="visit-card">
-                <h3>${item.label || ""}</h3>
-                ${lines}
-            </div>
+            <a href="https://maps.app.goo.gl/Gft9sFEBrsT9h2KG7" target="_blank" rel="noopener" class="visit-card visit-card-link">
+              <h3>${item.label || ""}</h3>
+              ${lines}
+            </a>
           `;
-        })
-        .join("");
-    }
+        }
+
+        return `
+          <div class="visit-card">
+            <h3>${item.label || ""}</h3>
+            ${lines}
+          </div>
+        `;
+      })
+      .join("");
   }
 }
 
 function populateMenuPage() {
-  if (content.menu) {
-    setText("menu-heading", content.menu.heading);
-    setText("menu-subheading", content.menu.subheading);
+  if (!content.menu) return;
 
-    const menuHero = document.querySelector(".menu-hero");
-    if (menuHero && content.menu.hero_image) {
-      menuHero.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${content.menu.hero_image}')`;
-    }
+  setText("menu-heading", content.menu.heading);
+  setText("menu-subheading", content.menu.subheading);
 
-    if (content.menu.coffee) {
-      setText("coffee-section-title", content.menu.coffee.section_title);
-      setImage(
-        "coffee-section-img",
-        content.menu.coffee.section_image,
-        "Coffee"
-      );
-
-      const coffeeItems = document.getElementById("coffee-items");
-      if (coffeeItems) {
-        coffeeItems.innerHTML = content.menu.coffee.items
-          .map((item) => createMenuItem(item))
-          .join("");
-      }
-    }
-
-    if (content.menu.pastries) {
-      setText("pastries-section-title", content.menu.pastries.section_title);
-      setImage(
-        "pastries-section-img",
-        content.menu.pastries.section_image,
-        "Pastries"
-      );
-
-      const pastriesItems = document.getElementById("pastries-items");
-      if (pastriesItems) {
-        pastriesItems.innerHTML = content.menu.pastries.items
-          .map((item) => createMenuItem(item))
-          .join("");
-      }
-    }
-
-    if (content.menu.lunch) {
-      setText("lunch-section-title", content.menu.lunch.section_title);
-      setImage("lunch-section-img", content.menu.lunch.section_image, "Lunch");
-
-      const lunchItems = document.getElementById("lunch-items");
-      if (lunchItems) {
-        lunchItems.innerHTML = content.menu.lunch.items
-          .map((item) => createMenuItem(item))
-          .join("");
-      }
-    }
+  const menuHero = document.querySelector(".menu-hero");
+  if (menuHero && content.menu.hero_image) {
+    menuHero.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${content.menu.hero_image}')`;
   }
+
+  ["coffee", "pastries", "lunch"].forEach((section) => {
+    if (!content.menu[section]) return;
+
+    setText(`${section}-section-title`, content.menu[section].section_title);
+    setImage(
+      `${section}-section-img`,
+      content.menu[section].section_image,
+      section
+    );
+
+    const container = document.getElementById(`${section}-items`);
+    if (container) {
+      container.innerHTML = content.menu[section].items
+        .map((item) => createMenuItem(item))
+        .join("");
+    }
+  });
 }
 
 function createMenuItem(item) {
   return `
     <div class="menu-item">
-        <div class="menu-item-header">
-            <h3>${item.name}</h3>
-            <span class="price">${item.price}</span>
-        </div>
-        <p>${item.description}</p>
+      <div class="menu-item-header">
+        <h3>${item.name}</h3>
+        <span class="price">${item.price}</span>
+      </div>
+      <p>${item.description}</p>
     </div>
   `;
 }
@@ -267,151 +220,129 @@ function populateFooter() {
 
   const socialLinks = document.getElementById("social-links");
   if (socialLinks && content.social) {
-    const links = [];
-    if (content.social.facebook) {
-      links.push(
-        `<a href="${content.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>`
-      );
-    }
-    if (content.social.twitter) {
-      links.push(
-        `<a href="${content.social.twitter}" target="_blank" rel="noopener" aria-label="Twitter"><i class="ph ph-twitter-logo"></i></a>`
-      );
-    }
-    socialLinks.innerHTML = links.join("");
+    const platforms = ["facebook", "twitter"];
+    socialLinks.innerHTML = platforms
+      .filter((platform) => content.social[platform])
+      .map(
+        (platform) =>
+          `<a href="${content.social[platform]}" target="_blank" rel="noopener" aria-label="${platform}">
+          <i class="ph ph-${platform}-logo"></i>
+        </a>`
+      )
+      .join("");
   }
 }
 
 function setText(id, text) {
   const element = document.getElementById(id);
-  if (element && text) {
-    if (element.tagName === "H2" && text.match(/[\?']/)) {
-      const wrappedText = text
-        .replace(/\?/g, '<span class="fallback-char">?</span>')
-        .replace(/'/g, '<span class="fallback-char">\'</span>');
-      element.innerHTML = wrappedText;
-    } else {
-      element.textContent = text;
-    }
+  if (!element || !text) return;
+
+  if (element.tagName === "H2" && /[\?']/.test(text)) {
+    element.innerHTML = text
+      .replace(/\?/g, '<span class="fallback-char">?</span>')
+      .replace(/'/g, '<span class="fallback-char">\'</span>');
+  } else {
+    element.textContent = text;
   }
 }
 
 function setImage(id, src, alt) {
   const element = document.getElementById(id);
-  if (element && src) {
-    element.src = src;
-    if (!element.getAttribute("loading")) {
-      element.setAttribute("loading", "lazy");
-    }
-    element.setAttribute("decoding", "async");
-    if (alt) element.alt = alt;
-  }
+  if (!element || !src) return;
+
+  element.src = src;
+  element.loading = "lazy";
+  element.decoding = "async";
+  if (alt) element.alt = alt;
 }
 
-let currentSlide = 0;
-let slides = [];
-let floatingButton = null;
-let floatingInstagram = null;
-let heroSlideshow = null;
+function normalizeArray(value) {
+  return Array.isArray(value) ? value : value ? [value] : [];
+}
+
+function cacheDOMElements() {
+  domElements = {
+    floatingButton: document.getElementById("floating-button"),
+    floatingInstagram: document.getElementById("floating-instagram"),
+    heroSlideshow: document.querySelector(".hero-slideshow"),
+    scrollIndicator: document.querySelector(".scroll-indicator"),
+    hero: document.querySelector(".hero"),
+    sectionContainers: document.querySelectorAll(
+      ".almas-cest-quoi-image, .qui-sommes-nous-image"
+    ),
+  };
+
+  animationState.slides = document.querySelectorAll(".hero-slide");
+  animationState.revealElements = document.querySelectorAll(".reveal");
+  animationState.heroHeight = domElements.hero
+    ? domElements.hero.offsetHeight
+    : 0;
+}
 
 function initSlideshow() {
-  slides = document.querySelectorAll(".hero-slide");
+  if (animationState.slides.length <= 1) return;
 
-  function nextSlide() {
-    if (slides.length === 0) return;
+  const nextSlide = () => {
+    animationState.slides[animationState.currentSlide].classList.remove(
+      "active"
+    );
+    animationState.currentSlide =
+      (animationState.currentSlide + 1) % animationState.slides.length;
+    animationState.slides[animationState.currentSlide].classList.add("active");
+  };
 
-    slides[currentSlide].classList.remove("active");
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add("active");
-  }
-
-  if (slides.length > 1) {
-    setInterval(nextSlide, 7000);
-  }
+  setInterval(nextSlide, 7000);
 }
 
 function initScrollEffects() {
-  floatingButton = document.getElementById("floating-button");
-  floatingInstagram = document.getElementById("floating-instagram");
-  heroSlideshow = document.querySelector(".hero-slideshow");
-  const scrollIndicator = document.querySelector(".scroll-indicator");
-  const hero = document.querySelector(".hero");
-  const sectionContainers = document.querySelectorAll(
-    ".almas-cest-quoi-image, .qui-sommes-nous-image"
-  );
-
-  const containerData = Array.from(sectionContainers)
+  const containerData = Array.from(domElements.sectionContainers || [])
     .map((container) => {
-      const images = Array.from(container.querySelectorAll("img"));
-      const isGallery = container.classList.contains("qui-sommes-nous-image");
+      const images = container.querySelectorAll("img");
       const isAlmas = container.classList.contains("almas-cest-quoi-image");
-      const parallaxRange = isAlmas ? 24 : 16;
-      const speedMultipliers = [0.5, 1.0, 1.5];
-
       return {
         element: container,
-        images,
-        isGallery,
-        parallaxRange,
-        speedMultipliers,
+        images: Array.from(images),
+        parallaxRange: isAlmas ? 24 : 16,
+        isGallery: !isAlmas,
       };
     })
     .filter((data) => data.images.length > 0);
 
-  let ticking = false;
-  let heroHeight = hero ? hero.offsetHeight : 0;
-
-  window.addEventListener("resize", () => {
-    heroHeight = hero ? hero.offsetHeight : 0;
-  });
-
-  const updateScrollEffects = () => {
+  const handleScroll = () => {
     const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
 
-    if (scrollIndicator) {
-      scrollIndicator.style.opacity = scrollY > 50 ? "0" : "1";
+    if (domElements.scrollIndicator) {
+      domElements.scrollIndicator.style.opacity = scrollY > 50 ? "0" : "1";
     }
 
     const triggerPoint = window.innerWidth <= 768 ? 600 : 1000;
+    const showButtons = scrollY > triggerPoint;
 
-    if (floatingButton) {
-      if (scrollY > triggerPoint) {
-        floatingButton.classList.add("visible");
-      } else {
-        floatingButton.classList.remove("visible");
-      }
+    if (domElements.floatingButton) {
+      domElements.floatingButton.classList.toggle("visible", showButtons);
+    }
+    if (domElements.floatingInstagram) {
+      domElements.floatingInstagram.classList.toggle("visible", showButtons);
     }
 
-    if (floatingInstagram) {
-      if (scrollY > triggerPoint) {
-        floatingInstagram.classList.add("visible");
-      } else {
-        floatingInstagram.classList.remove("visible");
-      }
-    }
-
-    if (heroSlideshow && scrollY < heroHeight) {
-      const scrollPercent = Math.min(scrollY / heroHeight, 1);
-
+    if (domElements.heroSlideshow && scrollY < animationState.heroHeight) {
+      const scrollPercent = Math.min(scrollY / animationState.heroHeight, 1);
       const scaleX = 1 - scrollPercent * 0.25;
       const scaleY = 1 - scrollPercent * 0.15;
       const borderRadius = Math.min(scrollPercent / 0.1, 1) * 16;
       const blur = scrollPercent * 20;
 
-      heroSlideshow.style.transform = `translate(-50%, -50%) scaleX(${scaleX}) scaleY(${scaleY})`;
-      heroSlideshow.style.borderRadius = `${borderRadius}px`;
+      domElements.heroSlideshow.style.transform = `translate(-50%, -50%) scaleX(${scaleX}) scaleY(${scaleY})`;
+      domElements.heroSlideshow.style.borderRadius = `${borderRadius}px`;
 
-      if (slides.length > 0) {
-        slides.forEach((slide) => {
-          slide.style.filter = `blur(${blur}px)`;
-        });
-      }
+      animationState.slides.forEach((slide) => {
+        slide.style.filter = `blur(${blur}px)`;
+      });
     }
 
-    const windowHeight = window.innerHeight;
     containerData.forEach((data) => {
       const rect = data.element.getBoundingClientRect();
-
       if (rect.top < windowHeight && rect.bottom > 0) {
         const scrollPast = Math.max(0, windowHeight - rect.top);
         const maxScroll = windowHeight + rect.height;
@@ -419,103 +350,95 @@ function initScrollEffects() {
         const parallaxY = (scrollPercent - 0.5) * data.parallaxRange;
 
         data.images.forEach((img, index) => {
-          img.style.removeProperty("transform");
-          const speedMultiplier =
-            data.isGallery && data.speedMultipliers[index]
-              ? data.speedMultipliers[index]
-              : 1.0;
-          const adjustedParallaxY = parallaxY * speedMultiplier;
-          img.style.setProperty("--parallax-offset", `${adjustedParallaxY}%`);
+          const speedMultiplier = data.isGallery
+            ? [0.5, 1.0, 1.5][index] || 1
+            : 1;
+          img.style.setProperty(
+            "--parallax-offset",
+            `${parallaxY * speedMultiplier}%`
+          );
         });
       }
     });
 
-    ticking = false;
+    animationState.revealElements.forEach((element) => {
+      const elementTop = element.getBoundingClientRect().top;
+      if (elementTop < windowHeight * 0.85) {
+        element.classList.add("active");
+      }
+    });
+
+    animationState.ticking = false;
   };
 
   window.addEventListener(
     "scroll",
     () => {
-      if (!ticking) {
-        requestAnimationFrame(updateScrollEffects);
-        ticking = true;
+      if (!animationState.ticking) {
+        requestAnimationFrame(handleScroll);
+        animationState.ticking = true;
       }
     },
     { passive: true }
   );
-}
 
-const revealElements = document.querySelectorAll(".reveal");
-
-const revealOnScroll = () => {
-  revealElements.forEach((element) => {
-    const elementTop = element.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (elementTop < windowHeight * 0.85) {
-      element.classList.add("active");
-    }
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      animationState.heroHeight = domElements.hero
+        ? domElements.hero.offsetHeight
+        : 0;
+    }, 250);
   });
-};
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+  handleScroll();
+}
 
 function animateLogo() {
   const logo = document.querySelector(".hero-logo");
   if (!logo) return;
 
-  const paths = logo.querySelectorAll("path");
-
-  const pathsArray = Array.from(paths);
-  const pathsWithPos = pathsArray.map((path, originalIndex) => {
-    const bbox = path.getBBox();
-    return {
-      path: path,
-      x: bbox.x,
-      originalIndex: originalIndex,
-    };
-  });
-
-  pathsWithPos.sort((a, b) => a.x - b.x);
+  const paths = Array.from(logo.querySelectorAll("path"));
+  const pathsWithPos = paths
+    .map((path) => ({ path, x: path.getBBox().x }))
+    .sort((a, b) => a.x - b.x);
 
   pathsWithPos.forEach((item, index) => {
-    const path = item.path;
-    const length = path.getTotalLength();
-
-    path.style.strokeDasharray = length;
-    path.style.strokeDashoffset = length;
+    const length = item.path.getTotalLength();
+    item.path.style.strokeDasharray = length;
+    item.path.style.strokeDashoffset = length;
 
     setTimeout(() => {
-      path.style.transition = "stroke-dashoffset 1.5s ease-out";
-      path.style.strokeDashoffset = "0";
+      item.path.style.transition = "stroke-dashoffset 1.5s ease-out";
+      item.path.style.strokeDashoffset = "0";
     }, index * 250);
   });
 
   const totalAnimationTime = pathsWithPos.length * 250 + 200;
-  setTimeout(() => {
-    logo.classList.add("filled");
-  }, totalAnimationTime);
+
+  setTimeout(() => logo.classList.add("filled"), totalAnimationTime);
 
   const tagline = document.getElementById("hero-subheading");
-  const scrollIndicator = document.querySelector(".scroll-indicator");
+  const scrollIndicator = domElements.scrollIndicator;
+
   if (tagline) {
     setTimeout(() => {
       tagline.classList.add("show");
       if (scrollIndicator) {
-        setTimeout(() => {
-          scrollIndicator.classList.add("show");
-        }, 400);
+        setTimeout(() => scrollIndicator.classList.add("show"), 400);
       }
     }, totalAnimationTime + 800);
   } else if (scrollIndicator) {
-    setTimeout(() => {
-      scrollIndicator.classList.add("show");
-    }, totalAnimationTime + 1200);
+    setTimeout(
+      () => scrollIndicator.classList.add("show"),
+      totalAnimationTime + 1200
+    );
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  cacheDOMElements();
   initSlideshow();
   initScrollEffects();
   animateLogo();
