@@ -22,9 +22,6 @@ function populateContent() {
   }
 
   // Navigation
-  if (content.navigation) {
-    populateNavigation();
-  }
 
   // HOME PAGE
   if (
@@ -132,15 +129,6 @@ function initMapbox() {
       });
     }
   }, 500);
-}
-
-function populateNavigation() {
-  const navMenu = document.getElementById("nav-menu");
-  if (navMenu && content.navigation) {
-    navMenu.innerHTML = content.navigation
-      .map((item) => `<li><a href="${item.link}">${item.text}</a></li>`)
-      .join("");
-  }
 }
 
 function populateHomePage() {
@@ -448,8 +436,11 @@ function initScrollEffects() {
     }
 
     // Show floating button after scrolling 1000px
+    // Adjust trigger point for mobile
+    const triggerPoint = window.innerWidth <= 768 ? 600 : 1000;
+
     if (floatingButton) {
-      if (scrollY > 1000) {
+      if (scrollY > triggerPoint) {
         floatingButton.classList.add("visible");
       } else {
         floatingButton.classList.remove("visible");
@@ -457,7 +448,7 @@ function initScrollEffects() {
     }
 
     if (floatingInstagram) {
-      if (scrollY > 1000) {
+      if (scrollY > triggerPoint) {
         floatingInstagram.classList.add("visible");
       } else {
         floatingInstagram.classList.remove("visible");
@@ -613,23 +604,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Animate logo on load
   animateLogo();
-
-  // Mobile menu toggle
-  const mobileToggle = document.querySelector(".mobile-menu-toggle");
-  const navMenu = document.querySelector(".nav-menu");
-
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-    });
-
-    // Close menu when clicking a link
-    navMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("active");
-      });
-    });
-  }
 
   // Load content
   loadContent();
