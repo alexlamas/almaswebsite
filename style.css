@@ -19,6 +19,7 @@ html {
 
 .fallback-char {
   font-family: 'Playfair Display', 'Raleway', sans-serif;
+  font-weight: 600;
 }
 
 :root {
@@ -304,9 +305,11 @@ a {
 }
 
 @keyframes scrollFlow {
-  0%, 100% { transform: translateY(-5px); opacity: 0; }
-  15%, 85% { opacity: 0.6; }
-  50% { opacity: 0.7; transform: translateY(5px); }
+  0% { transform: translateY(-5px); opacity: 0; }
+  20% { transform: translateY(0px); opacity: 0.6; }
+  50% { transform: translateY(5px); opacity: 0.7; }
+  80% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(-5px); opacity: 0; }
 }
 
 .btn {
@@ -359,6 +362,7 @@ a {
   position: relative;
   padding-bottom: 1rem;
   text-align: center;
+  line-height: 1.2;
 }
 
 .almas-cest-quoi h2::after,
