@@ -217,15 +217,17 @@ a {
 }
 
 .hero-logo path {
-  fill: transparent;
-  stroke: var(--text-light);
-  stroke-width: 2.5;
+  fill: transparent !important;
+  stroke: var(--text-light) !important;
+  stroke-width: 2.5 !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .hero-logo.filled path {
-  fill: var(--text-light);
-  stroke: var(--text-light);
-  stroke-width: 2.5;
+  fill: var(--text-light) !important;
+  stroke: var(--text-light) !important;
+  stroke-width: 2.5 !important;
   animation: fadeInFill 2s ease-in forwards;
 }
 
@@ -615,7 +617,13 @@ a {
 }
 
 .mapboxgl-ctrl-logo {
-  display: none;
+  display: none !important;
+}
+
+.mapboxgl-ctrl-attrib-inner,
+.mapboxgl-ctrl-attrib,
+.mapboxgl-compact {
+  display: none !important;
 }
 
 .footer {
