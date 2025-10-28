@@ -439,8 +439,13 @@ function animateLogo() {
 
 function lazyLoadHeroImages() {
   const slides = document.querySelectorAll('.hero-slide[data-bg]');
+  const supportsWebP = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+
   slides.forEach(slide => {
-    const bgUrl = slide.getAttribute('data-bg');
+    const webpUrl = slide.getAttribute('data-bg-webp');
+    const jpgUrl = slide.getAttribute('data-bg');
+    const bgUrl = supportsWebP && webpUrl ? webpUrl : jpgUrl;
+
     if (bgUrl) {
       const img = new Image();
       img.onload = () => {

@@ -29,7 +29,8 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' media="print" onload="this.media='all'" />
     <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js' defer></script>
     <link rel="stylesheet" href="style.css" />
-    <link rel="preload" as="image" href="images/hero-1.jpg" />
+    <link rel="preload" as="image" href="images/hero-1.webp" type="image/webp" />
+    <link rel="preload" as="image" href="images/hero-1.jpg" type="image/jpeg" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
@@ -40,9 +41,9 @@
   <body>
     <section class="hero" id="home">
       <div class="hero-slideshow">
-        <div class="hero-slide active" style="background-image: url('images/hero-1.jpg')"></div>
-        <div class="hero-slide" data-bg="images/hero-2.jpg"></div>
-        <div class="hero-slide" data-bg="images/hero-3.jpg"></div>
+        <div class="hero-slide active" style="background-image: image-set(url('images/hero-1.webp') type('image/webp'), url('images/hero-1.jpg') type('image/jpeg'))"></div>
+        <div class="hero-slide" data-bg-webp="images/hero-2.webp" data-bg="images/hero-2.jpg"></div>
+        <div class="hero-slide" data-bg-webp="images/hero-3.webp" data-bg="images/hero-3.jpg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <svg
@@ -145,15 +146,18 @@
             <p id="almas-cest-quoi-text"></p>
           </div>
           <div class="almas-cest-quoi-image">
-            <img
-              id="almas-cest-quoi-img"
-              src="images/farcis.jpg"
-              alt="Almas c'est quoi"
-              width="800"
-              height="600"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source srcset="images/farcis.webp" type="image/webp">
+              <img
+                id="almas-cest-quoi-img"
+                src="images/farcis.jpg"
+                alt="Almas c'est quoi"
+                width="800"
+                height="765"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
         </div>
       </div>
