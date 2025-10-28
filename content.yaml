@@ -70,8 +70,8 @@ notre_cafe:
         - '75010 Paris, France'
     - label: 'Horaires'
       lines:
-        - 'Lundi — Vendredi : 8h00 — 18h00'
-        - 'Samedi : 9h00 — 14h00'
+        - 'Lundi — Vendredi : 9h00 — 17h00'
+        - 'Samedi : 12h00 — 15h00'
         - 'Dimanche : Fermé'
   map:
     title: 'Almas - 12 Rue des Artisans, Paris'

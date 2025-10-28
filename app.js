@@ -106,10 +106,7 @@ function initMapbox() {
 
   el.addEventListener("click", (e) => {
     e.stopPropagation();
-    window.open(
-      "https://www.google.com/maps/place/48+Rue+de+Chabrol,+75010+Paris,+France",
-      "_blank"
-    );
+    window.open("https://maps.app.goo.gl/wBbG7msv6UKrpCJu5", "_blank");
   });
 
   new mapboxgl.Marker(el, { anchor: "bottom" })
@@ -186,7 +183,7 @@ function populateNotreCafe() {
 
         if (isAddress) {
           return `
-            <a href="https://www.google.com/maps/place/48+Rue+de+Chabrol,+75010+Paris,+France" target="_blank" rel="noopener" class="visit-card visit-card-link">
+            <a href="https://maps.app.goo.gl/wBbG7msv6UKrpCJu5" target="_blank" rel="noopener" class="visit-card visit-card-link">
               <h3>${item.label || ""}</h3>
               ${lines}
             </a>
