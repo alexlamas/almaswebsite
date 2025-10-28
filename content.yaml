@@ -61,13 +61,13 @@ qui_sommes_nous:
 notre_cafe:
   heading: 'Notre Café'
   text: |
-    Retrouvez-nous au cœur du 11e arrondissement pour une pause gourmande aux saveurs de nos origines. Nous vous accueillons toute la semaine dans un lieu convivial et lumineux.
+    Retrouvez-nous au cœur du 10e arrondissement pour une pause gourmande aux saveurs de nos origines. Nous vous accueillons toute la semaine dans un lieu convivial et lumineux.
   image: '/images/notre-cafe.jpg'
   items:
     - label: 'Adresse'
       lines:
-        - '12 Rue des Artisans'
-        - '75011 Paris'
+        - '48 Rue de Chabrol'
+        - '75010 Paris, France'
     - label: 'Horaires'
       lines:
         - 'Lundi — Vendredi : 8h00 — 18h00'

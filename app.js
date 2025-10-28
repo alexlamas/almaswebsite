@@ -56,12 +56,14 @@ function lazyLoadMapbox() {
           // Load Mapbox CSS
           const mapboxCSS = document.createElement("link");
           mapboxCSS.rel = "stylesheet";
-          mapboxCSS.href = "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css";
+          mapboxCSS.href =
+            "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css";
           document.head.appendChild(mapboxCSS);
 
           // Load Mapbox JS
           const mapboxJS = document.createElement("script");
-          mapboxJS.src = "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js";
+          mapboxJS.src =
+            "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js";
           mapboxJS.onload = initMapbox;
           document.head.appendChild(mapboxJS);
 
@@ -76,7 +78,8 @@ function lazyLoadMapbox() {
 }
 
 function initMapbox() {
-  if (typeof mapboxgl === "undefined" || !document.getElementById("mapbox-map")) return;
+  if (typeof mapboxgl === "undefined" || !document.getElementById("mapbox-map"))
+    return;
 
   mapboxgl.accessToken =
     "pk.eyJ1IjoiZWxlY3RyaWthbGV4IiwiYSI6ImNtaDlxbzFzazFic2kya3BjOGF0bm92Z24ifQ.-8evErzgCBHn8QWWuHmkSA";
@@ -103,7 +106,10 @@ function initMapbox() {
 
   el.addEventListener("click", (e) => {
     e.stopPropagation();
-    window.open("https://maps.app.goo.gl/Gft9sFEBrsT9h2KG7", "_blank");
+    window.open(
+      "https://www.google.com/maps/place/48+Rue+de+Chabrol,+75010+Paris,+France",
+      "_blank"
+    );
   });
 
   new mapboxgl.Marker(el, { anchor: "bottom" })
@@ -180,7 +186,7 @@ function populateNotreCafe() {
 
         if (isAddress) {
           return `
-            <a href="https://maps.app.goo.gl/Gft9sFEBrsT9h2KG7" target="_blank" rel="noopener" class="visit-card visit-card-link">
+            <a href="https://www.google.com/maps/place/48+Rue+de+Chabrol,+75010+Paris,+France" target="_blank" rel="noopener" class="visit-card visit-card-link">
               <h3>${item.label || ""}</h3>
               ${lines}
             </a>
@@ -311,17 +317,18 @@ function initSlideshow() {
 
   const nextSlide = () => {
     const currentSlide = animationState.slides[animationState.currentSlide];
-    const nextSlideIndex = (animationState.currentSlide + 1) % animationState.slides.length;
+    const nextSlideIndex =
+      (animationState.currentSlide + 1) % animationState.slides.length;
     const nextSlideElement = animationState.slides[nextSlideIndex];
 
     // Remove active class from current slide
     currentSlide.classList.remove("active");
 
     // Reset animation on next slide by temporarily removing and re-adding animation class
-    nextSlideElement.style.animation = 'none';
+    nextSlideElement.style.animation = "none";
     // Force reflow to restart animation
     void nextSlideElement.offsetHeight;
-    nextSlideElement.style.animation = '';
+    nextSlideElement.style.animation = "";
 
     // Add active class to next slide
     nextSlideElement.classList.add("active");
@@ -476,12 +483,16 @@ function animateLogo() {
 }
 
 function lazyLoadHeroImages() {
-  const slides = document.querySelectorAll('.hero-slide[data-bg]');
-  const supportsWebP = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  const slides = document.querySelectorAll(".hero-slide[data-bg]");
+  const supportsWebP =
+    document
+      .createElement("canvas")
+      .toDataURL("image/webp")
+      .indexOf("data:image/webp") === 0;
 
-  slides.forEach(slide => {
-    const webpUrl = slide.getAttribute('data-bg-webp');
-    const jpgUrl = slide.getAttribute('data-bg');
+  slides.forEach((slide) => {
+    const webpUrl = slide.getAttribute("data-bg-webp");
+    const jpgUrl = slide.getAttribute("data-bg");
     const bgUrl = supportsWebP && webpUrl ? webpUrl : jpgUrl;
 
     if (bgUrl) {
