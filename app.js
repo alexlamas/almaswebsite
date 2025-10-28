@@ -41,15 +41,42 @@ function populateContent() {
 
   populateFooter();
 
-  if (typeof mapboxgl !== "undefined") {
-    initMapbox();
-  } else {
-    window.addEventListener("load", initMapbox);
-  }
+  // Lazy load Mapbox when user scrolls near the map section
+  lazyLoadMapbox();
+}
+
+function lazyLoadMapbox() {
+  const mapContainer = document.getElementById("mapbox-map");
+  if (!mapContainer) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Load Mapbox CSS
+          const mapboxCSS = document.createElement("link");
+          mapboxCSS.rel = "stylesheet";
+          mapboxCSS.href = "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css";
+          document.head.appendChild(mapboxCSS);
+
+          // Load Mapbox JS
+          const mapboxJS = document.createElement("script");
+          mapboxJS.src = "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js";
+          mapboxJS.onload = initMapbox;
+          document.head.appendChild(mapboxJS);
+
+          observer.disconnect();
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
+
+  observer.observe(mapContainer);
 }
 
 function initMapbox() {
-  if (!mapboxgl || !document.getElementById("mapbox-map")) return;
+  if (typeof mapboxgl === "undefined" || !document.getElementById("mapbox-map")) return;
 
   mapboxgl.accessToken =
     "pk.eyJ1IjoiZWxlY3RyaWthbGV4IiwiYSI6ImNtaDlxbzFzazFic2kya3BjOGF0bm92Z24ifQ.-8evErzgCBHn8QWWuHmkSA";
@@ -283,12 +310,23 @@ function initSlideshow() {
   if (animationState.slides.length <= 1) return;
 
   const nextSlide = () => {
-    animationState.slides[animationState.currentSlide].classList.remove(
-      "active"
-    );
-    animationState.currentSlide =
-      (animationState.currentSlide + 1) % animationState.slides.length;
-    animationState.slides[animationState.currentSlide].classList.add("active");
+    const currentSlide = animationState.slides[animationState.currentSlide];
+    const nextSlideIndex = (animationState.currentSlide + 1) % animationState.slides.length;
+    const nextSlideElement = animationState.slides[nextSlideIndex];
+
+    // Remove active class from current slide
+    currentSlide.classList.remove("active");
+
+    // Reset animation on next slide by temporarily removing and re-adding animation class
+    nextSlideElement.style.animation = 'none';
+    // Force reflow to restart animation
+    void nextSlideElement.offsetHeight;
+    nextSlideElement.style.animation = '';
+
+    // Add active class to next slide
+    nextSlideElement.classList.add("active");
+
+    animationState.currentSlide = nextSlideIndex;
   };
 
   setInterval(nextSlide, 7000);
