@@ -94,7 +94,7 @@ function initMapbox() {
     attributionControl: false,
   });
 
-  map.addControl(new mapboxgl.NavigationControl());
+  map.addControl(new mapboxgl.NavigationControl({ showCompass: false }));
 
   const el = document.createElement("div");
   el.className = "custom-marker";
