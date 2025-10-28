@@ -437,10 +437,27 @@ function animateLogo() {
   }
 }
 
+function lazyLoadHeroImages() {
+  const slides = document.querySelectorAll('.hero-slide[data-bg]');
+  slides.forEach(slide => {
+    const bgUrl = slide.getAttribute('data-bg');
+    if (bgUrl) {
+      const img = new Image();
+      img.onload = () => {
+        slide.style.backgroundImage = `url('${bgUrl}')`;
+      };
+      img.src = bgUrl;
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   cacheDOMElements();
   initSlideshow();
   initScrollEffects();
   animateLogo();
   loadContent();
+
+  // Lazy load hero images 2 and 3 after initial load
+  setTimeout(lazyLoadHeroImages, 1000);
 });

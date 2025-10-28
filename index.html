@@ -19,11 +19,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600&family=Raleway:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Raleway:wght@400;500;600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' media="print" onload="this.media='all'" />
     <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js' defer></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preload" as="image" href="images/hero-1.jpg" />
@@ -38,8 +41,8 @@
     <section class="hero" id="home">
       <div class="hero-slideshow">
         <div class="hero-slide active" style="background-image: url('images/hero-1.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('images/hero-2.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('images/hero-3.jpg')"></div>
+        <div class="hero-slide" data-bg="images/hero-2.jpg"></div>
+        <div class="hero-slide" data-bg="images/hero-3.jpg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <svg
@@ -146,6 +149,8 @@
               id="almas-cest-quoi-img"
               src="images/farcis.jpg"
               alt="Almas c'est quoi"
+              width="800"
+              height="600"
               loading="lazy"
               decoding="async"
             />
@@ -201,7 +206,7 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js" defer></script>
+    <script src="app.js" defer></script>
   </body>
 </html>
