@@ -51,9 +51,12 @@ qui_sommes_nous:
   text: |
     Almas est avant tout l’histoire de notre rencontre et la cuisine de nos racines. Des recettes héritées de nos mères, grand-mères et familles. Amitiée construite au sein du restaurant Nosso de Alessandra Montagne, nous avons à cœur de travailler dans le respect des producteurs, la protection de la biodiversité, et la valorisation du local au maximum avec une vraie limitation des déchets et un click&collect des plus écoresponsables. Une garantie de produits frais et de qualité, préparés avec le souci du bon et du partage des multiples inspirations qui nous animent.
   images:
-    - '/images/qui-sommes-nous-1.png'
-    - '/images/qui-sommes-nous-2.png'
-    - '/images/qui-sommes-nous-3.png'
+    - src: '/images/qui-sommes-nous-1.png'
+      name: 'Sandra'
+    - src: '/images/qui-sommes-nous-2.png'
+      name: 'Anna'
+    - src: '/images/qui-sommes-nous-3.png'
+      name: 'Maryam'
 
 # ============================================
 # NOTRE CAFE

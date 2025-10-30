@@ -156,12 +156,26 @@ function populateQuiSommesNous() {
       content.qui_sommes_nous.images || content.qui_sommes_nous.image
     );
     gallery.innerHTML = images
-      .map(
-        (src, index) =>
-          `<img src="${src}" alt="Qui sommes nous ${
-            index + 1
-          }" loading="lazy" decoding="async">`
-      )
+      .map((item, index) => {
+        const src = typeof item === 'string' ? item : item.src;
+        const name = typeof item === 'object' ? item.name : null;
+
+        if (name) {
+          return `
+            <div class="gallery-item-wrapper">
+              <img src="${src}" alt="${name}" loading="lazy" decoding="async">
+              <div class="name-label" data-name="${name}">
+                <svg class="hand-drawn-line" viewBox="0 0 100 60" preserveAspectRatio="none">
+                  <path class="line-path" d="M ${index === 0 ? '80' : index === 1 ? '50' : '20'} 5 Q ${index === 0 ? '70' : index === 1 ? '50' : '30'} 25, ${index === 0 ? '60' : index === 1 ? '50' : '40'} 55" stroke="#2c1810" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+                <span class="name-text">${name}</span>
+              </div>
+            </div>
+          `;
+        }
+
+        return `<img src="${src}" alt="Qui sommes nous ${index + 1}" loading="lazy" decoding="async">`;
+      })
       .join("");
   }
 }
