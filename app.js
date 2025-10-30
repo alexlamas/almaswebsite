@@ -296,7 +296,7 @@ function cacheDOMElements() {
     floatingInstagram: document.getElementById("floating-instagram"),
     heroSlideshow: document.querySelector(".hero-slideshow"),
     scrollIndicator: document.querySelector(".scroll-indicator"),
-    heroNavButtons: document.querySelector(".hero-nav-buttons"),
+    heroNavButtons: document.querySelectorAll(".hero-nav-buttons"),
     hero: document.querySelector(".hero"),
     sectionContainers: document.querySelectorAll(
       ".almas-cest-quoi-image, .qui-sommes-nous-image"
@@ -360,7 +360,9 @@ function initScrollEffects() {
     }
 
     if (domElements.heroNavButtons) {
-      domElements.heroNavButtons.style.opacity = scrollY > 50 ? "0" : "1";
+      domElements.heroNavButtons.forEach(btn => {
+        btn.style.opacity = scrollY > 50 ? "0" : "1";
+      });
     }
 
     const triggerPoint = window.innerWidth <= 768 ? 600 : 1000;
@@ -473,9 +475,9 @@ function animateLogo() {
   if (tagline) {
     setTimeout(() => {
       tagline.classList.add("show");
-      if (heroNavButtons) {
+      if (heroNavButtons && heroNavButtons.length > 0) {
         setTimeout(() => {
-          heroNavButtons.classList.add("show");
+          heroNavButtons.forEach(btn => btn.classList.add("show"));
           if (scrollIndicator) {
             setTimeout(() => scrollIndicator.classList.add("show"), 200);
           }
@@ -485,9 +487,9 @@ function animateLogo() {
       }
     }, totalAnimationTime + 800);
   } else {
-    if (heroNavButtons) {
+    if (heroNavButtons && heroNavButtons.length > 0) {
       setTimeout(() => {
-        heroNavButtons.classList.add("show");
+        heroNavButtons.forEach(btn => btn.classList.add("show"));
         if (scrollIndicator) {
           setTimeout(() => scrollIndicator.classList.add("show"), 200);
         }
