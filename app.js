@@ -166,7 +166,7 @@ function populateQuiSommesNous() {
               <img src="${src}" alt="${name}" loading="lazy" decoding="async">
               <div class="name-label" data-name="${name}">
                 <svg class="hand-drawn-line" viewBox="0 0 100 60" preserveAspectRatio="none">
-                  <path class="line-path" d="M ${index === 0 ? '80' : index === 1 ? '50' : '20'} 5 Q ${index === 0 ? '70' : index === 1 ? '50' : '30'} 25, ${index === 0 ? '60' : index === 1 ? '50' : '40'} 55" stroke="#2c1810" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <path class="line-path" d="M ${index === 0 ? '80' : index === 1 ? '50' : '20'} 5 Q ${index === 0 ? '65' : index === 1 ? '50' : '35'} 25, 50 55" stroke="#2c1810" stroke-width="2" fill="none" stroke-linecap="round"/>
                 </svg>
                 <span class="name-text">${name}</span>
               </div>
