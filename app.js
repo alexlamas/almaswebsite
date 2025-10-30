@@ -104,6 +104,13 @@ function initMapbox() {
     <img src="/favicon/favicon.svg" style="position:absolute;top:2px;left:50%;transform:translateX(-50%);width:38px;height:38px;filter:brightness(0) invert(1);" alt="ALMAS">
   `;
 
+  // Use touchstart for better mobile compatibility, especially Chrome iOS
+  el.addEventListener("touchstart", (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    window.open("https://maps.app.goo.gl/wBbG7msv6UKrpCJu5", "_blank");
+  });
+
   el.addEventListener("click", (e) => {
     e.stopPropagation();
     window.open("https://maps.app.goo.gl/wBbG7msv6UKrpCJu5", "_blank");
@@ -113,10 +120,21 @@ function initMapbox() {
     .setLngLat(cafeCoordinates)
     .addTo(map);
 
-  map.on("click", () => map.scrollZoom.enable());
-  map
-    .getCanvas()
-    .addEventListener("mouseleave", () => map.scrollZoom.disable());
+  // Detect if device is touch-enabled
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  // Use touchstart for touch devices (better Chrome iOS support)
+  if (isTouchDevice) {
+    map.on("touchstart", () => map.scrollZoom.enable());
+    // Re-disable scroll zoom after a delay on mobile
+    map.on("touchend", () => {
+      setTimeout(() => map.scrollZoom.disable(), 2000);
+    });
+  } else {
+    // Desktop: enable on click, disable on mouse leave
+    map.on("click", () => map.scrollZoom.enable());
+    map.getCanvas().addEventListener("mouseleave", () => map.scrollZoom.disable());
+  }
 }
 
 function populateHomePage() {
