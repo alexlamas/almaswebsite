@@ -407,17 +407,13 @@ a {
   width: 60px;
   height: 2px;
   background: var(--primary-color);
+  opacity: 0.2;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .qui-sommes-nous h2 {
   text-align: center;
-}
-
-.qui-sommes-nous h2::after {
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .almas-cest-quoi-content {
@@ -525,7 +521,7 @@ a {
   margin-bottom: 1.5rem;
   color: var(--text-dark);
   position: relative;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   text-align: center;
 }
 
