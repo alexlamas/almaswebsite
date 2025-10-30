@@ -260,29 +260,19 @@ a {
 
 .scroll-indicator {
   position: absolute;
-  bottom: 4rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
-  color: var(--text-light);
   opacity: 0;
   transition: opacity 0.5s ease-out;
 }
 
 .scroll-indicator.show {
   opacity: 0.7;
-}
-
-.scroll-indicator span {
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  opacity: 0.5;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .scroll-arrows {
@@ -310,6 +300,55 @@ a {
   50% { transform: translateY(5px); opacity: 0.7; }
   80% { transform: translateY(10px); opacity: 0; }
   100% { transform: translateY(-5px); opacity: 0; }
+}
+
+.hero-nav-buttons {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.hero-nav-buttons.show {
+  opacity: 1;
+}
+
+.hero-nav-buttons-mobile {
+  display: none;
+}
+
+.hero-nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  will-change: transform, background, border-color;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-nav-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.hero-nav-button span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 
 .btn {
@@ -373,17 +412,13 @@ a {
   width: 60px;
   height: 2px;
   background: var(--primary-color);
+  opacity: 0.2;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .qui-sommes-nous h2 {
   text-align: center;
-}
-
-.qui-sommes-nous h2::after {
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .almas-cest-quoi-content {
@@ -491,7 +526,7 @@ a {
   margin-bottom: 1.5rem;
   color: var(--text-dark);
   position: relative;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   text-align: center;
 }
 
@@ -913,7 +948,7 @@ a {
     margin-top: 0.5rem;
   }
 
-  .scroll-indicator {
+  .hero-nav-buttons {
     bottom: 5rem;
   }
 
@@ -988,8 +1023,26 @@ a {
     margin-top: 0.5rem;
   }
 
-  .scroll-indicator {
+  .hero-nav-buttons-desktop {
+    display: none;
+  }
+
+  .hero-nav-buttons-mobile {
+    display: flex;
     bottom: 5rem;
+  }
+
+  .hero-nav-button {
+    padding: 0.6rem 1.25rem;
+    min-width: 150px;
+  }
+
+  .hero-nav-button span {
+    font-size: 0.8rem;
+  }
+
+  .scroll-indicator {
+    bottom: 1rem;
   }
 
   .almas-cest-quoi h2,

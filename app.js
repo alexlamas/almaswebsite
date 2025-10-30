@@ -296,6 +296,7 @@ function cacheDOMElements() {
     floatingInstagram: document.getElementById("floating-instagram"),
     heroSlideshow: document.querySelector(".hero-slideshow"),
     scrollIndicator: document.querySelector(".scroll-indicator"),
+    heroNavButtons: document.querySelectorAll(".hero-nav-buttons"),
     hero: document.querySelector(".hero"),
     sectionContainers: document.querySelectorAll(
       ".almas-cest-quoi-image, .qui-sommes-nous-image"
@@ -356,6 +357,12 @@ function initScrollEffects() {
 
     if (domElements.scrollIndicator) {
       domElements.scrollIndicator.style.opacity = scrollY > 50 ? "0" : "1";
+    }
+
+    if (domElements.heroNavButtons) {
+      domElements.heroNavButtons.forEach(btn => {
+        btn.style.opacity = scrollY > 50 ? "0" : "1";
+      });
     }
 
     const triggerPoint = window.innerWidth <= 768 ? 600 : 1000;
@@ -463,19 +470,36 @@ function animateLogo() {
 
   const tagline = document.getElementById("hero-subheading");
   const scrollIndicator = domElements.scrollIndicator;
+  const heroNavButtons = domElements.heroNavButtons;
 
   if (tagline) {
     setTimeout(() => {
       tagline.classList.add("show");
-      if (scrollIndicator) {
+      if (heroNavButtons && heroNavButtons.length > 0) {
+        setTimeout(() => {
+          heroNavButtons.forEach(btn => btn.classList.add("show"));
+          if (scrollIndicator) {
+            setTimeout(() => scrollIndicator.classList.add("show"), 200);
+          }
+        }, 400);
+      } else if (scrollIndicator) {
         setTimeout(() => scrollIndicator.classList.add("show"), 400);
       }
     }, totalAnimationTime + 800);
-  } else if (scrollIndicator) {
-    setTimeout(
-      () => scrollIndicator.classList.add("show"),
-      totalAnimationTime + 1200
-    );
+  } else {
+    if (heroNavButtons && heroNavButtons.length > 0) {
+      setTimeout(() => {
+        heroNavButtons.forEach(btn => btn.classList.add("show"));
+        if (scrollIndicator) {
+          setTimeout(() => scrollIndicator.classList.add("show"), 200);
+        }
+      }, totalAnimationTime + 1200);
+    } else if (scrollIndicator) {
+      setTimeout(
+        () => scrollIndicator.classList.add("show"),
+        totalAnimationTime + 1200
+      );
+    }
   }
 }
 
