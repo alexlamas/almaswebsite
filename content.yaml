@@ -36,11 +36,11 @@ hero:
 almas_cest_quoi:
   heading: "C'est quoi?"
   text: |
-    Pain frais maison façonné et farci à la main. Différent de tous les sandwiches connus.
+    Des pains pétris et façonnés à la main, farcis avec nos recettes de familles.
+    
+    "Almas" signifie "diamant" en arabe, persan et russe.
 
-    Mot signifiant « diamant » en arabe, persan et russe évoquant quelque chose de précieux.
-
-    Lieu parisien où la cuisine des racines apporte de l'âme à la pause déjeuner.
+    La cuisine de nos racines vous fait découvrir les parfums uniques de nos enfances entremêlées.
   image: '/images/farcis.jpg'
 
 # ============================================
