@@ -67,7 +67,7 @@ a {
 }
 
 .floating-button {
-  background: var(--green);
+  background: #4A90E2;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
@@ -90,19 +90,19 @@ a {
   width: 50px;
   height: 50px;
   justify-content: center;
-  background: rgba(245, 241, 232, 0.7);
+  background: rgba(74, 144, 226, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(74, 144, 226, 0.2);
   gap: 0;
-  color: var(--text-dark);
+  color: white;
 }
 
 .floating-button-instagram:hover {
-  background: rgba(232, 227, 218, 0.85);
+  background: rgba(46, 95, 168, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: var(--text-dark);
+  color: white;
   transform: translateY(-2px);
 }
 
@@ -118,8 +118,8 @@ a {
 
 .floating-button:not(.floating-button-instagram):hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(95, 148, 113, 0.4);
-  background: #528062;
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+  background: #2E5FA8;
 }
 
 .floating-button i {
@@ -324,13 +324,13 @@ a {
 }
 
 .btn-primary {
-  background: var(--bg-light);
-  color: var(--text-dark);
+  background: #4A90E2;
+  color: white;
 }
 
 .btn-primary:hover {
-  background: var(--primary-color);
-  color: var(--bg-light);
+  background: #2E5FA8;
+  color: white;
   transform: translateY(-2px);
 }
 
