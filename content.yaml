@@ -60,6 +60,14 @@ qui_sommes_nous:
       name: 'Maryam'
 
 # ============================================
+# NOS PRESTACIONS
+# ============================================
+nos_prestacions:
+  heading: 'Nos Prestacions'
+  text: |
+    Découvrez nos différentes prestations pour vos événements, fêtes et rassemblements. Nous proposons des services de traiteur avec nos spécialités maison, des ateliers de cuisine pour découvrir nos recettes traditionnelles, et des prestations sur-mesure adaptées à vos besoins. Contactez-nous pour organiser votre événement avec les saveurs authentiques d'Almas.
+
+# ============================================
 # NOTRE CAFE
 # ============================================
 notre_cafe:

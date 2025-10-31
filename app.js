@@ -32,6 +32,7 @@ function populateContent() {
     populateHomePage();
     populateAlmasCestQuoi();
     populateQuiSommesNous();
+    populateNosPrestacions();
     populateNotreCafe();
   }
 
@@ -178,6 +179,13 @@ function populateQuiSommesNous() {
       })
       .join("");
   }
+}
+
+function populateNosPrestacions() {
+  if (!content.nos_prestacions) return;
+
+  setText("nos-prestacions-heading", content.nos_prestacions.heading);
+  setText("nos-prestacions-text", content.nos_prestacions.text);
 }
 
 function populateNotreCafe() {
