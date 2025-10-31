@@ -49,8 +49,8 @@ almas_cest_quoi:
 qui_sommes_nous:
   heading: 'Qui sommes nous?'
   text: |
-Almas est avant tout l’histoire de notre rencontre. Amitié construite au sein du restaurant Nosso de la cheffe Alessandra Montagne, nous avons à cœur de travailler dans le respect des producteurs, la protection de la biodiversité, la valorisation du local et une limitation des déchets.
-Des produits frais et bien sourcés, préparés avec le souci du bon et du partage des multiples inspirations qui nous animent.  
+    Almas est avant tout l’histoire de notre rencontre. Amitié construite au sein du restaurant Nosso de la cheffe Alessandra Montagne, nous avons à cœur de travailler dans le respect des producteurs, la protection de la biodiversité, la valorisation du local et une limitation des déchets.
+    Des produits frais et bien sourcés, préparés avec le souci du bon et du partage des multiples inspirations qui nous animent.  
   images:
     - src: '/images/qui-sommes-nous-1.png'
       name: 'Sandra'
