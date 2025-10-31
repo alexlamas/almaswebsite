@@ -90,20 +90,21 @@ a {
   width: 50px;
   height: 50px;
   justify-content: center;
-  background: rgba(245, 241, 232, 0.7);
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 0, 0, 0.08);
   gap: 0;
-  color: var(--text-dark);
+  color: white;
 }
 
 .floating-button-instagram:hover {
-  background: rgba(232, 227, 218, 0.85);
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: var(--text-dark);
+  color: white;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(214, 36, 159, 0.4);
 }
 
 .floating-button-instagram i {
@@ -751,6 +752,19 @@ a {
   border-color: var(--text-dark);
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.social-links a[href*="instagram"] {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: white;
+  border: none;
+}
+
+.social-links a[href*="instagram"]:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(214, 36, 159, 0.4);
 }
 
 #cafe-tagline {
