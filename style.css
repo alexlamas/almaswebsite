@@ -386,6 +386,7 @@ a {
 
 .almas-cest-quoi,
 .qui-sommes-nous,
+.nos-prestacions,
 .notre-cafe {
   padding: 7rem 14rem;
   background: var(--bg-light);
@@ -393,7 +394,8 @@ a {
 }
 
 .almas-cest-quoi h2,
-.qui-sommes-nous h2 {
+.qui-sommes-nous h2,
+.nos-prestacions h2 {
   font-family: 'SugarMagic', 'Raleway', sans-serif;
   font-size: 2.5rem;
   color: var(--primary-color);
@@ -405,7 +407,8 @@ a {
 }
 
 .almas-cest-quoi h2::after,
-.qui-sommes-nous h2::after {
+.qui-sommes-nous h2::after,
+.nos-prestacions h2::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -569,6 +572,41 @@ a {
 
 .name-label[data-name="Maryam"] .name-text {
   transform: rotate(-3deg);
+}
+
+.nos-prestacions-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.nos-prestacions-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 350px;
+  margin-left: auto;
+}
+
+.nos-prestacions-images img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.24);
+}
+
+.nos-prestacions-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 0;
+  white-space: pre-line;
+  opacity: 0.9;
+  text-align: left;
 }
 
 .notre-cafe-content {
@@ -891,12 +929,14 @@ a {
 
   .almas-cest-quoi,
   .qui-sommes-nous,
+  .nos-prestacions,
   .notre-cafe {
     padding: 3.5rem 3rem;
   }
 
   .almas-cest-quoi-content,
   .qui-sommes-nous-content,
+  .nos-prestacions-content,
   .notre-cafe-content {
     gap: 2rem;
   }
@@ -955,24 +995,28 @@ a {
 
   .almas-cest-quoi,
   .qui-sommes-nous,
+  .nos-prestacions,
   .notre-cafe {
     padding: 3rem 2rem;
   }
 
   .almas-cest-quoi h2,
-  .qui-sommes-nous h2 {
+  .qui-sommes-nous h2,
+  .nos-prestacions h2 {
     margin-bottom: 1.25rem;
     text-align: center;
   }
 
   .almas-cest-quoi h2::after,
-  .qui-sommes-nous h2::after {
+  .qui-sommes-nous h2::after,
+  .nos-prestacions h2::after {
     left: 50%;
     transform: translateX(-50%);
   }
 
   .almas-cest-quoi-text p,
-  .qui-sommes-nous-text p {
+  .qui-sommes-nous-text p,
+  .nos-prestacions-text p {
     margin-bottom: 1.25rem;
     text-align: center;
   }
@@ -1038,12 +1082,29 @@ a {
     margin-right: auto;
   }
 
-  .almas-cest-quoi-content {
+  .almas-cest-quoi-content,
+  .nos-prestacions-content {
     max-width: 500px;
   }
 
+  .nos-prestacions-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nos-prestacions-text {
+    order: 1;
+  }
+
+  .nos-prestacions-images {
+    order: 2;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .almas-cest-quoi-text,
-  .qui-sommes-nous-text {
+  .qui-sommes-nous-text,
+  .nos-prestacions-text {
     padding-right: 0;
     max-width: 100%;
     text-align: center;
@@ -1075,6 +1136,7 @@ a {
 @media (max-width: 480px) {
   .almas-cest-quoi,
   .qui-sommes-nous,
+  .nos-prestacions,
   .notre-cafe {
     padding: 3.5rem 1.25rem;
   }
@@ -1118,13 +1180,15 @@ a {
 
   .almas-cest-quoi h2,
   .qui-sommes-nous h2,
+  .nos-prestacions h2,
   .notre-cafe-description h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
   }
 
   .almas-cest-quoi-text p,
-  .qui-sommes-nous-text p {
+  .qui-sommes-nous-text p,
+  .nos-prestacions-text p {
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: 1rem;

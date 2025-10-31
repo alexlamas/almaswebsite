@@ -186,6 +186,16 @@ function populateNosPrestacions() {
 
   setText("nos-prestacions-heading", content.nos_prestacions.heading);
   setText("nos-prestacions-text", content.nos_prestacions.text);
+
+  const imagesContainer = document.getElementById("nos-prestacions-images");
+  if (imagesContainer && content.nos_prestacions.images) {
+    const images = normalizeArray(content.nos_prestacions.images);
+    imagesContainer.innerHTML = images
+      .map((src, index) => `
+        <img src="${src}" alt="Nos Prestacions ${index + 1}" loading="lazy" decoding="async">
+      `)
+      .join("");
+  }
 }
 
 function populateNotreCafe() {
