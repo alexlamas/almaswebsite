@@ -7,7 +7,7 @@
 # ============================================
 site:
   name: 'ALMAS'
-  tagline: 'La cuisine de nos racines'
+  tagline: 'La cuisine de nos'
   logo: '/images/logo.png'
   favicon: 'favicon/favicon-96x96.png'
 
