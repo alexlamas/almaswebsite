@@ -32,6 +32,7 @@ function populateContent() {
     populateHomePage();
     populateAlmasCestQuoi();
     populateQuiSommesNous();
+    populateNosPrestacions();
     populateNotreCafe();
   }
 
@@ -43,6 +44,9 @@ function populateContent() {
 
   // Lazy load Mapbox when user scrolls near the map section
   lazyLoadMapbox();
+
+  // Start Instagram image cycling
+  cycleInstagramImages();
 }
 
 function lazyLoadMapbox() {
@@ -53,6 +57,8 @@ function lazyLoadMapbox() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          observer.disconnect();
+
           // Load Mapbox CSS
           const mapboxCSS = document.createElement("link");
           mapboxCSS.rel = "stylesheet";
@@ -64,10 +70,14 @@ function lazyLoadMapbox() {
           const mapboxJS = document.createElement("script");
           mapboxJS.src =
             "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js";
-          mapboxJS.onload = initMapbox;
+          mapboxJS.onload = () => {
+            // Give CSS time to load before initializing
+            setTimeout(initMapbox, 100);
+          };
+          mapboxJS.onerror = () => {
+            console.error("Failed to load Mapbox");
+          };
           document.head.appendChild(mapboxJS);
-
-          observer.disconnect();
         }
       });
     },
@@ -80,6 +90,8 @@ function lazyLoadMapbox() {
 function initMapbox() {
   if (typeof mapboxgl === "undefined" || !document.getElementById("mapbox-map"))
     return;
+
+  try {
 
   mapboxgl.accessToken =
     "pk.eyJ1IjoiZWxlY3RyaWthbGV4IiwiYSI6ImNtaDlxbzFzazFic2kya3BjOGF0bm92Z24ifQ.-8evErzgCBHn8QWWuHmkSA";
@@ -101,7 +113,6 @@ function initMapbox() {
   el.style.cssText = "width:42px;height:58px;cursor:pointer;position:relative;";
   el.innerHTML = `
     <img src="/images/pin.svg" style="width:42px;height:58px;display:block;" alt="Location pin">
-    <img src="/favicon/favicon.svg" style="position:absolute;top:2px;left:50%;transform:translateX(-50%);width:38px;height:38px;filter:brightness(0) invert(1);" alt="ALMAS">
   `;
 
   el.addEventListener("click", (e) => {
@@ -117,6 +128,39 @@ function initMapbox() {
   map
     .getCanvas()
     .addEventListener("mouseleave", () => map.scrollZoom.disable());
+  } catch (error) {
+    console.error("Error initializing map:", error);
+  }
+}
+
+function cycleInstagramImages() {
+  if (!content.social || !content.social.instagram_previews) return;
+
+  const img = document.getElementById("instagram-preview-img");
+  if (!img) return;
+
+  const images = content.social.instagram_previews;
+  let currentIndex = 0;
+
+  // Preload all images
+  images.forEach((src) => {
+    const image = new Image();
+    image.src = src;
+  });
+
+  function updateImage() {
+    img.style.opacity = '0';
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      img.src = images[currentIndex];
+      setTimeout(() => {
+        img.style.opacity = '1';
+      }, 50);
+    }, 400);
+  }
+
+  // Change image every 5 seconds
+  setInterval(updateImage, 5000);
 }
 
 function populateHomePage() {
@@ -137,11 +181,6 @@ function populateAlmasCestQuoi() {
 
   setText("almas-cest-quoi-heading", content.almas_cest_quoi.heading);
   setText("almas-cest-quoi-text", content.almas_cest_quoi.text);
-  setImage(
-    "almas-cest-quoi-img",
-    content.almas_cest_quoi.image,
-    "Almas c'est quoi"
-  );
 }
 
 function populateQuiSommesNous() {
@@ -176,6 +215,23 @@ function populateQuiSommesNous() {
 
         return `<img src="${src}" alt="Qui sommes nous ${index + 1}" loading="lazy" decoding="async">`;
       })
+      .join("");
+  }
+}
+
+function populateNosPrestacions() {
+  if (!content.nos_prestacions) return;
+
+  setText("nos-prestacions-heading", content.nos_prestacions.heading);
+  setText("nos-prestacions-text", content.nos_prestacions.text);
+
+  const imagesContainer = document.getElementById("nos-prestacions-images");
+  if (imagesContainer && content.nos_prestacions.images) {
+    const images = normalizeArray(content.nos_prestacions.images);
+    imagesContainer.innerHTML = images
+      .map((src, index) => `
+        <img src="${src}" alt="Nos Prestacions ${index + 1}" loading="lazy" decoding="async">
+      `)
       .join("");
   }
 }
@@ -281,10 +337,11 @@ function setText(id, text) {
   const element = document.getElementById(id);
   if (!element || !text) return;
 
-  if (element.tagName === "H2" && /[\?']/.test(text)) {
+  if (element.tagName === "H2" && /[\?',]/.test(text)) {
     element.innerHTML = text
       .replace(/\?/g, '<span class="fallback-char">?</span>')
-      .replace(/'/g, '<span class="fallback-char">\'</span>');
+      .replace(/'/g, '<span class="fallback-char">\'</span>')
+      .replace(/,/g, '<span class="fallback-char">,</span>');
   } else {
     element.textContent = text;
   }
@@ -307,7 +364,6 @@ function normalizeArray(value) {
 function cacheDOMElements() {
   domElements = {
     floatingButton: document.getElementById("floating-button"),
-    floatingInstagram: document.getElementById("floating-instagram"),
     heroSlideshow: document.querySelector(".hero-slideshow"),
     scrollIndicator: document.querySelector(".scroll-indicator"),
     heroNavButtons: document.querySelectorAll(".hero-nav-buttons"),
@@ -379,14 +435,11 @@ function initScrollEffects() {
       });
     }
 
-    const triggerPoint = window.innerWidth <= 768 ? 600 : 1000;
+    const triggerPoint = window.innerWidth <= 768 ? 300 : 500;
     const showButtons = scrollY > triggerPoint;
 
     if (domElements.floatingButton) {
       domElements.floatingButton.classList.toggle("visible", showButtons);
-    }
-    if (domElements.floatingInstagram) {
-      domElements.floatingInstagram.classList.toggle("visible", showButtons);
     }
 
     if (domElements.heroSlideshow && scrollY < animationState.heroHeight) {

@@ -61,9 +61,10 @@ a {
   top: 2rem;
   right: 2rem;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   z-index: 1000;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .floating-button {
@@ -85,29 +86,101 @@ a {
   pointer-events: none;
 }
 
-.floating-button-instagram {
-  padding: 0.75rem;
-  width: 50px;
-  height: 50px;
-  justify-content: center;
-  background: rgba(245, 241, 232, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  gap: 0;
+.instagram-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: white;
+  text-decoration: none;
   color: var(--text-dark);
+  transition: all 0.1s ease-in-out;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.floating-button-instagram:hover {
-  background: rgba(232, 227, 218, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: var(--text-dark);
-  transform: translateY(-2px);
+.instagram-card:hover {
+  transform: rotate(2deg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.floating-button-instagram i {
-  font-size: 2.2rem;
+.instagram-card-image {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.instagram-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+
+}
+
+.instagram-card-content {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  position: relative;
+}
+
+.instagram-card-content .ph-instagram-logo {
+  font-size: 1.4rem;
+  color: #E4405F;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.instagram-card:hover .instagram-card-content .ph-instagram-logo {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.instagram-card-content span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.instagram-card-content .instagram-handle,
+.instagram-card-content .instagram-cta {
+  position: absolute;
+  left: 3.5rem;
+}
+
+.instagram-card-content .instagram-cta {
+  opacity: 0;
+}
+
+.instagram-card:hover .instagram-handle {
+  opacity: 0;
+}
+
+.instagram-card:hover .instagram-cta {
+  opacity: 1;
+}
+
+.instagram-card-arrow {
+  position: absolute;
+  left: 1rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-size: 1.25rem !important;
+  color: var(--text-dark) !important;
+}
+
+.instagram-card:hover .instagram-card-arrow {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .floating-button.visible {
@@ -116,7 +189,7 @@ a {
   pointer-events: auto;
 }
 
-.floating-button:not(.floating-button-instagram):hover {
+.floating-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(95, 148, 113, 0.4);
   background: #528062;
@@ -386,6 +459,7 @@ a {
 
 .almas-cest-quoi,
 .qui-sommes-nous,
+.nos-prestacions,
 .notre-cafe {
   padding: 7rem 14rem;
   background: var(--bg-light);
@@ -393,7 +467,8 @@ a {
 }
 
 .almas-cest-quoi h2,
-.qui-sommes-nous h2 {
+.qui-sommes-nous h2,
+.nos-prestacions h2 {
   font-family: 'SugarMagic', 'Raleway', sans-serif;
   font-size: 2.5rem;
   color: var(--primary-color);
@@ -405,7 +480,8 @@ a {
 }
 
 .almas-cest-quoi h2::after,
-.qui-sommes-nous h2::after {
+.qui-sommes-nous h2::after,
+.nos-prestacions h2::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -484,13 +560,11 @@ a {
 
 .almas-cest-quoi-image img {
   width: 100%;
-  height: 150%;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.1s ease-out;
   position: relative;
-  top: -25%;
-  transform: translateY(var(--parallax-offset, 0%)) scale(1.3);
 }
 
 .qui-sommes-nous-gallery {
@@ -569,6 +643,78 @@ a {
 
 .name-label[data-name="Maryam"] .name-text {
   transform: rotate(-3deg);
+}
+
+.nos-prestacions-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.nos-prestacions-images {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.nos-prestacions-images img:first-child {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.24);
+}
+
+.nos-prestacions-images img:last-child {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.24);
+}
+
+.nos-prestacions-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nos-prestacions-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 0;
+  white-space: pre-line;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.nos-prestacions-contact {
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.nos-prestacions-contact a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.nos-prestacions-contact a:hover {
+  opacity: 0.7;
+}
+
+.nos-prestacions-contact a i {
+  font-size: 1.2rem;
+  margin-right: 0.3rem;
+  vertical-align: -0.1em;
+}
+
+.nos-prestacions-contact .separator {
+  margin: 0 1rem;
+  opacity: 0.3;
 }
 
 .notre-cafe-content {
@@ -713,6 +859,19 @@ a {
   border-color: var(--text-dark);
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.social-links a[href*="instagram"] {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: white;
+  border: none;
+}
+
+.social-links a[href*="instagram"]:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(214, 36, 159, 0.4);
 }
 
 #cafe-tagline {
@@ -891,12 +1050,14 @@ a {
 
   .almas-cest-quoi,
   .qui-sommes-nous,
+  .nos-prestacions,
   .notre-cafe {
     padding: 3.5rem 3rem;
   }
 
   .almas-cest-quoi-content,
   .qui-sommes-nous-content,
+  .nos-prestacions-content,
   .notre-cafe-content {
     gap: 2rem;
   }
@@ -918,6 +1079,24 @@ a {
 
   .floating-button {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .instagram-card-content span {
+    flex: 0;
+  }
+
+  .footer p {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer .separator {
+    display: none;
+  }
+
+  .hero-slide {
+    background-position: 75% center;
   }
 
   .notre-cafe-details {
@@ -955,24 +1134,28 @@ a {
 
   .almas-cest-quoi,
   .qui-sommes-nous,
+  .nos-prestacions,
   .notre-cafe {
     padding: 3rem 2rem;
   }
 
   .almas-cest-quoi h2,
-  .qui-sommes-nous h2 {
+  .qui-sommes-nous h2,
+  .nos-prestacions h2 {
     margin-bottom: 1.25rem;
     text-align: center;
   }
 
   .almas-cest-quoi h2::after,
-  .qui-sommes-nous h2::after {
+  .qui-sommes-nous h2::after,
+  .nos-prestacions h2::after {
     left: 50%;
     transform: translateX(-50%);
   }
 
   .almas-cest-quoi-text p,
-  .qui-sommes-nous-text p {
+  .qui-sommes-nous-text p,
+  .nos-prestacions-text p {
     margin-bottom: 1.25rem;
     text-align: center;
   }
@@ -980,11 +1163,6 @@ a {
   .almas-cest-quoi-text p:last-child,
   .qui-sommes-nous-text p:last-child {
     margin-bottom: 0;
-  }
-
-  .almas-cest-quoi-image {
-    margin: 1.25rem auto 0;
-    width: 90%;
   }
 
   .qui-sommes-nous-gallery {
@@ -1032,18 +1210,35 @@ a {
     order: 1;
   }
 
-  .almas-cest-quoi-image {
+  .almas-cest-quoi-content .instagram-card {
     order: 2;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .almas-cest-quoi-content {
+  .almas-cest-quoi-content,
+  .nos-prestacions-content {
     max-width: 500px;
   }
 
+  .nos-prestacions-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nos-prestacions-text {
+    order: 1;
+  }
+
+  .nos-prestacions-images {
+    order: 2;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .almas-cest-quoi-text,
-  .qui-sommes-nous-text {
+  .qui-sommes-nous-text,
+  .nos-prestacions-text {
     padding-right: 0;
     max-width: 100%;
     text-align: center;
@@ -1075,6 +1270,7 @@ a {
 @media (max-width: 480px) {
   .almas-cest-quoi,
   .qui-sommes-nous,
+  .nos-prestacions,
   .notre-cafe {
     padding: 3.5rem 1.25rem;
   }
@@ -1118,13 +1314,15 @@ a {
 
   .almas-cest-quoi h2,
   .qui-sommes-nous h2,
+  .nos-prestacions h2,
   .notre-cafe-description h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
   }
 
   .almas-cest-quoi-text p,
-  .qui-sommes-nous-text p {
+  .qui-sommes-nous-text p,
+  .nos-prestacions-text p {
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: 1rem;
