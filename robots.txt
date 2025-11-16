@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lightcoral-peafowl-430879.hostingersite.com/sitemap.xml
+
+# Disallow access to admin or private folders if any
+Disallow: /admin/
+Disallow: /*.yaml$
