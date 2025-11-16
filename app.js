@@ -220,14 +220,14 @@ function populateQuiSommesNous() {
 }
 
 function populateNosPrestacions() {
-  if (!content.nos_prestacions) return;
+  if (!content.nos_prestations) return;
 
-  setText("nos-prestacions-heading", content.nos_prestacions.heading);
-  setText("nos-prestacions-text", content.nos_prestacions.text);
+  setText("nos-prestations-heading", content.nos_prestations.heading);
+  setText("nos-prestations-text", content.nos_prestations.text);
 
-  const imagesContainer = document.getElementById("nos-prestacions-images");
-  if (imagesContainer && content.nos_prestacions.images) {
-    const images = normalizeArray(content.nos_prestacions.images);
+  const imagesContainer = document.getElementById("nos-prestations-images");
+  if (imagesContainer && content.nos_prestations.images) {
+    const images = normalizeArray(content.nos_prestations.images);
     imagesContainer.innerHTML = images
       .map((src, index) => `
         <img src="${src}" alt="Nos Prestacions ${index + 1}" loading="lazy" decoding="async">
