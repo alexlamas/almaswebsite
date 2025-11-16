@@ -158,23 +158,52 @@ function cycleInstagramImages() {
 
   // Start cycling only after all images are loaded
   Promise.all(loadPromises).then(() => {
+    const container = img.parentElement;
+
+    // Ensure container has position relative
+    container.style.position = 'relative';
+
     function updateImage() {
+      const currentImg = document.getElementById('instagram-preview-img');
+      if (!currentImg) return;
+
       const nextIndex = (currentIndex + 1) % images.length;
 
-      // Fade out current image
-      img.style.opacity = '0';
+      // Create new image element for next image
+      const nextImg = document.createElement('img');
+      nextImg.src = images[nextIndex];
+      nextImg.style.width = '100%';
+      nextImg.style.height = '100%';
+      nextImg.style.objectFit = 'cover';
+      nextImg.style.position = 'absolute';
+      nextImg.style.top = '0';
+      nextImg.style.left = '100%';
+      nextImg.style.transition = 'left 0.6s ease-out';
 
+      container.appendChild(nextImg);
+
+      // Force browser to register the initial position
+      nextImg.offsetHeight;
+
+      // Slide both images to the left together
       setTimeout(() => {
-        // Change to next image (which is already preloaded)
-        currentIndex = nextIndex;
-        img.src = images[currentIndex];
+        currentImg.style.left = '-100%';
+        nextImg.style.left = '0';
+      }, 10);
 
-        // Fade in after image is set
-        requestAnimationFrame(() => {
-          img.style.opacity = '1';
-        });
-      }, 300);
+      // Clean up after transition
+      setTimeout(() => {
+        currentImg.remove();
+        nextImg.id = 'instagram-preview-img';
+        currentIndex = nextIndex;
+      }, 650);
     }
+
+    // Make current image ready for sliding
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '0';
+    img.style.transition = 'left 0.6s ease-out';
 
     // Start cycling every 5 seconds
     setInterval(updateImage, 5000);
@@ -223,7 +252,7 @@ function populateQuiSommesNous() {
               <img src="${src}" alt="${name}" loading="lazy" decoding="async">
               <div class="name-label" data-name="${name}">
                 <svg class="hand-drawn-line" viewBox="0 0 100 60" preserveAspectRatio="none">
-                  <path class="line-path" d="M ${index === 0 ? '55' : index === 1 ? '50' : '45'} 5 Q ${index === 0 ? '52' : index === 1 ? '48' : '48'} 30, 50 55" stroke="#5F9471" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <path class="line-path" d="M ${index === 0 ? '52' : index === 1 ? '50' : '48'} 25 Q ${index === 0 ? '51' : index === 1 ? '49' : '49'} 38, 50 52" stroke="#74966E" stroke-width="3" fill="none" stroke-linecap="round"/>
                 </svg>
                 <span class="name-text">${name}</span>
               </div>
@@ -234,6 +263,47 @@ function populateQuiSommesNous() {
         return `<img src="${src}" alt="Qui sommes nous ${index + 1}" loading="lazy" decoding="async">`;
       })
       .join("");
+
+    // Animate lines and text when images become visible
+    animateNameLabels();
+  }
+}
+
+function animateNameLabels() {
+  const galleryItems = document.querySelectorAll('.qui-sommes-nous .gallery-item-wrapper');
+  let hasAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+
+        // Animate each item one by one
+        galleryItems.forEach((item, index) => {
+          const linePath = item.querySelector('.line-path');
+          const nameText = item.querySelector('.name-text');
+
+          // Delay each item by 1.2 seconds (800ms line + 400ms gap)
+          const itemDelay = index * 1200;
+
+          // Animate line
+          setTimeout(() => {
+            if (linePath) linePath.classList.add('animate');
+
+            // Then animate text while line is still drawing
+            setTimeout(() => {
+              if (nameText) nameText.classList.add('show');
+            }, 400);
+          }, itemDelay + 300);
+        });
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  if (galleryItems.length > 0) {
+    observer.observe(galleryItems[0]);
   }
 }
 
@@ -248,7 +318,7 @@ function populateNosPrestacions() {
     const images = normalizeArray(content.nos_prestations.images);
     imagesContainer.innerHTML = images
       .map((src, index) => `
-        <img src="${src}" alt="Nos Prestacions ${index + 1}" loading="lazy" decoding="async">
+        <img src="${src}" alt="Nos Prestations ${index + 1}" loading="lazy" decoding="async">
       `)
       .join("");
   }
@@ -454,7 +524,16 @@ function initScrollEffects() {
     }
 
     const triggerPoint = window.innerWidth <= 768 ? 300 : 500;
-    const showButtons = scrollY > triggerPoint;
+    let showButtons = scrollY > triggerPoint;
+
+    // Hide floating button when near bottom of page
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPosition = scrollY + windowHeight;
+    const isNearBottom = scrollPosition >= documentHeight - 400;
+
+    if (isNearBottom) {
+      showButtons = false;
+    }
 
     if (domElements.floatingButton) {
       domElements.floatingButton.classList.toggle("visible", showButtons);
@@ -591,10 +670,11 @@ function animateLogo() {
 }
 
 function startHeroCyclingText() {
-  const cyclingTextEl = document.getElementById("hero-cycling-text");
-  if (!cyclingTextEl) return;
+  const subheading = document.getElementById("hero-subheading");
+  if (!subheading) return;
 
   const texts = [
+    "La cuisine de nos racines",
     "Restaurant & Café",
     "Prestations traiteur",
     "Pains farcis maison",
@@ -605,25 +685,31 @@ function startHeroCyclingText() {
 
   let currentIndex = 0;
 
+  // Make it clickable to scroll down
+  subheading.style.cursor = "pointer";
+  subheading.addEventListener("click", () => {
+    const nextSection = document.getElementById("almas-cest-quoi");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
   function updateText() {
+    const currentSubheading = document.getElementById("hero-subheading");
+    if (!currentSubheading) return;
+
     // Fade out
-    cyclingTextEl.classList.remove("show");
+    currentSubheading.style.opacity = "0";
 
     setTimeout(() => {
-      // Update text
+      // Change text
       currentIndex = (currentIndex + 1) % texts.length;
-      cyclingTextEl.textContent = texts[currentIndex];
+      currentSubheading.textContent = texts[currentIndex];
 
       // Fade in
-      setTimeout(() => {
-        cyclingTextEl.classList.add("show");
-      }, 50);
-    }, 800);
+      currentSubheading.style.opacity = "1";
+    }, 400);
   }
-
-  // Show first text
-  cyclingTextEl.textContent = texts[currentIndex];
-  cyclingTextEl.classList.add("show");
 
   // Cycle through texts every 3.5 seconds
   setInterval(updateText, 3500);
