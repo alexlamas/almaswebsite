@@ -124,11 +124,11 @@ a {
 
 .instagram-card-content {
   padding: 0.75rem 1rem;
-  display: flex;
-  align-items: center;
+  display: inline-flex;
   gap: 0.5rem;
   background: white;
   position: relative;
+  font-family: monospace;
 }
 
 .instagram-card-content .ph-instagram-logo {
@@ -145,19 +145,26 @@ a {
 }
 
 .instagram-card-content span {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: opacity 0.3s ease;
+  opacity: 0.8;
+  position: relative;
 }
 
-.instagram-card-content .instagram-handle,
+.instagram-card-content .instagram-handle {
+  transform: translateY(3px);
+}
+
+
 .instagram-card-content .instagram-cta {
   position: absolute;
-  left: 3.5rem;
+  inset: 0  ;
+  opacity: 0;
 }
 
-.instagram-card-content .instagram-cta {
-  opacity: 0;
+.instagram-card-text {
+  position: relative;
 }
 
 .instagram-card:hover .instagram-handle {
@@ -328,6 +335,23 @@ a {
 }
 
 .hero p.show {
+  opacity: 1;
+}
+
+#hero-cycling-text {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  min-height: 1.5rem;
+}
+
+#hero-cycling-text.show {
   opacity: 1;
 }
 
@@ -621,7 +645,6 @@ a {
 .line-path {
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: url(#hand-drawn-effect);
 }
 
 .name-text {
@@ -1083,6 +1106,15 @@ a {
 
   .instagram-card-content span {
     flex: 0;
+    text-align: left;
+  }
+
+  .instagram-card-content .instagram-handle {
+    opacity: 0;
+  }
+
+  .instagram-card-content .instagram-cta {
+    opacity: 1;
   }
 
   .footer p {
@@ -1183,6 +1215,10 @@ a {
     height: 50px;
   }
 
+  .line-path {
+    stroke-width: 3 !important;
+  }
+
   .hero-content {
     width: 60%;
     transform: translate(-50%, -58%);
@@ -1195,6 +1231,11 @@ a {
   .hero p {
     font-size: 1rem;
     margin-top: 0.5rem;
+  }
+
+  #hero-cycling-text {
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
   }
 
   .hero-nav-buttons {
@@ -1290,6 +1331,11 @@ a {
     margin-top: 0.5rem;
   }
 
+  #hero-cycling-text {
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+
   .hero-nav-buttons-desktop {
     display: none;
   }
@@ -1348,6 +1394,10 @@ a {
 
   .hand-drawn-line {
     height: 40px;
+  }
+
+  .line-path {
+    stroke-width: 4 !important;
   }
 
   .btn {

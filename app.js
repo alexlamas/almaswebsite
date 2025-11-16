@@ -141,26 +141,44 @@ function cycleInstagramImages() {
 
   const images = content.social.instagram_previews;
   let currentIndex = 0;
+  const preloadedImages = [];
 
-  // Preload all images
-  images.forEach((src) => {
-    const image = new Image();
-    image.src = src;
+  // Preload all images and wait for them to load
+  const loadPromises = images.map((src, index) => {
+    return new Promise((resolve) => {
+      const image = new Image();
+      image.onload = () => {
+        preloadedImages[index] = image;
+        resolve();
+      };
+      image.onerror = () => resolve(); // Continue even if an image fails to load
+      image.src = src;
+    });
   });
 
-  function updateImage() {
-    img.style.opacity = '0';
-    setTimeout(() => {
-      currentIndex = (currentIndex + 1) % images.length;
-      img.src = images[currentIndex];
-      setTimeout(() => {
-        img.style.opacity = '1';
-      }, 50);
-    }, 400);
-  }
+  // Start cycling only after all images are loaded
+  Promise.all(loadPromises).then(() => {
+    function updateImage() {
+      const nextIndex = (currentIndex + 1) % images.length;
 
-  // Change image every 5 seconds
-  setInterval(updateImage, 5000);
+      // Fade out current image
+      img.style.opacity = '0';
+
+      setTimeout(() => {
+        // Change to next image (which is already preloaded)
+        currentIndex = nextIndex;
+        img.src = images[currentIndex];
+
+        // Fade in after image is set
+        requestAnimationFrame(() => {
+          img.style.opacity = '1';
+        });
+      }, 300);
+    }
+
+    // Start cycling every 5 seconds
+    setInterval(updateImage, 5000);
+  });
 }
 
 function populateHomePage() {
@@ -552,6 +570,8 @@ function animateLogo() {
       } else if (scrollIndicator) {
         setTimeout(() => scrollIndicator.classList.add("show"), 400);
       }
+      // Start cycling text after tagline is shown
+      setTimeout(() => startHeroCyclingText(), 2000);
     }, totalAnimationTime + 800);
   } else {
     if (heroNavButtons && heroNavButtons.length > 0) {
@@ -568,6 +588,45 @@ function animateLogo() {
       );
     }
   }
+}
+
+function startHeroCyclingText() {
+  const cyclingTextEl = document.getElementById("hero-cycling-text");
+  if (!cyclingTextEl) return;
+
+  const texts = [
+    "Restaurant & Café",
+    "Prestations traiteur",
+    "Pains farcis maison",
+    "Événements privés",
+    "À emporter",
+    "Workshops culinaires"
+  ];
+
+  let currentIndex = 0;
+
+  function updateText() {
+    // Fade out
+    cyclingTextEl.classList.remove("show");
+
+    setTimeout(() => {
+      // Update text
+      currentIndex = (currentIndex + 1) % texts.length;
+      cyclingTextEl.textContent = texts[currentIndex];
+
+      // Fade in
+      setTimeout(() => {
+        cyclingTextEl.classList.add("show");
+      }, 50);
+    }, 800);
+  }
+
+  // Show first text
+  cyclingTextEl.textContent = texts[currentIndex];
+  cyclingTextEl.classList.add("show");
+
+  // Cycle through texts every 3.5 seconds
+  setInterval(updateText, 3500);
 }
 
 function lazyLoadHeroImages() {
