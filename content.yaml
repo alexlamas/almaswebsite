@@ -34,14 +34,14 @@ hero:
 # ALMAS C'EST QUOI
 # ============================================
 almas_cest_quoi:
-  heading: "C'est quoi?"
+  heading: "C'est quoi, Almas?"
   text: |
     Des pains pétris et façonnés à la main, farcis avec nos recettes de familles.
 
     "Almas" signifie "diamant" en arabe, persan et russe.
 
     La cuisine de nos racines vous fait découvrir les parfums uniques de nos enfances entremêlées.
-  image: '/images/almas.jpg'
+  image: '/images/insta2.png'
 
 # ============================================
 # QUI SOMMES NOUS
@@ -49,8 +49,7 @@ almas_cest_quoi:
 qui_sommes_nous:
   heading: 'Qui sommes nous?'
   text: |
-    Almas est avant tout l’histoire de notre rencontre. Amitié construite au sein du restaurant Nosso de la cheffe Alessandra Montagne, nous avons à cœur de travailler dans le respect des producteurs, la protection de la biodiversité, la valorisation du local et une limitation des déchets.
-    Des produits frais et bien sourcés, préparés avec le souci du bon et du partage des multiples inspirations qui nous animent.  
+    Almas est avant tout l’histoire de notre rencontre. Amitié construite au sein du restaurant Nosso de la cheffe Alessandra Montagne, nous avons à cœur de travailler dans le respect des producteurs, la protection de la biodiversité, la valorisation du local et une limitation des déchets. Des produits frais et bien sourcés, préparés avec le souci du bon et du partage des multiples inspirations qui nous animent.  
   images:
     - src: '/images/qui-sommes-nous-1.png'
       name: 'Sandra'
@@ -65,10 +64,10 @@ qui_sommes_nous:
 nos_prestacions:
   heading: 'Nos Prestacions'
   text: |
-    Découvrez nos différentes prestations pour vos événements, fêtes et rassemblements. Nous proposons des services de traiteur avec nos spécialités maison, des ateliers de cuisine pour découvrir nos recettes traditionnelles, et des prestations sur-mesure adaptées à vos besoins. Contactez-nous pour organiser votre événement avec les saveurs authentiques d'Almas.
+    Découvrez nos services traiteur pour vos événements, privatisez notre lieu ou laissez-vous tenter par nos workshops pour découvrir la cuisine de nos racines. Pour plus d'informations, contactez-nous par téléphone, e-mail ou sur Instagram.
   images:
-    - '/images/farcis.jpg'
-    - '/images/farcis.jpg'
+    - '/images/dehors.jpeg'
+    - '/images/table.jpeg'
 
 # ============================================
 # NOTRE CAFE
@@ -98,6 +97,12 @@ notre_cafe:
 # ============================================
 social:
   instagram: 'https://www.instagram.com/almas.restaurantparis/'
+  instagram_previews:
+    - '/images/insta1.png'
+    - '/images/insta2.png'
+    - '/images/insta3.png'
+    - '/images/insta4.png'
+    - '/images/insta5.png'
 
 # ============================================
 # MENU PAGE
