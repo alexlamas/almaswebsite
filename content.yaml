@@ -185,6 +185,68 @@ menu:
         price: '6,50€'
 
 # ============================================
+# PHARMACY PAGE
+# ============================================
+pharmacy:
+  heading: 'Round The Clock Pharmacy'
+  tagline: 'Your trusted community pharmacy in Barnes'
+
+  about:
+    heading: 'About Our Pharmacy'
+    text: |
+      Round The Clock Pharmacy is a light, airy, and well-stocked chemist shop in the heart of Barnes. Led by Michel Lamaa, we are proud to serve our local community with professional pharmaceutical services and a carefully curated selection of health and beauty products.
+
+      We specialize in natural, chemical-free, and organic skincare ranges, bringing you the best in wellness and personal care. Our knowledgeable team is always ready to provide expert advice and personalized service.
+    image: '/images/pharmacy-interior.jpg'
+
+  services:
+    heading: 'Our Services'
+    items:
+      - title: 'Prescription Dispensing'
+        description: 'NHS and private prescription services with professional advice'
+        icon: 'prescription'
+      - title: 'Natural Skincare'
+        description: 'Organic and chemical-free beauty products for healthy skin'
+        icon: 'leaf'
+      - title: 'Health Consultations'
+        description: 'Expert guidance on medications and wellness'
+        icon: 'first-aid-kit'
+      - title: 'Film Processing'
+        description: 'Traditional film development services'
+        icon: 'camera'
+      - title: 'Toiletries & Cosmetics'
+        description: 'Wide selection of personal care products'
+        icon: 'shopping-bag'
+      - title: 'NHS Services'
+        description: 'Full range of NHS pharmacy services'
+        icon: 'heartbeat'
+
+  location:
+    text: |
+      Located in Barnes Village, Southwest London, our pharmacy has been serving the local community for years. We're easily accessible and offer a welcoming environment for all your pharmaceutical needs.
+    items:
+      - label: 'Address'
+        lines:
+          - '69 Church Road'
+          - 'Barnes, London SW13 9HH'
+          - 'United Kingdom'
+      - label: 'Contact'
+        lines:
+          - 'Phone: +44 20 XXXX XXXX'
+          - 'Email: info@roundtheclock.pharmacy'
+      - label: 'Opening Hours'
+        lines:
+          - 'Monday — Friday: 9:00 AM — 6:00 PM'
+          - 'Saturday: 9:00 AM — 5:00 PM'
+          - 'Sunday: Closed'
+    map:
+      coordinates: [-0.2423, 51.4693]  # Barnes, London coordinates
+      title: 'Round The Clock Pharmacy - 69 Church Road, Barnes'
+
+  footer:
+    info: 'Round The Clock Pharmacy | 69 Church Road, Barnes, London SW13 9HH | Owned and operated by Michel Lamaa'
+
+# ============================================
 # FOOTER
 # ============================================
 footer:

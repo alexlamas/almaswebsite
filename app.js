@@ -40,6 +40,10 @@ function populateContent() {
     populateMenuPage();
   }
 
+  if (window.location.pathname.includes("pharmacy.html")) {
+    populatePharmacyPage();
+  }
+
   populateFooter();
 
   // Lazy load Mapbox when user scrolls near the map section
@@ -329,6 +333,154 @@ function createMenuItem(item) {
       <p>${item.description}</p>
     </div>
   `;
+}
+
+function populatePharmacyPage() {
+  if (!content.pharmacy) return;
+
+  setText("pharmacy-heading", content.pharmacy.heading);
+  setText("pharmacy-tagline", content.pharmacy.tagline);
+
+  // About section
+  if (content.pharmacy.about) {
+    setText("pharmacy-about-heading", content.pharmacy.about.heading);
+    setText("pharmacy-about-text", content.pharmacy.about.text);
+    setImage("pharmacy-about-img", content.pharmacy.about.image, "Round The Clock Pharmacy");
+  }
+
+  // Services section
+  if (content.pharmacy.services) {
+    setText("pharmacy-services-heading", content.pharmacy.services.heading);
+
+    const servicesGrid = document.getElementById("pharmacy-services-grid");
+    if (servicesGrid && content.pharmacy.services.items) {
+      servicesGrid.innerHTML = content.pharmacy.services.items
+        .map((item) => `
+          <div class="pharmacy-service-card">
+            <i class="ph ph-${item.icon}"></i>
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+          </div>
+        `)
+        .join("");
+    }
+  }
+
+  // Location section
+  if (content.pharmacy.location) {
+    setText("pharmacy-location-text", content.pharmacy.location.text);
+
+    const cardsContainer = document.getElementById("pharmacy-visit-cards");
+    if (cardsContainer && content.pharmacy.location.items) {
+      const items = normalizeArray(content.pharmacy.location.items);
+      cardsContainer.innerHTML = items
+        .map((item) => {
+          const lines = normalizeArray(item.lines)
+            .map((line) => `<p>${line}</p>`)
+            .join("");
+
+          return `
+            <div class="visit-card">
+              <h3>${item.label || ""}</h3>
+              ${lines}
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    // Initialize pharmacy map if coordinates are provided
+    if (content.pharmacy.location.map && content.pharmacy.location.map.coordinates) {
+      lazyLoadPharmacyMapbox();
+    }
+  }
+
+  // Footer info
+  if (content.pharmacy.footer) {
+    setText("pharmacy-footer-info", content.pharmacy.footer.info);
+  }
+}
+
+function lazyLoadPharmacyMapbox() {
+  const mapContainer = document.getElementById("pharmacy-mapbox-map");
+  if (!mapContainer) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+
+          // Load Mapbox CSS
+          const mapboxCSS = document.createElement("link");
+          mapboxCSS.rel = "stylesheet";
+          mapboxCSS.href =
+            "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css";
+          document.head.appendChild(mapboxCSS);
+
+          // Load Mapbox JS
+          const mapboxJS = document.createElement("script");
+          mapboxJS.src =
+            "https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js";
+          mapboxJS.onload = () => {
+            setTimeout(initPharmacyMapbox, 100);
+          };
+          mapboxJS.onerror = () => {
+            console.error("Failed to load Mapbox");
+          };
+          document.head.appendChild(mapboxJS);
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
+
+  observer.observe(mapContainer);
+}
+
+function initPharmacyMapbox() {
+  if (typeof mapboxgl === "undefined" || !document.getElementById("pharmacy-mapbox-map"))
+    return;
+
+  try {
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiZWxlY3RyaWthbGV4IiwiYSI6ImNtaDlxbzFzazFic2kya3BjOGF0bm92Z24ifQ.-8evErzgCBHn8QWWuHmkSA";
+
+    const pharmacyCoordinates = content.pharmacy.location.map.coordinates;
+    const map = new mapboxgl.Map({
+      container: "pharmacy-mapbox-map",
+      style: "mapbox://styles/electrikalex/cmhaeskgh001v01qyapsg1xpe",
+      center: pharmacyCoordinates,
+      zoom: 14,
+      scrollZoom: false,
+      attributionControl: false,
+    });
+
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }));
+
+    const el = document.createElement("div");
+    el.className = "custom-marker";
+    el.style.cssText = "width:42px;height:58px;cursor:pointer;position:relative;";
+    el.innerHTML = `
+      <img src="/images/pin.svg" style="width:42px;height:58px;display:block;" alt="Location pin">
+    `;
+
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.open("https://www.google.com/maps/place/69+Church+Rd,+Barnes,+London+SW13+9HH", "_blank");
+    });
+
+    new mapboxgl.Marker(el, { anchor: "bottom" })
+      .setLngLat(pharmacyCoordinates)
+      .addTo(map);
+
+    map.on("click", () => map.scrollZoom.enable());
+    map
+      .getCanvas()
+      .addEventListener("mouseleave", () => map.scrollZoom.disable());
+  } catch (error) {
+    console.error("Error initializing pharmacy map:", error);
+  }
 }
 
 function populateFooter() {

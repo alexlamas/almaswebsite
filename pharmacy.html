@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Round The Clock Pharmacy - Barnes, London</title>
+    <meta name="description" content="Round The Clock Pharmacy - Your trusted community pharmacy in Barnes. Dispensing chemist offering natural, chemical-free and organic skincare products." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Round The Clock Pharmacy - Barnes, London" />
+    <meta property="og:description" content="Your trusted community pharmacy in Barnes. Dispensing chemist offering natural, chemical-free and organic skincare products." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Raleway:wght@400;500;600&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+  </head>
+
+  <body>
+    <section class="pharmacy-hero">
+      <div class="pharmacy-hero-overlay"></div>
+      <div class="pharmacy-hero-content">
+        <h1 id="pharmacy-heading">Round The Clock Pharmacy</h1>
+        <p id="pharmacy-tagline">Your trusted community pharmacy in Barnes</p>
+      </div>
+      <a href="#pharmacy-about" class="scroll-indicator">
+        <div class="scroll-arrows">
+          <svg
+            class="scroll-arrow"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="4,7 10,13 16,7"
+              fill="none"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            class="scroll-arrow"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="4,7 10,13 16,7"
+              fill="none"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </a>
+    </section>
+
+    <section class="pharmacy-about reveal" id="pharmacy-about">
+      <div class="container">
+        <h2 id="pharmacy-about-heading">About Our Pharmacy</h2>
+        <div class="pharmacy-about-content">
+          <div class="pharmacy-about-text">
+            <p id="pharmacy-about-text"></p>
+          </div>
+          <div class="pharmacy-about-image">
+            <img id="pharmacy-about-img" src="" alt="Round The Clock Pharmacy" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pharmacy-services reveal" id="pharmacy-services">
+      <div class="container">
+        <h2 id="pharmacy-services-heading">Our Services</h2>
+        <div class="pharmacy-services-grid" id="pharmacy-services-grid">
+        </div>
+      </div>
+    </section>
+
+    <section class="pharmacy-location reveal" id="pharmacy-location">
+      <div class="container">
+        <div class="pharmacy-location-content">
+          <div class="pharmacy-location-description">
+            <h2>Visit Us</h2>
+            <p id="pharmacy-location-text"></p>
+          </div>
+          <div class="pharmacy-location-details">
+            <div class="pharmacy-location-map">
+              <div id="pharmacy-mapbox-map"></div>
+            </div>
+            <div class="pharmacy-location-info">
+              <div class="visit-cards" id="pharmacy-visit-cards"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <p id="pharmacy-footer-info"></p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
