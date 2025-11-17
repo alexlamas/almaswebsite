@@ -12,17 +12,6 @@ site:
   favicon: 'favicon/favicon-96x96.png'
 
 # ============================================
-# NAVIGATION
-# ============================================
-navigation:
-  - text: 'Menu'
-    link: 'menu.html'
-  - text: 'À emporter'
-    link: '#takeaway'
-  - text: 'Contact'
-    link: '#contact'
-
-# ============================================
 # HOME PAGE - HERO SECTION (KEN BURNS SLIDESHOW)
 # ============================================
 hero:
@@ -103,86 +92,6 @@ social:
     - '/images/insta3.png'
     - '/images/insta4.png'
     - '/images/insta5.png'
-
-# ============================================
-# MENU PAGE
-# ============================================
-menu:
-  hero_image: '/images/menu-hero.jpg'
-  heading: 'Notre Menu'
-  subheading: 'Préparé avec amour, servi avec soin'
-
-  # COFFEE SECTION
-  coffee:
-    section_title: 'Café'
-    section_image: '/images/coffee-section.jpg'
-    items:
-      - name: 'Espresso'
-        description: 'Riche et corsé'
-        price: '3,50€'
-      - name: 'Americano'
-        description: 'Espresso allongé'
-        price: '4,00€'
-      - name: 'Cappuccino'
-        description: 'Espresso avec lait mousseux'
-        price: '4,50€'
-      - name: 'Latte'
-        description: 'Espresso avec lait chaud'
-        price: '4,75€'
-      - name: 'Flat White'
-        description: 'Double espresso avec microfoam'
-        price: '5,00€'
-      - name: 'Moka'
-        description: 'Latte au chocolat'
-        price: '5,25€'
-      - name: 'Cold Brew'
-        description: 'Café infusé à froid'
-        price: '4,50€'
-
-  # PASTRIES SECTION
-  pastries:
-    section_title: 'Pâtisseries'
-    section_image: '/images/pastries-section.jpg'
-    items:
-      - name: 'Croissant'
-        description: 'Beurré, feuilleté, parfait'
-        price: '3,50€'
-      - name: 'Pain au Chocolat'
-        description: 'Croissant au chocolat noir'
-        price: '4,00€'
-      - name: 'Muffin aux Myrtilles'
-        description: 'Fait avec des baies fraîches'
-        price: '3,75€'
-      - name: 'Roulé à la Cannelle'
-        description: 'Chaud avec glaçage au fromage'
-        price: '4,50€'
-      - name: 'Scone'
-        description: 'Saveurs du jour'
-        price: '3,50€'
-      - name: 'Cake à la Banane'
-        description: 'Moelleux et savoureux'
-        price: '3,25€'
-
-  # LUNCH SECTION
-  lunch:
-    section_title: 'Déjeuner'
-    section_image: '/images/lunch-section.jpg'
-    items:
-      - name: "Toast à l'Avocat"
-        description: 'Pain au levain, avocat, tomates cerises, feta'
-        price: '9,50€'
-      - name: 'Sandwich Petit Déjeuner'
-        description: 'Œuf, fromage, choix de viande sur brioche'
-        price: '8,50€'
-      - name: 'Panini Caprese'
-        description: 'Mozzarella, tomate, basilic, balsamique'
-        price: '10,00€'
-      - name: 'Club Dinde'
-        description: 'Dinde, bacon, laitue, tomate sur pain au levain'
-        price: '11,00€'
-      - name: 'Soupe du Jour'
-        description: 'Demandez notre sélection du jour'
-        price: '6,50€'
 
 # ============================================
 # FOOTER
