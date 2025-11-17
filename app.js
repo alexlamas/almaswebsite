@@ -451,7 +451,7 @@ function normalizeArray(value) {
 
 function cacheDOMElements() {
   domElements = {
-    floatingButton: document.getElementById("floating-button"),
+    floatingButtonsContainer: document.querySelector(".floating-buttons-container"),
     heroSlideshow: document.querySelector(".hero-slideshow"),
     scrollIndicator: document.querySelector(".scroll-indicator"),
     heroNavButtons: document.querySelectorAll(".hero-nav-buttons"),
@@ -535,8 +535,8 @@ function initScrollEffects() {
       showButtons = false;
     }
 
-    if (domElements.floatingButton) {
-      domElements.floatingButton.classList.toggle("visible", showButtons);
+    if (domElements.floatingButtonsContainer) {
+      domElements.floatingButtonsContainer.classList.toggle("visible", showButtons);
     }
 
     if (domElements.heroSlideshow && scrollY < animationState.heroHeight) {
