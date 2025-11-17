@@ -86,7 +86,7 @@ a {
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 0;
+  border-radius: 25px;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -96,19 +96,9 @@ a {
   letter-spacing: 0.05em;
   opacity: 1;
   transform: none;
-  transition: background 0.3s ease, border-radius 0.3s ease;
+  transition: background 0.3s ease;
   pointer-events: auto;
   position: relative;
-}
-
-.floating-button:first-child {
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-}
-
-.floating-button:last-child {
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
 }
 
 .floating-button:not(:last-child)::after {
@@ -231,11 +221,9 @@ a {
 
 .floating-button:hover {
   background: rgba(0, 0, 0, 0.2);
-  border-radius: 25px;
 }
 
-.floating-button:hover::after,
-.floating-button:hover + .floating-button::after {
+.floating-buttons-container:hover .floating-button:not(:last-child)::after {
   opacity: 0;
 }
 
