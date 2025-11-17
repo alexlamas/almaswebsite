@@ -61,7 +61,7 @@ a {
   top: 2rem;
   right: 2rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
   z-index: 1000;
   align-items: flex-end;
