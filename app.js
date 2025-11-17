@@ -36,10 +36,6 @@ function populateContent() {
     populateNotreCafe();
   }
 
-  if (window.location.pathname.includes("menu.html")) {
-    populateMenuPage();
-  }
-
   populateFooter();
 
   // Lazy load Mapbox when user scrolls near the map section
@@ -357,48 +353,6 @@ function populateNotreCafe() {
       })
       .join("");
   }
-}
-
-function populateMenuPage() {
-  if (!content.menu) return;
-
-  setText("menu-heading", content.menu.heading);
-  setText("menu-subheading", content.menu.subheading);
-
-  const menuHero = document.querySelector(".menu-hero");
-  if (menuHero && content.menu.hero_image) {
-    menuHero.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${content.menu.hero_image}')`;
-  }
-
-  ["coffee", "pastries", "lunch"].forEach((section) => {
-    if (!content.menu[section]) return;
-
-    setText(`${section}-section-title`, content.menu[section].section_title);
-    setImage(
-      `${section}-section-img`,
-      content.menu[section].section_image,
-      section
-    );
-
-    const container = document.getElementById(`${section}-items`);
-    if (container) {
-      container.innerHTML = content.menu[section].items
-        .map((item) => createMenuItem(item))
-        .join("");
-    }
-  });
-}
-
-function createMenuItem(item) {
-  return `
-    <div class="menu-item">
-      <div class="menu-item-header">
-        <h3>${item.name}</h3>
-        <span class="price">${item.price}</span>
-      </div>
-      <p>${item.description}</p>
-    </div>
-  `;
 }
 
 function populateFooter() {

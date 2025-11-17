@@ -35,7 +35,6 @@ This website was intentionally built with **simplicity and maintainability** in 
 ```
 almaswebsite/
 ├── index.html          # Main homepage
-├── menu.html           # Menu page (if exists)
 ├── style.css           # All styles - clean, no comments
 ├── app.js              # JavaScript - clean, no comments
 ├── content.yaml        # ⭐ SINGLE SOURCE OF TRUTH FOR ALL CONTENT
@@ -176,7 +175,6 @@ python3 -m http.server 8000
 3. Upload ALL files maintaining structure:
    ```
    index.html
-   menu.html
    style.css
    app.js
    content.yaml
@@ -283,10 +281,9 @@ The site features several scroll-triggered effects:
 2. Colors cascade throughout the site
 
 **Adding a new page:**
-1. Duplicate `index.html` or `menu.html`
-2. Update navigation in `content.yaml`
-3. Add page-specific content to YAML
-4. Add populate function in `app.js`
+1. Duplicate `index.html` structure
+2. Add page-specific content to YAML
+3. Add populate function in `app.js`
 
 ## 🐛 Troubleshooting
 
