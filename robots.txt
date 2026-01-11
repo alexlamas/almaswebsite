@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://lightcoral-peafowl-430879.hostingersite.com/sitemap.xml
+Sitemap: https://almasrestaurant.fr/sitemap.xml
 
 # Disallow access to admin or private folders if any
 Disallow: /admin/

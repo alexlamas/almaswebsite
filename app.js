@@ -408,7 +408,6 @@ function cacheDOMElements() {
     floatingButtonsContainer: document.querySelector(".floating-buttons-container"),
     heroSlideshow: document.querySelector(".hero-slideshow"),
     scrollIndicator: document.querySelector(".scroll-indicator"),
-    heroNavButtons: document.querySelectorAll(".hero-nav-buttons"),
     hero: document.querySelector(".hero"),
     sectionContainers: document.querySelectorAll(
       ".almas-cest-quoi-image, .qui-sommes-nous-image"
@@ -471,27 +470,8 @@ function initScrollEffects() {
       domElements.scrollIndicator.style.opacity = scrollY > 50 ? "0" : "1";
     }
 
-    if (domElements.heroNavButtons) {
-      domElements.heroNavButtons.forEach(btn => {
-        btn.style.opacity = scrollY > 50 ? "0" : "1";
-      });
-    }
-
-    const triggerPoint = window.innerWidth <= 768 ? 300 : 500;
-    let showButtons = scrollY > triggerPoint;
-
-    // Hide floating button when near bottom of page
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollPosition = scrollY + windowHeight;
-    const isNearBottom = scrollPosition >= documentHeight - 400;
-
-    if (isNearBottom) {
-      showButtons = false;
-    }
-
-    if (domElements.floatingButtonsContainer) {
-      domElements.floatingButtonsContainer.classList.toggle("visible", showButtons);
-    }
+    // Move floating buttons to corner after scrolling past hero
+    updateFloatingButtonsPosition();
 
     if (domElements.heroSlideshow && scrollY < animationState.heroHeight) {
       const scrollPercent = Math.min(scrollY / animationState.heroHeight, 1);
@@ -541,6 +521,9 @@ function initScrollEffects() {
   window.addEventListener(
     "scroll",
     () => {
+      // Update floating buttons immediately for smooth scrolling
+      updateFloatingButtonsPosition();
+
       if (!animationState.ticking) {
         requestAnimationFrame(handleScroll);
         animationState.ticking = true;
@@ -588,38 +571,21 @@ function animateLogo() {
 
   const tagline = document.getElementById("hero-subheading");
   const scrollIndicator = domElements.scrollIndicator;
-  const heroNavButtons = domElements.heroNavButtons;
 
   if (tagline) {
     setTimeout(() => {
       tagline.classList.add("show");
-      if (heroNavButtons && heroNavButtons.length > 0) {
-        setTimeout(() => {
-          heroNavButtons.forEach(btn => btn.classList.add("show"));
-          if (scrollIndicator) {
-            setTimeout(() => scrollIndicator.classList.add("show"), 200);
-          }
-        }, 400);
-      } else if (scrollIndicator) {
+      if (scrollIndicator) {
         setTimeout(() => scrollIndicator.classList.add("show"), 400);
       }
       // Start cycling text after tagline is shown
       setTimeout(() => startHeroCyclingText(), 2000);
     }, totalAnimationTime + 800);
-  } else {
-    if (heroNavButtons && heroNavButtons.length > 0) {
-      setTimeout(() => {
-        heroNavButtons.forEach(btn => btn.classList.add("show"));
-        if (scrollIndicator) {
-          setTimeout(() => scrollIndicator.classList.add("show"), 200);
-        }
-      }, totalAnimationTime + 1200);
-    } else if (scrollIndicator) {
-      setTimeout(
-        () => scrollIndicator.classList.add("show"),
-        totalAnimationTime + 1200
-      );
-    }
+  } else if (scrollIndicator) {
+    setTimeout(
+      () => scrollIndicator.classList.add("show"),
+      totalAnimationTime + 1200
+    );
   }
 }
 
@@ -692,13 +658,35 @@ function lazyLoadHeroImages() {
   });
 }
 
+function updateFloatingButtonsPosition() {
+  if (!domElements.floatingButtonsContainer) return;
+  const container = domElements.floatingButtonsContainer;
+  const scrollY = window.scrollY;
+  const isMobile = window.innerWidth <= 768;
+
+  const hideAt = 50;
+  const showCornerAt = isMobile ? 300 : 400;
+
+  // Three states: visible at bottom, hidden, visible at corner
+  const isHidden = scrollY >= hideAt && scrollY < showCornerAt;
+  const isCorner = scrollY >= showCornerAt;
+
+  container.classList.toggle('hidden', isHidden);
+  container.classList.toggle('corner', isCorner);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   cacheDOMElements();
   initSlideshow();
   initScrollEffects();
   animateLogo();
   loadContent();
+  updateFloatingButtonsPosition();
 
   // Lazy load hero images 2 and 3 after initial load
   setTimeout(lazyLoadHeroImages, 1000);
+});
+
+window.addEventListener("resize", () => {
+  updateFloatingButtonsPosition();
 });

@@ -58,40 +58,62 @@ a {
 
 .floating-buttons-container {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: row;
   gap: 0;
   z-index: 1000;
-  align-items: flex-end;
-  background: var(--green);
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 30px;
   padding: 0;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: var(--transition);
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: auto;
+  opacity: 1;
+  --divider-color: rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
 }
 
-.floating-buttons-container.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.floating-buttons-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.floating-buttons-container.corner {
+  bottom: auto;
+  top: 2rem;
+  left: auto;
+  right: 2rem;
+  transform: none;
+  background: rgb(116, 150, 110);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  --divider-color: rgba(255, 255, 255, 0.3);
+}
+
+.floating-buttons-container.corner .floating-button {
+  color: white;
 }
 
 .floating-button {
   background: transparent;
-  color: white;
+  color: black;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 2rem;
   border-radius: 25px;
   text-decoration: none;
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: center;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
+  white-space: nowrap;
   font-size: 0.9rem;
   letter-spacing: 0.05em;
   opacity: 1;
@@ -109,7 +131,7 @@ a {
   transform: translateY(-50%);
   height: 60%;
   width: 1px;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--divider-color, rgba(255, 255, 255, 0.3));
   transition: opacity 0.3s ease;
 }
 
@@ -1144,8 +1166,6 @@ a {
 
 @media (max-width: 768px) {
   .floating-buttons-container {
-    right: 1rem;
-    top: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
@@ -1445,10 +1465,6 @@ a {
     font-size: 0.9rem;
   }
 
-  .floating-buttons-container {
-    right: 0.75rem;
-    top: 0.75rem;
-  }
 
   .notre-cafe-map {
     height: 250px;
