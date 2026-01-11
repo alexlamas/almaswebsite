@@ -66,7 +66,7 @@ a {
   gap: 0;
   z-index: 1000;
   align-items: center;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 30px;
@@ -458,17 +458,17 @@ a {
   text-decoration: none;
   color: var(--text-light);
   padding: 0.75rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   will-change: transform, background, border-color;
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 .hero-nav-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.7);
   transform: translateY(-2px);
 }
 
