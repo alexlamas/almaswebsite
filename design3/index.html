@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALMAS - Design 3: Art Déco Parisien</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design3/style.css">
+</head>
+<body>
+    <!-- Decorative Frame -->
+    <div class="page-frame">
+        <div class="frame-corner top-left"></div>
+        <div class="frame-corner top-right"></div>
+        <div class="frame-corner bottom-left"></div>
+        <div class="frame-corner bottom-right"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-links left">
+                <a href="#story">Notre Histoire</a>
+                <a href="#carte">La Carte</a>
+            </div>
+            <a href="#" class="nav-logo">
+                <div class="logo-frame">
+                    <span class="logo-text">ALMAS</span>
+                    <span class="logo-sub">CAFÉ • PARIS</span>
+                </div>
+            </a>
+            <div class="nav-links right">
+                <a href="#equipe">L'Équipe</a>
+                <a href="#visite">Visite</a>
+            </div>
+        </div>
+        <button class="nav-mobile" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>★</span>
+                <span>EST. 2019</span>
+                <span>★</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-small">Bienvenue au</span>
+                <span class="title-main">Café ALMAS</span>
+                <span class="title-script">où l'élégance rencontre le goût</span>
+            </h1>
+            <div class="hero-divider">
+                <span class="divider-line"></span>
+                <span class="divider-diamond">◆</span>
+                <span class="divider-line"></span>
+            </div>
+            <p class="hero-text">Une parenthèse intemporelle au cœur de Paris</p>
+            <div class="hero-buttons">
+                <a href="#carte" class="btn btn-gold">Découvrir la carte</a>
+                <a href="#visite" class="btn btn-outline">Nous rendre visite</a>
+            </div>
+        </div>
+        <div class="hero-images">
+            <div class="hero-img main">
+                <img src="/images/hero-1.jpg" alt="ALMAS Café">
+                <div class="img-frame"></div>
+            </div>
+            <div class="hero-img secondary">
+                <img src="/images/almas.jpg" alt="Intérieur">
+                <div class="img-frame"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-image">
+                    <div class="image-art-frame">
+                        <img src="/images/dehors.jpeg" alt="ALMAS terrasse">
+                    </div>
+                    <div class="story-badge">
+                        <span class="badge-year">2019</span>
+                        <span class="badge-text">Ouverture</span>
+                    </div>
+                </div>
+                <div class="story-content">
+                    <div class="section-header">
+                        <span class="section-number">01</span>
+                        <h2>Notre <em>Histoire</em></h2>
+                    </div>
+                    <div class="story-text">
+                        <p>
+                            Dans les années folles, Paris vibrait au rythme des cafés littéraires
+                            et des conversations passionnées. C'est cet esprit que nous avons
+                            voulu faire revivre chez ALMAS.
+                        </p>
+                        <p>
+                            Chaque détail de notre établissement rend hommage à cette époque
+                            dorée : les moulures Art Déco, les miroirs biseautés, et surtout,
+                            cet art de vivre à la française qui fait notre réputation.
+                        </p>
+                    </div>
+                    <div class="story-features">
+                        <div class="feature">
+                            <span class="feature-icon">◈</span>
+                            <div>
+                                <h4>Café d'exception</h4>
+                                <p>Grains sélectionnés avec soin</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">◈</span>
+                            <div>
+                                <h4>Pâtisseries maison</h4>
+                                <p>Créations uniques chaque jour</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="carte" class="carte">
+        <div class="carte-bg"></div>
+        <div class="container">
+            <div class="section-header center">
+                <span class="section-number">02</span>
+                <h2>Notre <em>Carte</em></h2>
+                <p class="section-subtitle">Une sélection raffinée pour tous les moments</p>
+            </div>
+            <div class="carte-tabs">
+                <button class="tab active" data-tab="petit-dej">Petit-Déjeuner</button>
+                <button class="tab" data-tab="dejeuner">Déjeuner</button>
+                <button class="tab" data-tab="gouter">Goûter</button>
+            </div>
+            <div class="carte-content">
+                <div class="carte-items active" id="petit-dej">
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Le Classique Parisien</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">12€</span>
+                        </div>
+                        <p>Croissant pur beurre, confiture maison, café ou thé</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>L'Œuf Bénédicte</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">16€</span>
+                        </div>
+                        <p>Muffin toasté, œufs pochés, sauce hollandaise, épinards frais</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Le Granola Maison</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">10€</span>
+                        </div>
+                        <p>Yaourt grec, granola aux noisettes, fruits de saison, miel</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>L'Assiette Gourmande</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">22€</span>
+                        </div>
+                        <p>Assortiment sucré-salé, œufs brouillés, viennoiseries, jus frais</p>
+                    </div>
+                </div>
+                <div class="carte-items" id="dejeuner">
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Salade du Marché</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">15€</span>
+                        </div>
+                        <p>Légumes de saison, fromage de chèvre, noix, vinaigrette miel-moutarde</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Quiche du Jour</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">14€</span>
+                        </div>
+                        <p>Servie tiède avec mesclun et vinaigrette</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Croque Monsieur ALMAS</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">16€</span>
+                        </div>
+                        <p>Pain brioché, jambon blanc, béchamel truffée, comté affiné</p>
+                    </div>
+                </div>
+                <div class="carte-items" id="gouter">
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Pâtisserie du Jour</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">7€</span>
+                        </div>
+                        <p>Création unique de notre chef pâtissier</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Chocolat Viennois</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">6€</span>
+                        </div>
+                        <p>Chocolat chaud onctueux, chantilly maison</p>
+                    </div>
+                    <div class="carte-item">
+                        <div class="item-header">
+                            <h4>Thé Gourmand</h4>
+                            <span class="item-dots"></span>
+                            <span class="item-price">12€</span>
+                        </div>
+                        <p>Thé au choix, trio de mignardises maison</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carte-images">
+                <div class="carte-img">
+                    <img src="/images/table.jpeg" alt="Petit-déjeuner">
+                </div>
+                <div class="carte-img">
+                    <img src="/images/hero-2.jpg" alt="Brunch">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="equipe" class="equipe">
+        <div class="container">
+            <div class="section-header center">
+                <span class="section-number">03</span>
+                <h2>L'<em>Équipe</em></h2>
+                <p class="section-subtitle">Les artisans de votre expérience</p>
+            </div>
+            <div class="equipe-grid">
+                <div class="equipe-member">
+                    <div class="member-portrait">
+                        <img src="/images/qui-sommes-nous-1.png" alt="Team member">
+                        <div class="portrait-frame"></div>
+                    </div>
+                    <div class="member-info">
+                        <span class="member-role">Fondateur</span>
+                        <h4>Alexandre</h4>
+                        <p>Passionné de café depuis toujours</p>
+                    </div>
+                </div>
+                <div class="equipe-member">
+                    <div class="member-portrait">
+                        <img src="/images/qui-sommes-nous-2.png" alt="Team member">
+                        <div class="portrait-frame"></div>
+                    </div>
+                    <div class="member-info">
+                        <span class="member-role">Chef Barista</span>
+                        <h4>Marie</h4>
+                        <p>L'art du latte art et bien plus</p>
+                    </div>
+                </div>
+                <div class="equipe-member">
+                    <div class="member-portrait">
+                        <img src="/images/qui-sommes-nous-3.png" alt="Team member">
+                        <div class="portrait-frame"></div>
+                    </div>
+                    <div class="member-info">
+                        <span class="member-role">Chef Pâtissier</span>
+                        <h4>Lucas</h4>
+                        <p>Créateur de douceurs uniques</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Section -->
+    <section id="visite" class="visite">
+        <div class="visite-image">
+            <img src="/images/hero-3.jpg" alt="ALMAS Café">
+            <div class="visite-overlay"></div>
+        </div>
+        <div class="visite-content">
+            <div class="section-header">
+                <span class="section-number light">04</span>
+                <h2 class="light">Nous <em>Rendre Visite</em></h2>
+            </div>
+            <div class="visite-info">
+                <div class="info-card">
+                    <div class="card-icon">✦</div>
+                    <h4>Adresse</h4>
+                    <p>123 Rue de la Paix<br>75002 Paris, France</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">✦</div>
+                    <h4>Horaires</h4>
+                    <p>Lun - Ven: 7h30 - 19h00<br>Sam - Dim: 9h00 - 20h00</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">✦</div>
+                    <h4>Réservation</h4>
+                    <p>+33 1 23 45 67 89<br>reservation@almas.cafe</p>
+                </div>
+            </div>
+            <div class="visite-cta">
+                <a href="#" class="btn btn-gold">Réserver une table</a>
+            </div>
+            <div class="visite-social">
+                <span>Suivez-nous</span>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <span class="logo-text">ALMAS</span>
+                    <span class="logo-tagline">L'élégance du goût</span>
+                </div>
+                <div class="footer-newsletter">
+                    <p>Recevez nos actualités</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre email">
+                        <button type="submit">→</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-divider">
+                <span class="divider-line"></span>
+                <span class="divider-diamond">◆</span>
+                <span class="divider-line"></span>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 ALMAS Café. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/design3/script.js"></script>
+</body>
+</html>
