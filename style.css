@@ -1029,6 +1029,102 @@ a {
   margin: 0 1rem;
 }
 
+.footer-legal {
+  margin-top: 0.75rem !important;
+  font-size: 0.75rem !important;
+  opacity: 0.45 !important;
+}
+
+.footer-legal a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Legal page */
+.legal-page {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  padding: 3rem 2rem 4rem;
+  min-height: 100vh;
+}
+
+.legal-page .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.legal-back-link {
+  display: inline-block;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-bottom: 2rem;
+  transition: opacity 0.3s ease;
+}
+
+.legal-back-link:hover {
+  opacity: 1;
+}
+
+.legal-page h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.legal-updated {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-bottom: 3rem;
+}
+
+.legal-section {
+  margin-bottom: 2.5rem;
+}
+
+.legal-section h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.legal-section h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal-section p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+.legal-section ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.legal-section li {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.legal-section a {
+  color: var(--text-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .menu-hero {
   height: 400px;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/menu-hero.jpg') center/cover no-repeat;
