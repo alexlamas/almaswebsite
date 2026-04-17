@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALMAS - Design 2: Jardin Botanique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design2/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="#about" class="nav-link">Notre Histoire</a>
+                <a href="#menu" class="nav-link">Carte</a>
+            </div>
+            <a href="#" class="logo">
+                <svg viewBox="0 0 120 60" class="logo-svg">
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">ALMAS</text>
+                </svg>
+            </a>
+            <div class="nav-right">
+                <a href="#team" class="nav-link">Équipe</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+        <button class="mobile-toggle" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-decoration leaf-1">
+            <svg width="200" height="300" viewBox="0 0 100 150" fill="none">
+                <path d="M50 0C50 0 0 50 0 100C0 130 25 150 50 150C75 150 100 130 100 100C100 50 50 0 50 0Z" fill="currentColor" opacity="0.15"/>
+            </svg>
+        </div>
+        <div class="hero-decoration leaf-2">
+            <svg width="150" height="225" viewBox="0 0 80 120" fill="none">
+                <path d="M40 0C40 0 0 40 0 80C0 104 20 120 40 120C60 120 80 104 80 80C80 40 40 0 40 0Z" fill="currentColor" opacity="0.1"/>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <span class="hero-tag">Café & Brunch</span>
+            <h1 class="hero-title">
+                Cultivons<br>
+                <span class="script">le bonheur</span>
+            </h1>
+            <p class="hero-desc">Un havre de paix où se mêlent saveurs authentiques et douceur de vivre</p>
+            <div class="hero-btns">
+                <a href="#menu" class="btn btn-primary">
+                    <span>Découvrir la carte</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#contact" class="btn btn-secondary">Nous trouver</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="image-wrapper">
+                <img src="/images/hero-1.jpg" alt="ALMAS Café">
+                <div class="image-badge">
+                    <span class="badge-icon">☕</span>
+                    <span class="badge-text">Ouvert<br>7j/7</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Défiler</span>
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="24" cy="24" r="20"/>
+                            <path d="M24 14v10l6 6"/>
+                        </svg>
+                    </div>
+                    <h3>Petit-déjeuner</h3>
+                    <p>Dès 8h, savourez nos créations matinales</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8 40h32M12 40V24l12-12 12 12v16"/>
+                            <rect x="18" y="28" width="12" height="12"/>
+                        </svg>
+                    </div>
+                    <h3>Fait maison</h3>
+                    <p>Tout est préparé sur place avec amour</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M24 4C14 4 8 12 8 20c0 12 16 24 16 24s16-12 16-24c0-8-6-16-16-16z"/>
+                            <circle cx="24" cy="20" r="6"/>
+                        </svg>
+                    </div>
+                    <h3>Local</h3>
+                    <p>Produits frais de producteurs locaux</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4 4 12.954 4 24s8.954 20 20 20z"/>
+                            <path d="M24 12v12h8"/>
+                        </svg>
+                    </div>
+                    <h3>Brunch</h3>
+                    <p>Le week-end, un brunch généreux vous attend</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-images">
+                    <div class="img-main">
+                        <img src="/images/almas.jpg" alt="Intérieur café">
+                    </div>
+                    <div class="img-secondary">
+                        <img src="/images/dehors.jpeg" alt="Terrasse">
+                    </div>
+                    <div class="plant-deco">
+                        <svg viewBox="0 0 60 100" fill="none">
+                            <path d="M30 100V50M30 50C30 50 10 40 10 25C10 10 30 0 30 0C30 0 50 10 50 25C50 40 30 50 30 50Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M30 70C30 70 15 60 15 50C15 40 30 35 30 35" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M30 70C30 70 45 60 45 50C45 40 30 35 30 35" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">Notre histoire</span>
+                    <h2 class="section-title">Un coin de <em>nature</em> en ville</h2>
+                    <p class="about-text">
+                        ALMAS est né d'une envie simple : créer un espace où le temps s'arrête,
+                        où chaque café raconte une histoire, et où les saveurs authentiques
+                        rencontrent la convivialité.
+                    </p>
+                    <p class="about-text">
+                        Dans notre écrin végétal, nous cultivons l'art de bien vivre. Nos producteurs
+                        locaux nous inspirent, et c'est avec passion que nous transformons leurs
+                        trésors en créations gourmandes.
+                    </p>
+                    <ul class="about-list">
+                        <li>
+                            <span class="list-check">✓</span>
+                            <span>Café de spécialité torréfié localement</span>
+                        </li>
+                        <li>
+                            <span class="list-check">✓</span>
+                            <span>Pâtisseries et viennoiseries maison</span>
+                        </li>
+                        <li>
+                            <span class="list-check">✓</span>
+                            <span>Carte végétarienne & options vegan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section id="menu" class="menu">
+        <div class="menu-bg"></div>
+        <div class="container">
+            <div class="menu-header">
+                <span class="section-tag">La carte</span>
+                <h2 class="section-title">Nos <em>créations</em></h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-card-img">
+                        <img src="/images/table.jpeg" alt="Petit-déjeuner">
+                        <span class="menu-card-badge">Populaire</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <h3>Le Gourmand</h3>
+                        <p>Œufs brouillés, avocat, pain de campagne toasté, salade verte, jus frais</p>
+                        <span class="menu-price">14€</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-card-img">
+                        <img src="/images/hero-2.jpg" alt="Brunch">
+                    </div>
+                    <div class="menu-card-content">
+                        <h3>Brunch du Weekend</h3>
+                        <p>Assortiment sucré-salé, boisson chaude, jus pressé, viennoiseries</p>
+                        <span class="menu-price">28€</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-card-img">
+                        <img src="/images/hero-3.jpg" alt="Pâtisseries">
+                        <span class="menu-card-badge">Nouveau</span>
+                    </div>
+                    <div class="menu-card-content">
+                        <h3>Douceurs Maison</h3>
+                        <p>Sélection de pâtisseries du jour, préparées chaque matin</p>
+                        <span class="menu-price">6€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-cta">
+                <a href="#" class="btn btn-outline-dark">
+                    <span>Voir toute la carte</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="team-header">
+                <span class="section-tag">L'équipe</span>
+                <h2 class="section-title">Les <em>jardiniers</em> du goût</h2>
+                <p class="team-intro">Des passionnés au service de votre bien-être</p>
+            </div>
+            <div class="team-carousel">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/images/qui-sommes-nous-1.png" alt="Team member">
+                        <div class="member-plant">🌿</div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Alexandre</h4>
+                        <span>Fondateur & Barista</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/images/qui-sommes-nous-2.png" alt="Team member">
+                        <div class="member-plant">🌱</div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Marie</h4>
+                        <span>Chef Pâtissière</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/images/qui-sommes-nous-3.png" alt="Team member">
+                        <div class="member-plant">🍃</div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Lucas</h4>
+                        <span>Chef Cuisinier</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram -->
+    <section class="instagram">
+        <div class="container">
+            <div class="insta-header">
+                <div class="insta-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="insta-text">
+                    <h3>Suivez-nous sur Instagram</h3>
+                    <a href="#">@almas.cafe</a>
+                </div>
+            </div>
+            <div class="insta-grid">
+                <div class="insta-item"><img src="/images/insta1.png" alt="Instagram"></div>
+                <div class="insta-item"><img src="/images/insta2.png" alt="Instagram"></div>
+                <div class="insta-item"><img src="/images/insta3.png" alt="Instagram"></div>
+                <div class="insta-item"><img src="/images/insta4.png" alt="Instagram"></div>
+                <div class="insta-item"><img src="/images/insta5.png" alt="Instagram"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span class="section-tag light">Nous trouver</span>
+                    <h2 class="section-title light">Venez <em>prendre racine</em></h2>
+                    <div class="info-items">
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>123 Rue de la Paix<br>75002 Paris</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">🕐</div>
+                            <div>
+                                <h4>Horaires</h4>
+                                <p>Lun - Ven: 8h - 18h<br>Sam - Dim: 9h - 19h</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div>
+                                <h4>Contact</h4>
+                                <p>+33 1 23 45 67 89<br>hello@almas.cafe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <div class="map-placeholder">
+                        <img src="/images/dehors.jpeg" alt="ALMAS Location">
+                        <div class="map-overlay">
+                            <span class="map-pin">📍</span>
+                            <span class="map-text">Voir sur Google Maps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">ALMAS</h3>
+                    <p>Cultivons le bonheur, une tasse à la fois.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <a href="#about">Notre Histoire</a>
+                        <a href="#menu">La Carte</a>
+                        <a href="#team">L'Équipe</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Infos</h4>
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Confidentialité</a>
+                        <a href="#">Recrutement</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Social</h4>
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">TikTok</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 ALMAS. Fait avec 🌿 à Paris.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/design2/script.js"></script>
+</body>
+</html>
