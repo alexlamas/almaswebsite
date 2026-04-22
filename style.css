@@ -101,9 +101,9 @@ a {
 
 .floating-button {
   background: transparent;
-  color: black;
+  color: #74966E;
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.65rem 1.4rem;
   border-radius: 25px;
   text-decoration: none;
   flex: 1 1 0;
@@ -112,10 +112,11 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 500;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
   white-space: nowrap;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
   opacity: 1;
   transform: none;
   transition: background 0.3s ease;
@@ -510,20 +511,21 @@ a {
 
 .btn-reservation {
   background: transparent;
-  color: var(--text-dark);
-  border: 1px solid var(--text-dark);
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: 0.85rem 2rem;
+  color: #74966E;
+  border: 1px solid #74966E;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.65rem 1.4rem;
   margin-top: 0;
 }
 
 .btn-reservation:hover {
-  background: var(--text-dark);
-  color: var(--bg-light);
+  background: #74966E;
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(116, 150, 110, 0.3);
 }
 
 .reveal {
@@ -785,6 +787,10 @@ a {
 }
 
 .nos-prestations-menu {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
   text-align: center;
 }
 
@@ -1270,8 +1276,8 @@ a {
   }
 
   .floating-button {
-    padding: 0.65rem 0.85rem;
-    font-size: 0.8rem;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.72rem;
   }
 
   .instagram-card-content span {
