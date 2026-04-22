@@ -116,8 +116,7 @@ a {
   font-weight: 600;
   white-space: nowrap;
   font-size: 0.82rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   opacity: 1;
   transform: none;
   transition: background 0.3s ease;
@@ -517,8 +516,7 @@ a {
   font-family: 'Raleway', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   padding: 0.65rem 1.4rem;
   margin-top: 0;
 }
