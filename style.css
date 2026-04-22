@@ -101,7 +101,7 @@ a {
 
 .floating-button {
   background: transparent;
-  color: #74966E;
+  color: #516B4D;
   border: none;
   padding: 0.65rem 1.4rem;
   border-radius: 25px;
@@ -511,8 +511,8 @@ a {
 
 .btn-reservation {
   background: transparent;
-  color: #74966E;
-  border: 1px solid #74966E;
+  color: #516B4D;
+  border: 1px solid #516B4D;
   font-family: 'Raleway', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
@@ -522,10 +522,10 @@ a {
 }
 
 .btn-reservation:hover {
-  background: #74966E;
+  background: #516B4D;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(116, 150, 110, 0.3);
+  box-shadow: 0 4px 12px rgba(81, 107, 77, 0.3);
 }
 
 .reveal {
