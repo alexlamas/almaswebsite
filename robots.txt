@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://almasrestaurant.fr/sitemap.xml
+Sitemap: https://www.almasrestaurant.fr/sitemap.xml
 
 # Disallow access to admin or private folders if any
 Disallow: /admin/
