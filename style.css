@@ -1161,6 +1161,32 @@ a {
   margin-bottom: 1rem;
 }
 
+.carte-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #516B4D;
+  margin-bottom: 1rem;
+}
+
+.carte-notice {
+  max-width: 620px;
+  margin: 0 auto 1.5rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(81, 107, 77, 0.35);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.carte-notice a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+  color: #516B4D;
+}
+
 .carte-intro {
   max-width: 620px;
   margin: 0 auto 1.5rem;
@@ -1258,20 +1284,6 @@ a {
   margin-top: 0.15rem;
 }
 
-.carte-item-small .carte-item-name {
-  font-size: 0.9rem;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-.carte-items-compact .carte-item {
-  padding: 0.45rem 0;
-}
-
-.carte-items-compact .carte-item-name {
-  font-size: 0.92rem;
-}
-
 .carte-footnote {
   font-size: 0.8rem;
   line-height: 1.6;
@@ -1287,19 +1299,6 @@ a {
 .carte-traiteur .carte-actions {
   justify-content: flex-start;
   margin-bottom: 1rem;
-}
-
-.carte-traiteur-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 3rem;
-}
-
-.carte-traiteur-lists p {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  opacity: 0.8;
-  margin-bottom: 0.75rem;
 }
 
 @media (max-width: 1024px) {
@@ -1516,10 +1515,6 @@ a {
 
   .qui-sommes-nous-text {
     margin-bottom: 0;
-  }
-
-  .carte-traiteur-grid {
-    grid-template-columns: 1fr;
   }
 
   .carte-page h1 {
