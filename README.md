@@ -38,7 +38,7 @@ almaswebsite/
 ├── style.css           # All styles - clean, no comments
 ├── app.js              # JavaScript - animations, map, Instagram card
 ├── images/             # All media assets
-│   ├── hero-1.jpg      # Slideshow images
+│   ├── hero-1.webp     # Slideshow images (jpg fallback alongside)
 │   ├── hero-2.jpg
 │   ├── hero-3.jpg
 │   ├── pin.svg         # Custom map marker

@@ -92,11 +92,11 @@ function initMapbox() {
 }
 
 const INSTAGRAM_PREVIEWS = [
-  "/images/insta1.png",
-  "/images/insta2.png",
-  "/images/insta3.png",
-  "/images/insta4.png",
-  "/images/insta5.png",
+  "/images/insta1.webp",
+  "/images/insta2.webp",
+  "/images/insta3.webp",
+  "/images/insta4.webp",
+  "/images/insta5.webp",
 ];
 
 function cycleInstagramImages() {
