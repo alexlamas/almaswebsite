@@ -6,4 +6,3 @@ Sitemap: https://almasrestaurant.fr/sitemap.xml
 
 # Disallow access to admin or private folders if any
 Disallow: /admin/
-Disallow: /*.yaml$
