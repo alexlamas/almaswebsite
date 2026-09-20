@@ -8,15 +8,15 @@ This website was intentionally built with **simplicity and maintainability** in 
 
 - **No build process** - Direct HTML/CSS/JS that works immediately
 - **No frameworks** - Pure vanilla JavaScript for maximum simplicity
-- **No dependencies** - Only uses a CDN for YAML parsing
-- **Easy editing** - All content managed through a single YAML file
+- **No dependencies** - No runtime libraries; only Mapbox is loaded lazily for the map
+- **Easy editing** - All text lives directly in `index.html`, so crawlers and social scrapers see it without JavaScript
 - **Static hosting** - Upload directly to any web host (Hostinger, etc.)
 
 ## 🏗️ Architecture
  
 ### Why This Approach?
 
-1. **Non-technical content editing** - The site owner's friend can edit content by simply modifying `content.yaml`
+1. **Simple content editing** - Text is plain HTML in `index.html`; edit it in place
 2. **No complex tooling** - No npm, webpack, or build steps to maintain
 3. **Zero dependencies** - Works offline, no package management headaches
 4. **Direct upload** - FTP/file manager upload works perfectly
@@ -27,17 +27,16 @@ This website was intentionally built with **simplicity and maintainability** in 
 - **HTML5** - Semantic, accessible markup
 - **CSS3** - Modern features (flexbox, grid, custom properties)
 - **Vanilla JavaScript** - ES6+ features, no frameworks
-- **YAML** - Human-friendly content format
 - **Google Fonts** - Raleway font family
 
 ## 📁 File Structure
 
 ```
 almaswebsite/
-├── index.html          # Main homepage
+├── index.html          # Main homepage - ⭐ ALL TEXT CONTENT LIVES HERE
+├── mentions-legales.html # Legal page
 ├── style.css           # All styles - clean, no comments
-├── app.js              # JavaScript - clean, no comments
-├── content.yaml        # ⭐ SINGLE SOURCE OF TRUTH FOR ALL CONTENT
+├── app.js              # JavaScript - animations, map, Instagram card
 ├── images/             # All media assets
 │   ├── hero-1.jpg      # Slideshow images
 │   ├── hero-2.jpg
@@ -89,53 +88,40 @@ almaswebsite/
 
 ## ✏️ Content Management
 
-### The YAML Approach
-
-**All editable content lives in `content.yaml`**. This design choice means:
-
-- ✅ Non-technical users can edit text and image paths
-- ✅ Single file to manage = less confusion
-- ✅ Version control friendly
-- ✅ No database needed
-- ✅ Clear structure with comments
-
-### How It Works
-
-1. Content is defined in `content.yaml`
-2. JavaScript loads and parses the YAML on page load
-3. DOM elements are populated dynamically
-4. Images referenced by path in YAML
+**All text lives directly in `index.html`.** Headings, paragraphs, address and
+opening hours are plain HTML. This was a deliberate change from an earlier
+YAML-driven setup: search engines and social scrapers now see the full page
+without running JavaScript, and there is no CDN dependency for rendering text.
 
 ### Editing Content
 
-To change ANY text or image on the site:
+1. Open `index.html`
+2. Find the section (`almas-cest-quoi`, `qui-sommes-nous`, `nos-prestations`, `notre-cafe`)
+3. Edit the text inside the `<h2>` / `<p>` tags
+4. Save and deploy
 
-1. Open `content.yaml` in any text editor
-2. Find the section you want to edit
-3. Change the text or image path
-4. Save the file
-5. Upload to server (or refresh if testing locally)
+Paragraphs with several lines use `white-space: pre-line`, so a blank line in
+the HTML source becomes a paragraph break on the page.
 
-**Example:**
-```yaml
-hero:
-  heading: "ALMAS"
-  subheading: "La cuisine de nos racines"
-```
+Punctuation in headings (`?`, `'`, `,`) is wrapped in `<span class="fallback-char">`
+because the SugarMagic display font lacks those glyphs.
+
+When you change the address or opening hours, also update the JSON-LD block at
+the bottom of `index.html` so Google's structured data stays in sync.
 
 ### Adding Images
 
 1. Place image in `/images` folder
-2. Reference it in `content.yaml` with path: `/images/filename.jpg`
-3. Upload both the image and updated `content.yaml`
+2. Reference it from `index.html` with path: `/images/filename.jpg`
+3. Add a descriptive `alt` attribute
+4. Instagram preview images are listed in `INSTAGRAM_PREVIEWS` in `app.js`
 
 ## 🚀 Development
 
 ### Local Testing
 
 The site needs to run on a server (not just opening HTML files) because:
-- YAML fetching requires HTTP/HTTPS
-- CORS restrictions apply to `fetch`
+- Root-relative paths (`/images/...`, `/fonts/...`) need a server root
 - Google Fonts requests need proper origins
 
 **Start local server:**
@@ -158,8 +144,8 @@ python3 -m http.server 8000
 - Use CSS custom properties (variables) for colors
 
 **For content changes:**
-- Edit `content.yaml` only
-- Never hardcode content in HTML (slideshow image URLs remain inline by design)
+- Edit the text in `index.html`
+- Keep the JSON-LD block in sync when address or hours change
 
 **For functionality changes:**
 - Edit `app.js`
@@ -175,9 +161,9 @@ python3 -m http.server 8000
 3. Upload ALL files maintaining structure:
    ```
    index.html
+   mentions-legales.html
    style.css
    app.js
-   content.yaml
     images/
       ├── logo.png
       ├── hero-1.jpg
@@ -188,14 +174,14 @@ python3 -m http.server 8000
 ### Updating Content
 
 **For text/content changes:**
-1. Edit `content.yaml` locally
-2. Upload just `content.yaml` to server
+1. Edit `index.html` locally
+2. Upload `index.html` to server
 3. Done! Changes appear immediately
 
 **For new images:**
 1. Add image to `/images` folder
-2. Update `content.yaml` with new image path
-3. Upload the image AND updated `content.yaml`
+2. Reference it from `index.html`
+3. Upload the image AND updated `index.html`
 
 **For design changes:**
 1. Edit `style.css` or `app.js`
@@ -243,7 +229,7 @@ The site features several scroll-triggered effects:
 ### When Working on This Project
 
 **DO:**
-- ✅ Maintain the single YAML file approach
+- ✅ Keep text content in plain HTML so crawlers see it without JS
 - ✅ Keep vanilla JavaScript (no frameworks)
 - ✅ Preserve the flat, modern aesthetic
 - ✅ Use CSS custom properties for colors
@@ -255,8 +241,7 @@ The site features several scroll-triggered effects:
 - ❌ Add build tools (webpack, npm scripts, etc.)
 - ❌ Introduce frameworks (React, Vue, etc.)
 - ❌ Add heavy drop shadows or glow effects
-- ❌ Hardcode text content in HTML (hero slide image URLs are the lone exception)
-- ❌ Break the YAML structure
+- ❌ Inject text content with JavaScript (search engines and scrapers must see it in the HTML)
 - ❌ Add complex dependencies
 
 ### Design Principles
@@ -270,11 +255,9 @@ The site features several scroll-triggered effects:
 ### Common Tasks
 
 **Adding a new section:**
-1. Add HTML structure to `index.html`
+1. Add HTML structure and text to `index.html`
 2. Add styles to `style.css`
-3. Add content structure to `content.yaml`
-4. Add populate function in `app.js`
-5. Add `reveal` class for scroll animation
+3. Add `reveal` class for scroll animation
 
 **Changing colors:**
 1. Update CSS custom properties in `:root`
@@ -282,8 +265,8 @@ The site features several scroll-triggered effects:
 
 **Adding a new page:**
 1. Duplicate `index.html` structure
-2. Add page-specific content to YAML
-3. Add populate function in `app.js`
+2. Give it its own `<title>`, `<meta name="description">` and canonical
+3. Add it to `sitemap.xml`
 
 ## 🐛 Troubleshooting
 
@@ -293,11 +276,9 @@ The site features several scroll-triggered effects:
 - Hard refresh the browser (Ctrl+Shift+R) to bust caches
 - Verify filenames match case-sensitively (especially on Linux hosting)
 
-### YAML Changes Not Showing
+### Text Changes Not Showing
 - Clear browser cache (Ctrl+Shift+R)
-- Check for YAML syntax errors (indentation!)
-- Verify file uploaded to server
-- Check browser console for errors
+- Verify `index.html` uploaded to server
 
 ### Sections Not Revealing
 - Check `reveal` class is on section
@@ -332,7 +313,7 @@ The site features several scroll-triggered effects:
 ## 📝 License & Credits
 
 Built for ALMAS restaurant with custom code.
-- No third-party libraries (except YAML parser CDN)
+- No third-party libraries (Mapbox GL is loaded lazily for the map only)
 - All design and code original
 - Raleway font by Google Fonts
 
@@ -342,7 +323,7 @@ Built for ALMAS restaurant with custom code.
 
 This site prioritizes **simplicity over complexity**:
 
-- A non-technical person can edit content via YAML
+- Content is plain HTML anyone can edit
 - No build process means no build failures
 - Direct file upload means instant updates
 - Vanilla JavaScript means no framework updates

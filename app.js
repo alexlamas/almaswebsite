@@ -1,4 +1,3 @@
-let content = {};
 let domElements = {};
 let animationState = {
   currentSlide: 0,
@@ -7,43 +6,6 @@ let animationState = {
   ticking: false,
   revealElements: [],
 };
-
-async function loadContent() {
-  try {
-    const response = await fetch("content.yaml");
-    const yamlText = await response.text();
-    content = jsyaml.load(yamlText);
-    populateContent();
-  } catch (error) {
-    console.error("Error loading content:", error);
-  }
-}
-
-function populateContent() {
-  if (content.site) {
-    document.getElementById("site-title").textContent = content.site.name;
-  }
-
-  const isHomePage =
-    ["/", "/index.html"].includes(window.location.pathname) ||
-    window.location.pathname.endsWith("/");
-
-  if (isHomePage) {
-    populateHomePage();
-    populateAlmasCestQuoi();
-    populateQuiSommesNous();
-    populateNosPrestacions();
-    populateNotreCafe();
-  }
-
-  populateFooter();
-
-  // Lazy load Mapbox when user scrolls near the map section
-  lazyLoadMapbox();
-
-  // Start Instagram image cycling
-  cycleInstagramImages();
-}
 
 function lazyLoadMapbox() {
   const mapContainer = document.getElementById("mapbox-map");
@@ -129,13 +91,19 @@ function initMapbox() {
   }
 }
 
-function cycleInstagramImages() {
-  if (!content.social || !content.social.instagram_previews) return;
+const INSTAGRAM_PREVIEWS = [
+  "/images/insta1.png",
+  "/images/insta2.png",
+  "/images/insta3.png",
+  "/images/insta4.png",
+  "/images/insta5.png",
+];
 
+function cycleInstagramImages() {
   const img = document.getElementById("instagram-preview-img");
   if (!img) return;
 
-  const images = content.social.instagram_previews;
+  const images = INSTAGRAM_PREVIEWS;
   let currentIndex = 0;
   const preloadedImages = [];
 
@@ -206,65 +174,6 @@ function cycleInstagramImages() {
   });
 }
 
-function populateHomePage() {
-  if (content.hero) {
-    setText("hero-heading", content.hero.heading);
-    setText("hero-subheading", content.hero.subheading);
-
-    const heroCta = document.getElementById("hero-cta");
-    if (heroCta) {
-      heroCta.textContent = content.hero.cta_button_text;
-      heroCta.href = content.hero.cta_button_link;
-    }
-  }
-}
-
-function populateAlmasCestQuoi() {
-  if (!content.almas_cest_quoi) return;
-
-  setText("almas-cest-quoi-heading", content.almas_cest_quoi.heading);
-  setText("almas-cest-quoi-text", content.almas_cest_quoi.text);
-}
-
-function populateQuiSommesNous() {
-  if (!content.qui_sommes_nous) return;
-
-  setText("qui-sommes-nous-heading", content.qui_sommes_nous.heading);
-  setText("qui-sommes-nous-text", content.qui_sommes_nous.text);
-
-  const gallery = document.getElementById("qui-sommes-nous-gallery");
-  if (gallery) {
-    const images = normalizeArray(
-      content.qui_sommes_nous.images || content.qui_sommes_nous.image
-    );
-    gallery.innerHTML = images
-      .map((item, index) => {
-        const src = typeof item === 'string' ? item : item.src;
-        const name = typeof item === 'object' ? item.name : null;
-
-        if (name) {
-          return `
-            <div class="gallery-item-wrapper">
-              <img src="${src}" alt="${name}" loading="lazy" decoding="async">
-              <div class="name-label" data-name="${name}">
-                <svg class="hand-drawn-line" viewBox="0 0 100 60" preserveAspectRatio="none">
-                  <path class="line-path" d="M ${index === 0 ? '52' : index === 1 ? '50' : '48'} 25 Q ${index === 0 ? '51' : index === 1 ? '49' : '49'} 38, 50 52" stroke="#74966E" stroke-width="3" fill="none" stroke-linecap="round"/>
-                </svg>
-                <span class="name-text">${name}</span>
-              </div>
-            </div>
-          `;
-        }
-
-        return `<img src="${src}" alt="Qui sommes nous ${index + 1}" loading="lazy" decoding="async">`;
-      })
-      .join("");
-
-    // Animate lines and text when images become visible
-    animateNameLabels();
-  }
-}
-
 function animateNameLabels() {
   const galleryItems = document.querySelectorAll('.qui-sommes-nous .gallery-item-wrapper');
   let hasAnimated = false;
@@ -301,106 +210,6 @@ function animateNameLabels() {
   if (galleryItems.length > 0) {
     observer.observe(galleryItems[0]);
   }
-}
-
-function populateNosPrestacions() {
-  if (!content.nos_prestations) return;
-
-  setText("nos-prestations-heading", content.nos_prestations.heading);
-  setText("nos-prestations-text", content.nos_prestations.text);
-
-  const imagesContainer = document.getElementById("nos-prestations-images");
-  if (imagesContainer && content.nos_prestations.images) {
-    const images = normalizeArray(content.nos_prestations.images);
-    imagesContainer.innerHTML = images
-      .map((src, index) => `
-        <img src="${src}" alt="Nos Prestations ${index + 1}" loading="lazy" decoding="async">
-      `)
-      .join("");
-  }
-}
-
-function populateNotreCafe() {
-  if (!content.notre_cafe) return;
-
-  setText("notre-cafe-text", content.notre_cafe.text);
-
-  const cardsContainer = document.getElementById("visit-cards");
-  if (cardsContainer && content.notre_cafe.items) {
-    const items = normalizeArray(content.notre_cafe.items);
-    cardsContainer.innerHTML = items
-      .map((item) => {
-        const lines = normalizeArray(item.lines)
-          .map((line) => `<p>${line}</p>`)
-          .join("");
-        const isAddress = item.label?.toLowerCase().includes("adresse");
-
-        if (isAddress) {
-          return `
-            <a href="https://maps.app.goo.gl/wBbG7msv6UKrpCJu5" target="_blank" rel="noopener" class="visit-card visit-card-link">
-              <h3>${item.label || ""}</h3>
-              ${lines}
-            </a>
-          `;
-        }
-
-        return `
-          <div class="visit-card">
-            <h3>${item.label || ""}</h3>
-            ${lines}
-          </div>
-        `;
-      })
-      .join("");
-  }
-}
-
-function populateFooter() {
-  if (content.footer) {
-    setText("cafe-tagline", content.footer.tagline);
-  }
-
-  const socialLinks = document.getElementById("social-links");
-  if (socialLinks && content.social) {
-    const platforms = ["facebook", "twitter"];
-    socialLinks.innerHTML = platforms
-      .filter((platform) => content.social[platform])
-      .map(
-        (platform) =>
-          `<a href="${content.social[platform]}" target="_blank" rel="noopener" aria-label="${platform}">
-          <i class="ph ph-${platform}-logo"></i>
-        </a>`
-      )
-      .join("");
-  }
-}
-
-function setText(id, text) {
-  const element = document.getElementById(id);
-  if (!element || !text) return;
-
-  if (element.tagName === "H2" && /[\?',]/.test(text)) {
-    element.innerHTML = text
-      .replace(/\?/g, '<span class="fallback-char">?</span>')
-      .replace(/'/g, '<span class="fallback-char">\'</span>')
-      .replace(/,/g, '<span class="fallback-char">,</span>');
-  } else {
-    element.textContent = text;
-  }
-}
-
-function setImage(id, src, alt) {
-  const element = document.getElementById(id);
-  if (!element || !src) return;
-
-  element.src = src;
-  element.loading = "lazy";
-  element.decoding = "async";
-  if (alt) element.alt = alt;
-}
-
-function normalizeArray(value) {
-  return Array.isArray(value) ? value : value ? [value] : [];
 }
 
 function cacheDOMElements() {
@@ -680,7 +489,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initSlideshow();
   initScrollEffects();
   animateLogo();
-  loadContent();
+  animateNameLabels();
+  lazyLoadMapbox();
+  cycleInstagramImages();
   updateFloatingButtonsPosition();
 
   // Lazy load hero images 2 and 3 after initial load
